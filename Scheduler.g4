@@ -59,11 +59,14 @@ func_call: VARNAME '('  args? ')';
 
 // variable definitions
 def:  TYPENAME VARNAME '=' expr
+| 'COLLECTION OF' TYPENAME '=' expr
 | dayDef
 | classDef
 | weekDef;
 // variable assignments
-assign: VARNAME '=' expr;
+assign: VARNAME '=' expr
+| VARNAME '.' ATTRIBUTE '=' expr;
+ATTRIBUTE: 'START' | 'END' | 'SUBJECT' | 'TEACHER';
 
 
 // expressions
@@ -83,15 +86,18 @@ expr:   expr '*' expr # Multiplication
     |   '#' expr # Overlap  // Check if two objects overlap --- jeszcze do ogarnięcia -> bool expression
     |   '(' expr ')' # Parenthesis
     |   func_call # FunctionCall // value from function call
+    |   collection # ExpressionCollection // collection of values
+    |   get # ExpressionGet // value from canvas
     |   value # ExpressionValue // direct value
     |   VARNAME # VariableName // reference to variable
+    |   VARNAME '.' ATTRIBUTE # ExpressionAttribute // reference to attribute of variable
     ;
 
 
 // collection of classes, days, weeks in day, week and schedule
 collection: '['  elements?  ']';
 elements: element ( ',' element)*;
-element: VARNAME;
+element: expr;
 
 
 /*
@@ -103,7 +109,7 @@ dayDef: 'DAY' SPACE VARNAME SPACE 'DATE' SPACE DATE SPACE 'CLASSES' collection;
 
 weekDef: 'WEEK' SPACE VARNAME SPACE 'STARTDATE' SPACE DATE SPACE 'DAYS' collection;
 */
-classDef: 'CLASS' VARNAME 'SUBJECT' VARNAME 'TEACHER' VARNAME 'START' TIME 'END' TIME;
+classDef: 'CLASS' VARNAME 'SUBJECT' STRING 'TEACHER' STRING 'START' TIME 'END' TIME;
 // DAY definition
 dayDef: 'DAY' VARNAME 'CLASSES' collection;
 // WEEK definition
