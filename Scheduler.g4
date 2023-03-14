@@ -1,13 +1,13 @@
 grammar Scheduler;        
 prog: code EOF;
 code: (instruction | canvas_instruction) ';' NEWLINE* code;
-instruction: def # Definition
-    | assign # Assignment
-    | if # IfStatement
-    | funcion # FunctionDefinition
-    | func_call #FunctionCall // chyba nie trzeba --- chcecie miec mozliwosc wywolania funkcji bez przypisania jej do zmiennej?
-    | transfer_statement # TransferStatement 
-    | loop # Loop
+instruction: def // Definition
+    | assign // Assignment
+    | if // IfStatement
+    | funcion // FunctionDefinition
+    | func_call //FunctionCall chyba nie trzeba --- chcecie miec mozliwosc wywolania funkcji bez przypisania jej do zmiennej?
+    | transfer_statement // TransferStatement 
+    | loop // Loop
     ;
 canvas_instruction: 'not_implemented';
 block: '{' NEWLINE* code NEWLINE* '}';
@@ -62,6 +62,8 @@ expr:   expr '*' expr # Multiplication
     |   VARNAME # VariableName // reference to variable
     ;
 
+// CLASS definition
+class: 'CLASS' SPACE VARNAME SPACE 'SUBJECT' SPACE STRING SPACE 'TEACHER' SPACE STRING SPACE 'START' SPACE TIME SPACE 'END' SPACE TIME;
 
 TYPENAME: 'INT' | 'BOOL' | 'STRING' | 'DATE' | 'TIME' | 'CLASS' | 'DAY' | 'WEEK';
 VARNAME : [a-zA-Z]+ ;
@@ -71,13 +73,13 @@ SPACE  : [ ]+ -> skip;
 NEWLINE : [\r\n]+ -> skip;
 
 
-value: INT | BOOL | STRING | DATE | TIME | CLASS | DAY | WEEK;
+value: INT | BOOL | STRING | DATE | TIME | /*CLASS |*/ DAY | WEEK;
 // value types
 INT	: [0-9]+ ;
 BOOL	: 'True' | 'False';
 STRING : [a-zA-Z0-9]+;
 DATE    : ('0'?[1-9] | [1-2][0-9] | '3'[0-1]) '/' ('0'?[1-9] | '1'[0-2]) '/' ([0-9][0-9][0-9][0-9]);
 TIME	:  ([0-1][0-9] | '2'[0-3]) ':' [0-5][0-9];
-CLASS	: 'not_implemented';
+//CLASS	: 'not_implemented';
 DAY	    : 'not_implemented';
 WEEK	: 'not_implemented';
