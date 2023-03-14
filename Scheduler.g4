@@ -37,7 +37,10 @@ arg: TYPENAME SPACE VARNAME;
 func_call: VARNAME SPACE? '(' SPACE? args? SPACE? ')';
 
 // variable definitions
-def:  TYPENAME SPACE VARNAME SPACE? '=' SPACE? expr;
+def:  TYPENAME SPACE VARNAME SPACE? '=' SPACE? expr
+| dayDef
+| classDef
+| weekDef;
 // variable assignments
 assign: VARNAME SPACE? '=' SPACE? expr;
 
@@ -66,7 +69,7 @@ expr:   expr '*' expr # Multiplication
 collection: '[' VARNAME (SPACE? ',' SPACE? VARNAME)* ']';
 
 // CLASS definition
-classDef: 'CLASS' SPACE VARNAME SPACE 'SUBJECT' SPACE STRING SPACE 'TEACHER' SPACE STRING SPACE 'START' SPACE TIME SPACE 'END' SPACE TIME;
+classDef: 'CLASS' SPACE VARNAME SPACE 'SUBJECT' SPACE VARNAME SPACE 'TEACHER' SPACE VARNAME SPACE 'START' SPACE TIME SPACE 'END' SPACE TIME;
 // DAY definition
 dayDef: 'DAY' SPACE VARNAME SPACE 'DATE' SPACE DATE SPACE 'CLASSES' collection;
 
@@ -82,7 +85,7 @@ SPACE  : [ ]+ -> skip;
 NEWLINE : [\r\n]+ -> skip;
 
 
-value: INT | BOOL | STRING | DATE | TIME | /*CLASS |*/ DAY | WEEK;
+value: INT | BOOL | STRING | DATE | TIME; //| /*CLASS |*/ //DAY | WEEK;
 // value types
 INT	: [0-9]+ ;
 BOOL	: 'True' | 'False';
@@ -90,5 +93,7 @@ STRING : [a-zA-Z0-9]+;
 DATE    : ('0'?[1-9] | [1-2][0-9] | '3'[0-1]) '/' ('0'?[1-9] | '1'[0-2]) '/' ([0-9][0-9][0-9][0-9]);
 TIME	:  ([0-1][0-9] | '2'[0-3]) ':' [0-5][0-9];
 //CLASS	: 'not_implemented';
-DAY	    : 'not_implemented';
-WEEK	: 'not_implemented';
+//DAY	    : 'not_implemented';
+//WEEK	: 'not_implemented';
+SUBJECT	: STRING;
+TEACHER	: STRING;
