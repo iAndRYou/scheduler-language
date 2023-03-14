@@ -5,7 +5,7 @@ instruction: def // Definition
     | assign // Assignment
     | if_statement // IfStatement
     | function // FunctionDefinition
-    | func_call //FunctionCall chyba nie trzeba --- chcecie miec mozliwosc wywolania funkcji bez przypisania jej do zmiennej?
+    | func_call //FunctionCall 
     | transfer_statement // TransferStatement
     | loop // Loop
     ;
