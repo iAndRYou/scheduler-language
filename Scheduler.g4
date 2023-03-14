@@ -9,23 +9,24 @@ instruction: def // Definition
     | transfer_statement // TransferStatement
     | loop // Loop
     ;
-canvas_instruction: 
-  add 
-| update 
-| delete
-| get ;
+canvas_instruction: add 
+    | update 
+    | delete
+    | get 
+    ;
 
-
+// adds an objects to canvas
 add: 'ADD' expr 'DATE' expr;
+// updates an objects on canvas
 update: 'UPDATE' expr ('DATE' expr ('TIME' TIME)? | 'DATES' collection);
+// deletes an objects from canvas
 delete : 'DELETE' ('DATE' expr ('TIME' TIME)? | 'DATES' collection);
 
-
+// gets objects that fulfill the conditions given
+get: 'GET' canvas_collection get_arg*;
 canvas_collection: 'CLASSES' | 'DAYS';
-get_args: get_arg (',' get_arg)*;
 get_arg: TYPENAME value;
-get: 'GET' canvas_collection get_args;
- // global variables: DAYS, WEEKS, TEACHERS, SUBJECTS, CLASSES, GROUPS, SCHEDULE
+
 block: '{' code '}';
 
 
@@ -131,7 +132,7 @@ NEWLINE : [\r\n]+ -> skip;
 TAB : '\t' -> skip;
 
 
-value: INT | BOOL | STRING | DATE | TIME; //| /*CLASS |*/ //DAY | WEEK;
+value: INT | BOOL | STRING | DATE | TIME | SUBJECT | TEACHER;
 // value types
 INT : [0-9]+ ;
 BOOL    : 'True' | 'False';
@@ -144,19 +145,10 @@ TIME    :  ([0-1][0-9] | '2'[0-3]) ':' [0-5][0-9];
 SUBJECT : STRING;
 TEACHER : STRING;
 
-
-
-
 //For testing
 /*
 antlr4-parse Scheduler.g4 prog -gui
 CLASS zaj SUBJECT fizyka TEACHER ostachiewicz START 09:30 END 11:00;
 CLASS var SUBJECT fgf TEACHER vfgf START 21:37 END 21:47;
 
-
  */
-
-
-
-
-
