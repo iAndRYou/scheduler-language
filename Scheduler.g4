@@ -6,16 +6,34 @@ instruction: def // Definition
     | if_statement // IfStatement
     | funcion // FunctionDefinition
     | func_call //FunctionCall chyba nie trzeba --- chcecie miec mozliwosc wywolania funkcji bez przypisania jej do zmiennej?
-    | transfer_statement // TransferStatement 
+    | transfer_statement // TransferStatement
     | loop // Loop
     ;
-canvas_instruction: 'not_implemented'; // global variables: DAYS, WEEKS, TEACHERS, SUBJECTS, CLASSES, GROUPS, SCHEDULE
+canvas_instruction: 
+  add 
+| update 
+| delete
+| get ;
+
+
+add: 'ADD' expr 'DATE' expr;
+update: 'UPDATE' expr ('DATE' expr ('TIME' TIME)? | 'DATES' collection);
+delete : 'DELETE' ('DATE' expr ('TIME' TIME)? | 'DATES' collection);
+
+
+canvas_collection: 'CLASSES' | 'DAYS';
+get_args: get_arg (',' get_arg)*;
+get_arg: TYPENAME value;
+get: 'GET' canvas_collection get_args;
+ // global variables: DAYS, WEEKS, TEACHERS, SUBJECTS, CLASSES, GROUPS, SCHEDULE
 block: '{' code '}';
+
 
 // transfer statements
 transfer_statement: 'RETURN' expr # Return
     | 'BREAK' # Break
     ;
+
 
 // loops
 loop: for_loop # ForLoop
@@ -26,15 +44,18 @@ for_loop: 'FOR' VARNAME 'IN' expr block;
 // while loops
 while_loop: 'WHILE' condition block;
 
+
 // if statement
 if_statement : 'IF' condition block;
-condition: expr; 
+condition: expr;
+
 
 // function definitions and calls
 funcion: 'DEF' VARNAME '(' args? ')' block;
-args: arg (',' arg)*; 
-arg: TYPENAME SPACE VARNAME;
+args: arg (',' arg)*;
+arg: TYPENAME VARNAME;
 func_call: VARNAME '('  args? ')';
+
 
 // variable definitions
 def:  TYPENAME VARNAME '=' expr
@@ -43,6 +64,7 @@ def:  TYPENAME VARNAME '=' expr
 | weekDef;
 // variable assignments
 assign: VARNAME '=' expr;
+
 
 // expressions
 expr:   expr '*' expr # Multiplication
@@ -65,29 +87,36 @@ expr:   expr '*' expr # Multiplication
     |   VARNAME # VariableName // reference to variable
     ;
 
-// collection of classes, days, weeks in day, week and schedule 
+
+// collection of classes, days, weeks in day, week and schedule
 collection: '['  elements?  ']';
 elements: element ( ',' element)*;
 element: VARNAME;
 
-/* 
+
+/*
 // CLASS definition
 classDef: 'CLASS' SPACE VARNAME SPACE 'SUBJECT' SPACE VARNAME SPACE 'TEACHER' SPACE VARNAME SPACE 'START' SPACE TIME SPACE 'END' SPACE TIME;
 // DAY definition
 dayDef: 'DAY' SPACE VARNAME SPACE 'DATE' SPACE DATE SPACE 'CLASSES' collection;
 
+
 weekDef: 'WEEK' SPACE VARNAME SPACE 'STARTDATE' SPACE DATE SPACE 'DAYS' collection;
 */
 classDef: 'CLASS' VARNAME 'SUBJECT' VARNAME 'TEACHER' VARNAME 'START' TIME 'END' TIME;
 // DAY definition
-dayDef: 'DAY' VARNAME 'DATE' DATE 'CLASSES' collection;
+dayDef: 'DAY' VARNAME 'CLASSES' collection;
+// WEEK definition
+weekDef: 'WEEK' VARNAME 'DAYS' collection;
 
-weekDef: 'WEEK' VARNAME 'STARTDATE' DATE 'DAYS' collection;
+
+
 
 
 
 TYPENAME: 'INT' | 'BOOL' | 'STRING' | 'DATE' | 'TIME' | 'CLASS' | 'DAY' | 'WEEK' | 'SUBJECT' | 'TEACHER';
 VARNAME : [a-zA-Z]+;
+
 
 // whitespace
 SPACE  : [ ]+   -> skip;
@@ -95,25 +124,33 @@ FORCESPACE : [ ]+;
 NEWLINE : [\r\n]+ -> skip;
 TAB : '\t' -> skip;
 
+
 value: INT | BOOL | STRING | DATE | TIME; //| /*CLASS |*/ //DAY | WEEK;
 // value types
-INT	: [0-9]+ ;
-BOOL	: 'True' | 'False';
+INT : [0-9]+ ;
+BOOL    : 'True' | 'False';
 STRING : '"'[a-zA-Z0-9]*'"'; // Old def [a-zA-Z0-9]+
 DATE    : ('0'?[1-9] | [1-2][0-9] | '3'[0-1]) '/' ('0'?[1-9] | '1'[0-2]) '/' ([0-9][0-9][0-9][0-9]);
-TIME	:  ([0-1][0-9] | '2'[0-3]) ':' [0-5][0-9];
-//CLASS	: 'not_implemented';
-//DAY	    : 'not_implemented';
-//WEEK	: 'not_implemented';
-SUBJECT	: STRING;
-TEACHER	: STRING;
+TIME    :  ([0-1][0-9] | '2'[0-3]) ':' [0-5][0-9];
+//CLASS : 'not_implemented';
+//DAY       : 'not_implemented';
+//WEEK  : 'not_implemented';
+SUBJECT : STRING;
+TEACHER : STRING;
+
+
 
 
 //For testing
 /*
-antlr4-parse Scheduler.g4 prog -gui 
+antlr4-parse Scheduler.g4 prog -gui
 CLASS zaj SUBJECT fizyka TEACHER ostachiewicz START 09:30 END 11:00;
 CLASS var SUBJECT fgf TEACHER vfgf START 21:37 END 21:47;
 
+
  */
+
+
+
+
 
