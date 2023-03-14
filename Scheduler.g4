@@ -1,6 +1,6 @@
 grammar Scheduler;        
 prog: code EOF;
-code: (instruction | canvas_instruction) ';'| code /*NEWLINE**/ code;
+code: ((instruction | canvas_instruction) ';')*;
 instruction: def // Definition
     | assign // Assignment
     | if_statement // IfStatement
@@ -110,7 +110,7 @@ dayDef: 'DAY' SPACE VARNAME SPACE 'DATE' SPACE DATE SPACE 'CLASSES' collection;
 
 weekDef: 'WEEK' SPACE VARNAME SPACE 'STARTDATE' SPACE DATE SPACE 'DAYS' collection;
 */
-classDef: 'CLASS' VARNAME 'SUBJECT' STRING 'TEACHER' STRING 'START' TIME 'END' TIME;
+classDef: 'CLASS' VARNAME 'SUBJECT' SUBJECT 'TEACHER' TEACHER 'START' TIME 'END' TIME;
 // DAY definition
 dayDef: 'DAY' VARNAME 'CLASSES' collection;
 // WEEK definition
