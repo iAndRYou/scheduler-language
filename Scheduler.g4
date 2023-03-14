@@ -22,9 +22,9 @@ block: '{' code '}';
 // adds an objects to canvas
 add: 'ADD' expr 'DATE' expr;
 // updates an objects on canvas
-update: 'UPDATE' expr ('DATE' expr ('TIME' TIME)? | 'DATES' collection);
+update: 'UPDATE' expr ('DATE' expr | 'DATES' collection);
 // deletes an objects from canvas
-delete : 'DELETE' ('DATE' expr ('TIME' TIME)? | 'DATES' collection);
+delete : 'DELETE' ('DATE' expr | 'DATES' collection);
 // gets objects that fulfill the conditions given
 get: 'GET' canvas_collection get_arg*;
 canvas_collection: 'CLASSES' | 'DAYS';
