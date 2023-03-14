@@ -66,8 +66,8 @@ def:  TYPENAME VARNAME '=' expr
 | weekDef;
 // variable assignments
 assign: VARNAME '=' expr
-| VARNAME '.' ATTRIBUTE '=' expr;
-ATTRIBUTE: 'START' | 'END' | 'SUBJECT' | 'TEACHER';
+| VARNAME ATTRIBUTE '=' expr;
+ATTRIBUTE: '.START' | '.END' | '.SUBJECT' | '.TEACHER';
 
 
 // expressions
@@ -91,7 +91,7 @@ expr:   expr '*' expr # Multiplication
     |   get # ExpressionGet // value from canvas
     |   value # ExpressionValue // direct value
     |   VARNAME # VariableName // reference to variable
-    |   VARNAME '.' ATTRIBUTE # ExpressionAttribute // reference to attribute of variable
+    |   VARNAME ATTRIBUTE # ExpressionAttribute // reference to attribute of variable
     ;
 
 
@@ -110,7 +110,7 @@ dayDef: 'DAY' SPACE VARNAME SPACE 'DATE' SPACE DATE SPACE 'CLASSES' collection;
 
 weekDef: 'WEEK' SPACE VARNAME SPACE 'STARTDATE' SPACE DATE SPACE 'DAYS' collection;
 */
-classDef: 'CLASS' VARNAME 'SUBJECT' SUBJECT 'TEACHER' TEACHER 'START' TIME 'END' TIME;
+classDef: 'CLASS' VARNAME 'SUBJECT' STRING 'TEACHER' STRING 'START' TIME 'END' TIME;
 // DAY definition
 dayDef: 'DAY' VARNAME 'CLASSES' collection;
 // WEEK definition
@@ -132,18 +132,16 @@ NEWLINE : [\r\n]+ -> skip;
 TAB : '\t' -> skip;
 
 
-value: INT | BOOL | STRING | DATE | TIME | SUBJECT | TEACHER;
+value: INT | BOOL | STRING | DATE | TIME;
 // value types
 INT : [0-9]+ ;
 BOOL    : 'True' | 'False';
-STRING : '"'[a-zA-Z0-9]*'"'; // Old def [a-zA-Z0-9]+
+STRING : '"' [a-zA-Z0-9]* '"'; // Old def [a-zA-Z0-9]+
 DATE    : ('0'?[1-9] | [1-2][0-9] | '3'[0-1]) '/' ('0'?[1-9] | '1'[0-2]) '/' ([0-9][0-9][0-9][0-9]);
 TIME    :  ([0-1][0-9] | '2'[0-3]) ':' [0-5][0-9];
 //CLASS : 'not_implemented';
 //DAY       : 'not_implemented';
 //WEEK  : 'not_implemented';
-SUBJECT : STRING;
-TEACHER : STRING;
 
 //For testing
 /*
