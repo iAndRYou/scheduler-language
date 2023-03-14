@@ -1,9 +1,9 @@
 grammar Scheduler;        
 prog: code EOF;
-code: (instruction | canvas_instruction) ';' NEWLINE* code;
+code: (instruction | canvas_instruction) ';'| code /*NEWLINE**/ code;
 instruction: def // Definition
     | assign // Assignment
-    | if // IfStatement
+    | if_statement // IfStatement
     | funcion // FunctionDefinition
     | func_call //FunctionCall chyba nie trzeba --- chcecie miec mozliwosc wywolania funkcji bez przypisania jej do zmiennej?
     | transfer_statement // TransferStatement 
@@ -27,7 +27,7 @@ for_loop: 'FOR' SPACE VARNAME SPACE? 'IN' SPACE? expr SPACE? NEWLINE* block;
 while_loop: 'WHILE' SPACE condition SPACE? NEWLINE* block;
 
 // if statement
-if : 'IF' SPACE condition SPACE? NEWLINE* block;
+if_statement : 'IF' SPACE condition SPACE? NEWLINE* block;
 condition: expr; 
 
 // function definitions and calls
@@ -78,10 +78,10 @@ weekDef: 'WEEK' SPACE VARNAME SPACE 'STARTDATE' SPACE DATE SPACE 'DAYS' collecti
 
 
 TYPENAME: 'INT' | 'BOOL' | 'STRING' | 'DATE' | 'TIME' | 'CLASS' | 'DAY' | 'WEEK';
-VARNAME : [a-zA-Z]+ ;
+VARNAME : [a-zA-Z]+;
 
 // whitespace
-SPACE  : [ ]+ -> skip;
+SPACE  : [ ]+ /*  -> skip;*/;
 NEWLINE : [\r\n]+ -> skip;
 
 
@@ -97,3 +97,10 @@ TIME	:  ([0-1][0-9] | '2'[0-3]) ':' [0-5][0-9];
 //WEEK	: 'not_implemented';
 SUBJECT	: STRING;
 TEACHER	: STRING;
+
+
+//For testing
+/*
+antlr4-parse Scheduler.g4 prog -gui 
+CLASS zaj SUBJECT fizyka TEACHER ostachiewicz START 09:30 END 11:00;
+ */
