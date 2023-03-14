@@ -1,6 +1,6 @@
 grammar Scheduler;        
 prog: code EOF;
-code: ((instruction | canvas_instruction) ';')*;
+code: ((instruction | canvas_instruction) ';')+;
 instruction: def // Definition
     | assign // Assignment
     | if_statement // IfStatement
