@@ -18,13 +18,13 @@ transfer_statement: 'RETURN' SPACE expr # Return
     ;
 
 // loops
-loop: for # ForLoop
-    | while # WhileLoop
+loop: for_loop # ForLoop
+    | while_loop # WhileLoop
     ;
 // for loops
-for: 'FOR' SPACE VARNAME SPACE? 'IN' SPACE? expr SPACE? NEWLINE* block;
+for_loop: 'FOR' SPACE VARNAME SPACE? 'IN' SPACE? expr SPACE? NEWLINE* block;
 // while loops
-while: 'WHILE' SPACE condition SPACE? NEWLINE* block;
+while_loop: 'WHILE' SPACE condition SPACE? NEWLINE* block;
 
 // if statement
 if : 'IF' SPACE condition SPACE? NEWLINE* block;
@@ -62,12 +62,16 @@ expr:   expr '*' expr # Multiplication
     |   VARNAME # VariableName // reference to variable
     ;
 
+// collection of classes, days, weeks in day, week and schedule 
+collection: '[' VARNAME (SPACE? ',' SPACE? VARNAME)* ']';
+
 // CLASS definition
 classDef: 'CLASS' SPACE VARNAME SPACE 'SUBJECT' SPACE STRING SPACE 'TEACHER' SPACE STRING SPACE 'START' SPACE TIME SPACE 'END' SPACE TIME;
 // DAY definition
-dayDef: 'DAY' SPACE VARNAME SPACE 'DATE' SPACE DATE SPACE 'CLASSES' '[' VARNAME (SPACE? ',' SPACE? VARNAME)* ']';
+dayDef: 'DAY' SPACE VARNAME SPACE 'DATE' SPACE DATE SPACE 'CLASSES' collection;
 
-weekDef: 'WEEK' SPACE VARNAME SPACE 'STARTDATE' SPACE DATE SPACE 'DAYS' '[' VARNAME (SPACE? ',' SPACE? VARNAME)* ']';
+weekDef: 'WEEK' SPACE VARNAME SPACE 'STARTDATE' SPACE DATE SPACE 'DAYS' collection;
+
 
 
 TYPENAME: 'INT' | 'BOOL' | 'STRING' | 'DATE' | 'TIME' | 'CLASS' | 'DAY' | 'WEEK';
