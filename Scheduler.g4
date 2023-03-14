@@ -66,7 +66,9 @@ expr:   expr '*' expr # Multiplication
     ;
 
 // collection of classes, days, weeks in day, week and schedule 
-collection: '[' VARNAME (SPACE? ',' SPACE? VARNAME)* ']';
+collection: '[' SPACE? elements? SPACE? ']';
+elements: element (SPACE? ',' SPACE? element)*;
+element: VARNAME;
 
 /* 
 // CLASS definition
