@@ -23,8 +23,7 @@ public class SchedulerParser extends Parser {
 		T__31=32, T__32=33, T__33=34, T__34=35, T__35=36, T__36=37, T__37=38, 
 		T__38=39, T__39=40, T__40=41, T__41=42, T__42=43, T__43=44, T__44=45, 
 		T__45=46, T__46=47, ATTRIBUTE=48, TYPENAME=49, VARNAME=50, SPACE=51, FORCESPACE=52, 
-		NEWLINE=53, TAB=54, INT=55, BOOL=56, STRING=57, DATE=58, TIME=59, SUBJECT=60, 
-		TEACHER=61;
+		NEWLINE=53, TAB=54, INT=55, BOOL=56, STRING=57, DATE=58, TIME=59;
 	public static final int
 		RULE_prog = 0, RULE_code = 1, RULE_instruction = 2, RULE_canvas_instruction = 3, 
 		RULE_add = 4, RULE_update = 5, RULE_delete = 6, RULE_get = 7, RULE_canvas_collection = 8, 
@@ -64,7 +63,7 @@ public class SchedulerParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			"ATTRIBUTE", "TYPENAME", "VARNAME", "SPACE", "FORCESPACE", "NEWLINE", 
-			"TAB", "INT", "BOOL", "STRING", "DATE", "TIME", "SUBJECT", "TEACHER"
+			"TAB", "INT", "BOOL", "STRING", "DATE", "TIME"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -1833,7 +1832,7 @@ public class SchedulerParser extends Parser {
 			setState(271);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__7) | (1L << T__19) | (1L << T__36) | (1L << T__37) | (1L << T__38) | (1L << VARNAME) | (1L << INT) | (1L << BOOL) | (1L << STRING) | (1L << DATE) | (1L << TIME) | (1L << SUBJECT) | (1L << TEACHER))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__7) | (1L << T__19) | (1L << T__36) | (1L << T__37) | (1L << T__38) | (1L << VARNAME) | (1L << INT) | (1L << BOOL) | (1L << STRING) | (1L << DATE) | (1L << TIME))) != 0)) {
 				{
 				setState(270);
 				elements();
@@ -1939,8 +1938,10 @@ public class SchedulerParser extends Parser {
 
 	public static class ClassDefContext extends ParserRuleContext {
 		public TerminalNode VARNAME() { return getToken(SchedulerParser.VARNAME, 0); }
-		public TerminalNode SUBJECT() { return getToken(SchedulerParser.SUBJECT, 0); }
-		public TerminalNode TEACHER() { return getToken(SchedulerParser.TEACHER, 0); }
+		public List<TerminalNode> STRING() { return getTokens(SchedulerParser.STRING); }
+		public TerminalNode STRING(int i) {
+			return getToken(SchedulerParser.STRING, i);
+		}
 		public List<TerminalNode> TIME() { return getTokens(SchedulerParser.TIME); }
 		public TerminalNode TIME(int i) {
 			return getToken(SchedulerParser.TIME, i);
@@ -1964,11 +1965,11 @@ public class SchedulerParser extends Parser {
 			setState(287);
 			match(T__41);
 			setState(288);
-			match(SUBJECT);
+			match(STRING);
 			setState(289);
 			match(T__42);
 			setState(290);
-			match(TEACHER);
+			match(STRING);
 			setState(291);
 			match(T__43);
 			setState(292);
@@ -2072,8 +2073,6 @@ public class SchedulerParser extends Parser {
 		public TerminalNode STRING() { return getToken(SchedulerParser.STRING, 0); }
 		public TerminalNode DATE() { return getToken(SchedulerParser.DATE, 0); }
 		public TerminalNode TIME() { return getToken(SchedulerParser.TIME, 0); }
-		public TerminalNode SUBJECT() { return getToken(SchedulerParser.SUBJECT, 0); }
-		public TerminalNode TEACHER() { return getToken(SchedulerParser.TEACHER, 0); }
 		public ValueContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2089,7 +2088,7 @@ public class SchedulerParser extends Parser {
 			{
 			setState(306);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << BOOL) | (1L << STRING) | (1L << DATE) | (1L << TIME) | (1L << SUBJECT) | (1L << TEACHER))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << BOOL) | (1L << STRING) | (1L << DATE) | (1L << TIME))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -2148,7 +2147,7 @@ public class SchedulerParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3?\u0137\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3=\u0137\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -2172,7 +2171,7 @@ public class SchedulerParser extends Parser {
 		"\33\u011c\13\33\3\34\3\34\3\35\3\35\3\35\3\35\3\35\3\35\3\35\3\35\3\35"+
 		"\3\35\3\35\3\36\3\36\3\36\3\36\3\36\3\37\3\37\3\37\3\37\3\37\3 \3 \3 "+
 		"\2\3\60!\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668"+
-		":<>\2\4\3\2\13\f\3\29?\2\u0147\2@\3\2\2\2\4K\3\2\2\2\6U\3\2\2\2\b[\3\2"+
+		":<>\2\4\3\2\13\f\3\29=\2\u0147\2@\3\2\2\2\4K\3\2\2\2\6U\3\2\2\2\b[\3\2"+
 		"\2\2\n]\3\2\2\2\fb\3\2\2\2\16n\3\2\2\2\20y\3\2\2\2\22\u0081\3\2\2\2\24"+
 		"\u0083\3\2\2\2\26\u0086\3\2\2\2\30\u008d\3\2\2\2\32\u0091\3\2\2\2\34\u0093"+
 		"\3\2\2\2\36\u0099\3\2\2\2 \u009d\3\2\2\2\"\u00a1\3\2\2\2$\u00a3\3\2\2"+
@@ -2246,8 +2245,8 @@ public class SchedulerParser extends Parser {
 		"\7\30\2\2\u0117\u0119\5\66\34\2\u0118\u0116\3\2\2\2\u0119\u011c\3\2\2"+
 		"\2\u011a\u0118\3\2\2\2\u011a\u011b\3\2\2\2\u011b\65\3\2\2\2\u011c\u011a"+
 		"\3\2\2\2\u011d\u011e\5\60\31\2\u011e\67\3\2\2\2\u011f\u0120\7+\2\2\u0120"+
-		"\u0121\7\64\2\2\u0121\u0122\7,\2\2\u0122\u0123\7>\2\2\u0123\u0124\7-\2"+
-		"\2\u0124\u0125\7?\2\2\u0125\u0126\7.\2\2\u0126\u0127\7=\2\2\u0127\u0128"+
+		"\u0121\7\64\2\2\u0121\u0122\7,\2\2\u0122\u0123\7;\2\2\u0123\u0124\7-\2"+
+		"\2\u0124\u0125\7;\2\2\u0125\u0126\7.\2\2\u0126\u0127\7=\2\2\u0127\u0128"+
 		"\7/\2\2\u0128\u0129\7=\2\2\u01299\3\2\2\2\u012a\u012b\7\60\2\2\u012b\u012c"+
 		"\7\64\2\2\u012c\u012d\7\13\2\2\u012d\u012e\5\62\32\2\u012e;\3\2\2\2\u012f"+
 		"\u0130\7\61\2\2\u0130\u0131\7\64\2\2\u0131\u0132\7\f\2\2\u0132\u0133\5"+
