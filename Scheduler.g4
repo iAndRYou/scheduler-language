@@ -10,10 +10,10 @@ instruction: def // Definition
     | loop // Loop
     ;
 canvas_instruction: 'not_implemented'; // global variables: DAYS, WEEKS, TEACHERS, SUBJECTS, CLASSES, GROUPS, SCHEDULE
-block: '{' NEWLINE* code NEWLINE* '}';
+block: '{' code '}';
 
 // transfer statements
-transfer_statement: 'RETURN' SPACE expr # Return
+transfer_statement: 'RETURN' expr # Return
     | 'BREAK' # Break
     ;
 
@@ -22,27 +22,27 @@ loop: for_loop # ForLoop
     | while_loop # WhileLoop
     ;
 // for loops
-for_loop: 'FOR' SPACE VARNAME SPACE? 'IN' SPACE? expr SPACE? NEWLINE* block;
+for_loop: 'FOR' VARNAME 'IN' expr block;
 // while loops
-while_loop: 'WHILE' SPACE condition SPACE? NEWLINE* block;
+while_loop: 'WHILE' condition block;
 
 // if statement
-if_statement : 'IF' SPACE condition SPACE? NEWLINE* block;
+if_statement : 'IF' condition block;
 condition: expr; 
 
 // function definitions and calls
-funcion: 'DEF' SPACE VARNAME SPACE? '(' SPACE? args? SPACE? ')' NEWLINE* block;
-args: arg (SPACE? ',' SPACE? arg)*; 
+funcion: 'DEF' VARNAME '(' args? ')' block;
+args: arg (',' arg)*; 
 arg: TYPENAME SPACE VARNAME;
-func_call: VARNAME SPACE? '(' SPACE? args? SPACE? ')';
+func_call: VARNAME '('  args? ')';
 
 // variable definitions
-def:  TYPENAME SPACE VARNAME SPACE? '=' SPACE? expr
+def:  TYPENAME VARNAME '=' expr
 | dayDef
 | classDef
 | weekDef;
 // variable assignments
-assign: VARNAME SPACE? '=' SPACE? expr;
+assign: VARNAME '=' expr;
 
 // expressions
 expr:   expr '*' expr # Multiplication
@@ -66,8 +66,8 @@ expr:   expr '*' expr # Multiplication
     ;
 
 // collection of classes, days, weeks in day, week and schedule 
-collection: '[' SPACE? elements? SPACE? ']';
-elements: element (SPACE? ',' SPACE? element)*;
+collection: '['  elements?  ']';
+elements: element ( ',' element)*;
 element: VARNAME;
 
 /* 
@@ -113,4 +113,7 @@ TEACHER	: STRING;
 /*
 antlr4-parse Scheduler.g4 prog -gui 
 CLASS zaj SUBJECT fizyka TEACHER ostachiewicz START 09:30 END 11:00;
+CLASS var SUBJECT fgf TEACHER vfgf START 21:37 END 21:47;
+
  */
+
