@@ -9,7 +9,7 @@ instruction: def // Definition
     | transfer_statement // TransferStatement 
     | loop // Loop
     ;
-canvas_instruction: 'not_implemented';
+canvas_instruction: 'not_implemented'; // global variables: DAYS, WEEKS, TEACHERS, SUBJECTS, CLASSES, GROUPS, SCHEDULE
 block: '{' NEWLINE* code NEWLINE* '}';
 
 // transfer statements
@@ -58,7 +58,7 @@ expr:   expr '*' expr # Multiplication
     |   expr 'AND' expr # And
     |   expr 'OR' expr # Or
     |   'NOT' expr # Not
-    |   '#' expr # Overlap  // Check if two objects overlap
+    |   '#' expr # Overlap  // Check if two objects overlap --- jeszcze do ogarnięcia -> bool expression
     |   '(' expr ')' # Parenthesis
     |   func_call # FunctionCall // value from function call
     |   value # ExpressionValue // direct value
