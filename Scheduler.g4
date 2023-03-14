@@ -1,11 +1,13 @@
 grammar Scheduler;        
 prog: code EOF;
 code: (instruction | canvas_instruction) ';' NEWLINE* code;
-instruction: def  
-    | assign 
-    | if 
-    | func 
-    | transfer_statement
+instruction: def # Definition
+    | assign # Assignment
+    | if # IfStatement
+    | funcion # FunctionDefinition
+    | func_call #FunctionCall // chyba nie trzeba --- chcecie miec mozliwosc wywolania funkcji bez przypisania jej do zmiennej?
+    | transfer_statement # TransferStatement 
+    | loop # Loop
     ;
 canvas_instruction: 'not_implemented';
 block: '{' NEWLINE* code NEWLINE* '}';
@@ -15,6 +17,10 @@ transfer_statement: 'RETURN' SPACE expr # Return
     | 'BREAK' # Break
     ;
 
+// loops
+loop: for # ForLoop
+    | while # WhileLoop
+    ;
 // for loops
 for: 'FOR' SPACE VARNAME SPACE? 'IN' SPACE? expr SPACE? NEWLINE* block;
 // while loops
@@ -24,10 +30,11 @@ while: 'WHILE' SPACE condition SPACE? NEWLINE* block;
 if : 'IF' SPACE condition SPACE? NEWLINE* block;
 condition: expr; 
 
-// function definitions
-func: 'DEF' SPACE VARNAME SPACE? '(' SPACE? args? SPACE? ')' NEWLINE* block;
+// function definitions and calls
+funcion: 'DEF' SPACE VARNAME SPACE? '(' SPACE? args? SPACE? ')' NEWLINE* block;
 args: arg (SPACE? ',' SPACE? arg)*; 
 arg: TYPENAME SPACE VARNAME;
+func_call: VARNAME SPACE? '(' SPACE? args? SPACE? ')';
 
 // variable definitions
 def:  TYPENAME SPACE VARNAME SPACE? '=' SPACE? expr;
@@ -47,7 +54,10 @@ expr:   expr '*' expr # Multiplication
     |   expr '>=' expr # GreaterThanOrEqual
     |   expr 'AND' expr # And
     |   expr 'OR' expr # Or
+    |   'NOT' expr # Not
+    |   '#' expr # Overlap  // Check if two objects overlap
     |   '(' expr ')' # Parenthesis
+    |   func_call # FunctionCall // value from function call
     |   value # ExpressionValue // direct value
     |   VARNAME # VariableName // reference to variable
     ;
