@@ -60,17 +60,17 @@ func_call: VARNAME '('  args? ')';
 
 // variable definitions
 def:  TYPENAME VARNAME '=' expr
-| 'COLLECTION OF' TYPENAME '=' expr
-| dayDef
-| classDef
-| weekDef;
+    | 'COLLECTION OF' TYPENAME '=' expr
+    | dayDef
+    | classDef
+    | weekDef;
 classDef: 'CLASS' VARNAME 'SUBJECT' STRING 'TEACHER' STRING 'START' TIME 'END' TIME;
 dayDef: 'DAY' VARNAME 'CLASSES' collection;
 weekDef: 'WEEK' VARNAME 'DAYS' collection;
 
 // variable assignments
 assign: VARNAME '=' expr
-| VARNAME ATTRIBUTE '=' expr;
+    | VARNAME ATTRIBUTE '=' expr;
 ATTRIBUTE: '.START' | '.END' | '.SUBJECT' | '.TEACHER';
 
 
@@ -88,7 +88,7 @@ expr:   expr '*' expr # Multiplication
     |   expr 'AND' expr # And
     |   expr 'OR' expr # Or
     |   'NOT' expr # Not
-    |   '#' expr # Overlap  // Check if two objects overlap --- jeszcze do ogarnięcia -> bool expression
+    |   '#' expr # Overlap  // Check if two objects overlap 
     |   '(' expr ')' # Parenthesis
     |   func_call # FunctionCall // value from function call
     |   collection # ExpressionCollection // collection of values
