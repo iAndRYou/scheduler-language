@@ -56,7 +56,7 @@ function: 'DEF' VARNAME '(' args? ')' block;
 args: arg (',' arg)*;
 arg: TYPENAME VARNAME;
 // function call
-func_call: VARNAME '('  args? ')';
+func_call: VARNAME '('  expr? (',' expr)* ')';
 
 // variable definitions
 def:  TYPENAME VARNAME '=' expr
@@ -131,4 +131,19 @@ antlr4-parse Scheduler.g4 prog -gui
 CLASS zaj SUBJECT fizyka TEACHER ostachiewicz START 09:30 END 11:00;
 CLASS var SUBJECT fgf TEACHER vfgf START 21:37 END 21:47;
 
+
+STRING a = "a";
+DEF func(INT aa, INT bb) {
+    RETURN aa+bb;
+};
+INT c = func(1, 2);
+FOR x IN [1, 2, 3] {
+    INT tmp = x;
+    IF (tmp == 2){
+        BREAK;
+    };
+};
+ADD exClass DATE 1/1/2019;
  */
+
+ 
