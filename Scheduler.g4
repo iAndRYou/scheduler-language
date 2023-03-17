@@ -26,9 +26,9 @@ update: 'UPDATE' expr ('DATE' expr | 'DATES' collection);
 // deletes an objects from canvas
 delete : 'DELETE' ('DATE' expr ('TIME' TIME)? | 'DATES' collection);
 // gets objects that fulfill the conditions given
-get: 'GET' canvas_collection get_arg*;
+get: 'GET' canvas_collection 'WHERE' get_arg*;
 canvas_collection: 'CLASSES' | 'DAYS';
-get_arg: TYPENAME value;
+get_arg: (TYPENAME | attribute) value;
 
 
 // INSTRUCTIONS
@@ -60,18 +60,21 @@ func_call: VARNAME '('  expr? (',' expr)* ')';
 
 // variable definitions
 def:  TYPENAME VARNAME '=' expr
-    | 'COLLECTION OF' TYPENAME '=' expr
+    | 'COLLECTION OF' TYPENAME VARNAME '=' expr
     | dayDef
     | classDef
     | weekDef;
-classDef: 'CLASS' VARNAME 'SUBJECT' STRING 'TEACHER' STRING 'START' TIME 'END' TIME;
+// classDef: 'CLASS' VARNAME 'SUBJECT' STRING 'TEACHER' STRING 'START' TIME 'END' TIME;
+classDef: 'CLASS' VARNAME (CLASS_ATTRIBUTE expr)*;
 dayDef: 'DAY' VARNAME 'CLASSES' collection;
 weekDef: 'WEEK' VARNAME 'DAYS' collection;
 
 // variable assignments
 assign: VARNAME '=' expr
-    | VARNAME ATTRIBUTE '=' expr;
-ATTRIBUTE: '.START' | '.END' | '.SUBJECT' | '.TEACHER';
+    | VARNAME '.' attribute '=' expr;
+
+attribute: CLASS_ATTRIBUTE;
+CLASS_ATTRIBUTE: 'START' | 'END' | 'SUBJECT' | 'TEACHER';
 
 
 // expressions
@@ -95,7 +98,7 @@ expr:   expr '*' expr # Multiplication
     |   get # ExpressionGet // value from canvas
     |   value # ExpressionValue // direct value
     |   VARNAME # VariableName // reference to variable
-    |   VARNAME ATTRIBUTE # ExpressionAttribute // reference to attribute of variable
+    |   VARNAME '.' attribute # ExpressionAttribute // reference to attribute of variable
     ;
 
 
@@ -105,24 +108,20 @@ elements: element ( ',' element)*;
 element: expr;
 
 
-TYPENAME: 'INT' | 'BOOL' | 'STRING' | 'DATE' | 'TIME' | 'CLASS' | 'DAY' | 'WEEK' | 'SUBJECT' | 'TEACHER';
+TYPENAME: 'INT' | 'BOOL' | 'STRING' | 'DATE' | 'TIME' | 'CLASS' | 'DAY' | 'WEEK';
 VARNAME : [a-zA-Z]+;
 
 
-// whitespace
-SPACE  : [ ]+   -> skip;
-FORCESPACE : [ ]+;
-NEWLINE : [\r\n]+ -> skip;
-TAB : '\t' -> skip;
-
-
 value: INT | BOOL | STRING | DATE | TIME;
-// value types
+// types
 INT : [0-9]+ ;
 BOOL    : 'True' | 'False';
 STRING : '"' [a-zA-Z0-9]* '"'; // Old def [a-zA-Z0-9]+
 DATE    : ('0'?[1-9] | [1-2][0-9] | '3'[0-1]) '/' ('0'?[1-9] | '1'[0-2]) '/' ([0-9][0-9][0-9][0-9]);
 TIME    :  ([0-1][0-9] | '2'[0-3]) ':' [0-5][0-9];
+
+// whitespace
+WS : [ \t\r\n]+ -> skip;
 
 
 //For testing
@@ -145,5 +144,3 @@ FOR x IN [1, 2, 3] {
 };
 ADD exClass DATE 1/1/2019;
  */
-
- 
