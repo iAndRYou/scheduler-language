@@ -65,8 +65,8 @@ def:  TYPENAME VARNAME SINGLEEQUAL expr
     | weekDef;
 // classDef: 'CLASS' VARNAME 'SUBJECT' STRING 'TEACHER' STRING 'START' TIME 'END' TIME;
 classDef: CLASSTOKEN VARNAME (CLASS_ATTRIBUTE expr)*;
-dayDef: DAYTOKEN VARNAME 'CLASSES' collection;
-weekDef: WEEKTOKEN VARNAME 'DAYS' collection;
+dayDef: DAYTOKEN VARNAME CLASSESTOKEN collection;
+weekDef: WEEKTOKEN VARNAME DAYSTOKEN collection;
 
 // variable assignments
 assign: VARNAME SINGLEEQUAL expr
