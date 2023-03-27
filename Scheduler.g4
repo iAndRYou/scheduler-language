@@ -106,7 +106,7 @@ TYPENAME: 'INT' | 'BOOL' | 'STRING' | 'DATE' | 'TIME';
 CLASSTOKEN : 'CLASS';
 DAYTOKEN : 'DAY';
 WEEKTOKEN : 'WEEK';
-VARNAME : [a-zA-Z]+;
+
 
 CLASSESTOKEN: 'CLASSES';
 DAYSTOKEN: 'DAYS';
@@ -166,6 +166,7 @@ TIME    :  ([0-1][0-9] | '2'[0-3]) ':' [0-5][0-9];
 // whitespace
 WS : [ \t\r\n]+ -> skip;
 
+VARNAME : [a-zA-Z]+; // spierdalaj na koniec
 
 //For testing
 /*
