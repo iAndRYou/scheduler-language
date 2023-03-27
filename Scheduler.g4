@@ -166,7 +166,7 @@ TIME    :  ([0-1][0-9] | '2'[0-3]) ':' [0-5][0-9];
 // whitespace
 WS : [ \t\r\n]+ -> skip;
 
-VARNAME : [a-zA-Z]+; // spierdalaj na koniec
+VARNAME : [a-zA-Z][a-zA-Z0-9]*; 
 
 //For testing
 /*
