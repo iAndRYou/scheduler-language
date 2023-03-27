@@ -1,5 +1,5 @@
 grammar Scheduler;        
-prog: code EOF;
+prog: code? EOF;
 code: ((instruction | canvas_instruction) ';' | comments)+;
 
 // code elements
