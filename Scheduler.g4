@@ -1,6 +1,6 @@
 grammar Scheduler;        
 prog: code EOF;
-code: ((instruction | canvas_instruction) ';')+ | comments;
+code: ((instruction | canvas_instruction) ';' | comments)+;
 
 // code elements
 instruction: def // Definition
