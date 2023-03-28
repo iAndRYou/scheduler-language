@@ -22,17 +22,17 @@ block: OPEN_CURLY code CLOSE_CURLY;
 
 
 // CANVAS INSTRUCTIONS
-// adds an objects to canvas
-add: ADD_CANVA expr TYPENAME expr; // date 
+// adds objects to canvas
+add: ADD_CANVA TYPENAME expr get_arg*; // date 
 
-// updates an objects on canvas
-update: UPDATE_CANVA expr (TYPENAME expr | 'DATES' collection); // date or dates
+// updates objects on canvas
+update: UPDATE_CANVA (TYPENAME expr | 'DATES' collection); // date or dates
 
-// deletes an objects from canvas
+// deletes objects from canvas
 delete : DELETE_CANVA (TYPENAME expr (TYPENAME TIME)? | 'DATES' collection); // date time or dates
 
 // gets objects that fulfill the conditions given
-get: GET_CANVA (CLASSESTOKEN | DAYSTOKEN) WHERE get_arg*;  //you can get CLASSES or DAYS 
+get: GET_CANVA (CLASSESTOKEN | DAYSTOKEN) WHERE? get_arg*;  //you can get CLASSES or DAYS 
 get_arg: (TYPENAME | attribute) value;
 
 start_date: 'START DATE' DATE;
@@ -180,7 +180,7 @@ value: INT
 // types
 INT : [0-9]+ ;
 BOOL    : 'True' | 'False';
-STRING : '"' [a-zA-Z0-9]* '"'; // Old def [a-zA-Z0-9]+
+STRING : '"' [a-zA-Z0-9 ]* '"'; // Old def [a-zA-Z0-9]+
 DATE    : ('0'?[1-9] | [1-2][0-9] | '3'[0-1]) '/' ('0'?[1-9] | '1'[0-2]) '/' ([0-9][0-9][0-9][0-9]);
 TIME    :  ([0-1][0-9] | '2'[0-3]) ':' [0-5][0-9];
 
