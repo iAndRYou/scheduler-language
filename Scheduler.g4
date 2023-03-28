@@ -83,9 +83,9 @@ attribute_call: VARNAME DOT attribute;
 CLASS_ATTRIBUTE: 'START' | 'END' | 'SUBJECT' | 'TEACHER';
 
 // collections 
-collection: OPEN_BRACKET  elements?  CLOSE_BRACKET;
-elements: element ( COMMA element)*;
-element: expr;
+collection: OPEN_BRACKET  collection_elements?  CLOSE_BRACKET;
+collection_elements: collection_element ( COMMA collection_element)*;
+collection_element: expr;
 // collection subscription - access to elements in a collection
 collection_subscription: VARNAME OPEN_BRACKET expr CLOSE_BRACKET;
 
@@ -93,10 +93,10 @@ collection_subscription: VARNAME OPEN_BRACKET expr CLOSE_BRACKET;
 // expressions
 expr:   (func_call | attribute_call | canvas_instruction | collection_subscription) # Calls// instruction
     |   NOT expr # NotExpr // negation
-    |   expr (MULTIPLY | DIVIDE) expr # MultDiv
-    |   expr (ADD | SUBTRACT) expr # AddSub
-    |   expr ( LESS_THAN | LESS_THAN_OR_EQUAL | GREATER_THAN | GREATER_THAN_OR_EQUAL) expr # Compare
-    |   expr (EQUAL | NOT_EQUAL) expr # EqualExpr
+    |   expr op=(MULTIPLY | DIVIDE) expr # MultDiv
+    |   expr op=(ADD | SUBTRACT) expr # AddSub
+    |   expr op=(LESS_THAN | LESS_THAN_OR_EQUAL | GREATER_THAN | GREATER_THAN_OR_EQUAL) expr # Compare
+    |   expr op=(EQUAL | NOT_EQUAL) expr # EqualExpr
     |   expr AND expr # AndExpr
     |   expr OR expr # OrExpr
     |   expr OVERLAP expr # OverlapExpr  // Check if two objects overlap 
