@@ -15,6 +15,8 @@ canvas_instruction: add
     | update // Update content of an object on canvas
     | delete // Dekete an object from canvas
     | get // Get specified objects from canvas as a collection
+    | start_date
+    | end_date
     ;
 block: OPEN_CURLY code CLOSE_CURLY;
 
@@ -32,6 +34,9 @@ delete : DELETE_CANVA (TYPENAME expr (TYPENAME TIME)? | 'DATES' collection); // 
 // gets objects that fulfill the conditions given
 get: GET_CANVA (CLASSESTOKEN | DAYSTOKEN) WHERE get_arg*;  //you can get CLASSES or DAYS 
 get_arg: (TYPENAME | attribute) value;
+
+start_date: 'START DATE' DATE;
+end_date: 'END DATE' DATE;
 
 
 // INSTRUCTIONS
