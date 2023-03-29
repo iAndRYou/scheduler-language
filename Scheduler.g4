@@ -23,10 +23,10 @@ block: OPEN_CURLY code CLOSE_CURLY;
 
 // CANVAS INSTRUCTIONS
 // adds objects to canvas
-add: ADD_CANVA TYPENAME expr get_arg*; // date 
+add: ADD_CANVA structure expr get_arg*; // date 
 
 // updates objects on canvas
-update: UPDATE_CANVA (TYPENAME expr | 'DATES' collection); // date or dates
+update: UPDATE_CANVA (DATE expr | 'DATES' collection); // date or dates
 
 // deletes objects from canvas
 delete : DELETE_CANVA (TYPENAME expr (TYPENAME TIME)? | 'DATES' collection); // date time or dates
@@ -74,9 +74,9 @@ def:  TYPENAME VARNAME SINGLEEQUAL expr
     | weekDef
     ;
 // classDef: 'CLASS' VARNAME 'SUBJECT' STRING 'TEACHER' STRING 'START' TIME 'END' TIME;
-classDef: CLASSTOKEN VARNAME (CLASS_ATTRIBUTE expr)*;
-dayDef: DAYTOKEN VARNAME CLASSESTOKEN collection;
-weekDef: WEEKTOKEN VARNAME DAYSTOKEN collection;
+classDef: CLASSNAME VARNAME (CLASS_ATTRIBUTE expr)*;
+dayDef: DAYNAME VARNAME CLASSESTOKEN collection;
+weekDef: WEEKNAME VARNAME DAYSTOKEN collection;
 
 // variable assignments and variable attribute assignments
 assign: VARNAME SINGLEEQUAL expr
@@ -112,15 +112,12 @@ expr:   (func_call | attribute_call | canvas_instruction | collection_subscripti
 
 
 // type rule and tokens 
-typerule: TYPENAME 
-    | CLASSTOKEN 
-    | DAYTOKEN 
-    | WEEKTOKEN
-    ;
+type: TYPENAME | structure;
+structure: CLASSNAME | DAYNAME | WEEKNAME;
 TYPENAME: 'INT' | 'BOOL' | 'STRING' | 'DATE' | 'TIME';
-CLASSTOKEN : 'CLASS';
-DAYTOKEN : 'DAY';
-WEEKTOKEN : 'WEEK';
+CLASSNAME : 'CLASS';
+DAYNAME : 'DAY';
+WEEKNAME : 'WEEK';
 
 
 // canvas collection keywords
