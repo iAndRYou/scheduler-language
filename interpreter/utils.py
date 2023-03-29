@@ -19,11 +19,9 @@ class Class_:
     def __repr__(self):
         return f"{self.start} - {self.end}, {self.subject}, {self.teacher}"
 
+@dataclass
 class Day:
-    classes: List[Class_] 
-
-    def __init__(self, classes_ = None):
-        self.classes = list() if classes_ is None else classes_
+    classes: List[Class_] = field(default_factory=list)
 
     def add_class(self, class_): # keeps classes chronological
         # binary search on classes
