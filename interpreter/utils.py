@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import time, date
 from typing import List, Dict, Tuple
 from copy import deepcopy
@@ -43,12 +43,14 @@ class Day:
         else:
             self.classes.insert(ind+1, class_)
 
+@dataclass
 class Week:
-    days: List[Day] = []
+    days: List[Day] = field(default_factory=list)
 
 
+@dataclass
 class Canvas:
-    days: Dict[date, Day] = dict()
+    days: Dict[date, Day] = field(default_factory=dict)
     start_date: date = None
     end_date: date = None
 
