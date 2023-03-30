@@ -188,10 +188,10 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#assign.
     def visitAssign(self, ctx:SchedulerParser.AssignContext):
-        if ctx.attribute() is None:
-            self.gvm.assign_variable(ctx.VARNAME().getText(), self.visit(ctx.expr()))
-        else:
+        if ctx.attribute():
             self.gvm.assign_attribute(ctx.VARNAME().getText(), self.visit(ctx.attribute()).lower(), self.visit(ctx.expr()))
+        else:
+            self.gvm.assign_variable(ctx.VARNAME().getText(), self.visit(ctx.expr()))
 
 
     # Visit a parse tree produced by SchedulerParser#attribute.
@@ -206,22 +206,25 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#collection.
     def visitCollection(self, ctx:SchedulerParser.CollectionContext):
-        return self.visitChildren(ctx)
+        if ctx.collection_elements():
+            return self.visit(ctx.collection_elements())
+        else:
+            return []
 
 
     # Visit a parse tree produced by SchedulerParser#collection_elements.
     def visitCollection_elements(self, ctx:SchedulerParser.Collection_elementsContext):
-        return self.visitChildren(ctx)
+        return [self.visit(col_elem) for col_elem in ctx.collection_element()]
 
 
     # Visit a parse tree produced by SchedulerParser#collection_element.
     def visitCollection_element(self, ctx:SchedulerParser.Collection_elementContext):
-        return self.visitChildren(ctx)
+        return self.visit(ctx.expr())
 
 
     # Visit a parse tree produced by SchedulerParser#collection_subscription.
     def visitCollection_subscription(self, ctx:SchedulerParser.Collection_subscriptionContext):
-        return self.visitChildren(ctx)
+        return self.gvm.access_variable(ctx.VARNAME().getText())[1][self.visit(ctx.expr())]
 
 
     # Visit a parse tree produced by SchedulerParser#AndExpr.
@@ -241,7 +244,10 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#EqualExpr.
     def visitEqualExpr(self, ctx:SchedulerParser.EqualExprContext):
-        return self.visitChildren(ctx)
+        if ctx.op.text == '==':
+            return self.visit(ctx.expr(0)) == self.visit(ctx.expr(1))
+        else:
+            return self.visit(ctx.expr(0)) != self.visit(ctx.expr(1))
 
 
     # Visit a parse tree produced by SchedulerParser#Parenthesis.
@@ -269,7 +275,14 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#Compare.
     def visitCompare(self, ctx:SchedulerParser.CompareContext):
-        return self.visitChildren(ctx)
+        if ctx.op.text == '<':
+            return (self.visit(ctx.expr(0)) < self.visit(ctx.expr(1)))
+        elif ctx.op.text == '<=':
+            return (self.visit(ctx.expr(0)) <= self.visit(ctx.expr(1)))
+        elif ctx.op.text == '>':
+            return (self.visit(ctx.expr(0)) > self.visit(ctx.expr(1)))
+        elif ctx.op.text == '>=':
+            return (self.visit(ctx.expr(0)) >= self.visit(ctx.expr(1)))
 
 
     # Visit a parse tree produced by SchedulerParser#NotExpr.
