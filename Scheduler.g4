@@ -33,7 +33,7 @@ delete : DELETE_CANVA (TYPENAME expr (TYPENAME TIME)? | 'DATES' collection); // 
 
 // gets objects that fulfill the conditions given
 get: GET_CANVA (CLASSESTOKEN | DAYSTOKEN) WHERE? get_arg*;  //you can get CLASSES or DAYS 
-get_arg: (TYPENAME | attribute) value;
+get_arg: (TYPENAME | attribute) expr;
 
 start_date: 'START DATE' DATE;
 end_date: 'END DATE' DATE;
@@ -46,11 +46,11 @@ transfer_statement: RETURN expr # Return
     ;
 
 // loops
-loop: for_loop # ForLoop
-    | while_loop # WhileLoop
+loop: for_loop 
+    | while_loop 
     ;
 // for loops
-for_loop: FOR VARNAME IN expr block;
+for_loop: FOR (TYPENAME | structure) VARNAME IN expr block;
 // while loops
 while_loop: WHILE condition block;
 

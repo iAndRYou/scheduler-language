@@ -1,4 +1,4 @@
-# Generated from ../scheduler-language/Scheduler.g4 by ANTLR 4.12.0
+# Generated from ../Scheduler.g4 by ANTLR 4.12.0
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .SchedulerParser import SchedulerParser
@@ -79,13 +79,8 @@ class SchedulerVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by SchedulerParser#ForLoop.
-    def visitForLoop(self, ctx:SchedulerParser.ForLoopContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by SchedulerParser#WhileLoop.
-    def visitWhileLoop(self, ctx:SchedulerParser.WhileLoopContext):
+    # Visit a parse tree produced by SchedulerParser#loop.
+    def visitLoop(self, ctx:SchedulerParser.LoopContext):
         return self.visitChildren(ctx)
 
 

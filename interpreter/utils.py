@@ -22,6 +22,7 @@ class time(time):
             raise NotImplementedError
     def __radd__(self, other):
         return self.__add__(other)
+
 class date(date):
     def __add__(self, other):
         if isinstance(other, int):
@@ -120,19 +121,19 @@ class VariableManager:
     
     def cast_value(self, type_, value):
         if type_ == 'INT':
-            if not isinstance(value, int):
+            if not type(value) == int:
                 value = int(value)
         elif type_ == 'BOOL':
-            if not isinstance(value, bool):
+            if not type(value) == bool:
                 value = bool(value)
         elif type_ == 'STRING':
-            if not isinstance(value, str):
+            if not type(value) == str:
                 value = str(value)
         elif type_ == 'DATE':
-            if not isinstance(value, date):
+            if not type(value) == date:
                 value = date(value)
-        elif type_ == 'TIME':
-            if not isinstance(value, time):
+        elif type_ == 'TIME': 
+            if not type(value) == time:
                 value = time(value)
         else:
             raise Exception(f"Wrong type of variable: {type_}")
@@ -145,10 +146,17 @@ class VariableManager:
         self.variables[name] = value
         self.vartypes[name] = type
     
+    def _def_collection(self, type, name, value):
+        value = [self.cast_value(type, elem) for elem in value]
+        self.variables[name] = value
+        self.vartypes[name] = "COLLECTION OF " + type
+            
+    
     def _def_class(self, name, attrs):
         attrs = {key: self.cast_value(ATTRIBUTES[key], value) for key, value in attrs.items() if key in ATTRIBUTES}
         new_class = Class_(**attrs)
-        self._def_variable('CLASS', name, new_class)
+        self.variables[name] = new_class
+        self.vartypes[name] = 'CLASS'
     
     def _assign_variable(self, name, value):
         type = self.vartypes[name]
@@ -183,7 +191,10 @@ class GlobalVariableManager(VariableManager):
     
     def def_variable(self, type, name, value):
         self.cur_vm()._def_variable(type, name, value)
-    
+
+    def def_collection(self, type, name, value):
+        self.cur_vm()._def_collection(type, name, value)
+
     def def_class(self, name, attrs):
         self.cur_vm()._def_class(name, attrs)
     
