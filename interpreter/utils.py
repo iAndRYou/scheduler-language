@@ -1,7 +1,11 @@
 from dataclasses import dataclass, field
 from datetime import time, date
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Any
 from copy import deepcopy
+
+TYPES = ('INT', 'BOOL', 'STRING', 'DATE', 'TIME')
+ATTRIBUTES = ('start', 'end', 'subject', 'teacher')
+
 
 def parse_date(date_str):
     return date(*list(map(int, date_str.split('/')))[::-1])
@@ -71,31 +75,73 @@ class Canvas:
                 print(class_)
             print()
 
+# types: int, bool, string, date, time
+# structures: class, day, week
 
+@dataclass
 class VariableManager:
-    vartypes: Dict[str, str] = dict()
-    variables = dict()
+    vartypes: Dict[str, str] = field(default_factory=dict)
+    variables: Dict[str, Any | None] = field(default_factory=dict)
+
+    def parse_value(self, type, value):
+        if type == 'INT':
+            value = int(value)
+        elif type == 'BOOL':
+            value = True if value == 'True' else False
+        elif type == 'STRING':
+            value = value[1:-1]
+        elif type == 'DATE':
+            value = parse_date(value)
+        elif type == 'TIME':
+            value = parse_time(value)
+        else:
+            raise Exception(f"Wrong type of variable: {type}")
+
+        return value
+    
+    def cast_value(self, type, value):
+        if type == 'INT':
+            value = int(value)
+        elif type == 'BOOL':
+            value = bool(value)
+        elif type == 'STRING':
+            value = str(value)
+        elif type == 'DATE':
+            value = date(value)
+        elif type == 'TIME':
+            value = time(value)
+        else:
+            raise Exception(f"Wrong type of variable: {type}")
+
+        return value
+
 
     def _def_variable(self, type, name, value):
         self.variables[name] = value
         self.vartypes[name] = type
     
     def _def_class(self, name, attrs):
-        attrs = {key: value for key, value in attrs.items() if key in ('start', 'end', 'subject', 'teacher')}
+        attrs = {key: value for key, value in attrs.items() if key in ATTRIBUTES}
         attrs['start'] = parse_time(attrs['start'])
         attrs['end'] = parse_time(attrs['end'])
         new_class = Class_(**attrs)
-        self.def_variable('CLASS', name, new_class)
+        self._def_variable('CLASS', name, new_class)
     
     def _assign_variable(self, name, value):
         self.variables[name] = value
+    
+    def _assign_attribute(self, name, attribute, value):
+        if attribute not in ATTRIBUTES:
+            raise Exception()
+        self.variables[name].__setattr__(attribute, value)
     
     def _del_variable(self, name):
         del self.variables[name]
         del self.vartypes[name]
 
+@dataclass
 class GlobalVariableManager(VariableManager):
-    vms: List[VariableManager] = []
+    vms: List[VariableManager] = field(default_factory=list)
 
     def access_variable(self, name):
         for vm in self.vms[::-1]:
@@ -117,6 +163,9 @@ class GlobalVariableManager(VariableManager):
     
     def assign_variable(self, name, value):
         self.cur_vm()._assign_variable(name, value)
+    
+    def assign_attribute(self, name, attribute, value):
+        self.cur_vm()._assign_attribute(name, attribute, value)
     
     def del_variable(self, name):
         self.cur_vm()._del_variable(name)

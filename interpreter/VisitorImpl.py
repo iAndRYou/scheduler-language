@@ -19,6 +19,7 @@ class VisitorImpl(SchedulerVisitor):
         self.canvas = Canvas()
 
         self.visitChildren(ctx)
+        print(self.gvm)
         self.canvas.print()
 
 
@@ -164,7 +165,7 @@ class VisitorImpl(SchedulerVisitor):
                 pass
             # variable
             else:
-                self.gvm.def_variable(ctx.TYPENAME(), ctx.VARNAME(), self.visit(ctx.expr()))
+                self.gvm.def_variable(ctx.TYPENAME().getText(), ctx.VARNAME().getText(), self.visit(ctx.expr()))
 
 
     # Visit a parse tree produced by SchedulerParser#classDef.
@@ -187,7 +188,10 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#assign.
     def visitAssign(self, ctx:SchedulerParser.AssignContext):
-        return self.visitChildren(ctx)
+        if ctx.attribute() is None:
+            self.gvm.assign_variable(ctx.VARNAME().getText(), self.visit(ctx.expr()))
+        else:
+            self.gvm.assign_attribute(ctx.VARNAME().getText(), self.visit(ctx.attribute()).lower(), self.visit(ctx.expr()))
 
 
     # Visit a parse tree produced by SchedulerParser#attribute.
@@ -227,7 +231,12 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#ValueExpr.
     def visitValueExpr(self, ctx:SchedulerParser.ValueExprContext):
-        return ctx.getText()
+        if ctx.collection():
+            return self.visit(ctx.collection())
+        elif ctx.value():
+            return self.visit(ctx.value())
+        else:
+            return self.gvm.access_variable(ctx.VARNAME().getText())[1] # return the value of the variable
 
 
     # Visit a parse tree produced by SchedulerParser#EqualExpr.
@@ -237,12 +246,15 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#Parenthesis.
     def visitParenthesis(self, ctx:SchedulerParser.ParenthesisContext):
-        return self.visitChildren(ctx)
+        return self.visit(ctx.expr())
 
 
     # Visit a parse tree produced by SchedulerParser#AddSub.
     def visitAddSub(self, ctx:SchedulerParser.AddSubContext):
-        return self.visitChildren(ctx)
+        if ctx.op.text == '+':
+            return self.visit(ctx.expr(0)) + self.visit(ctx.expr(1))
+        else:
+            return self.visit(ctx.expr(0)) - self.visit(ctx.expr(1))
 
 
     # Visit a parse tree produced by SchedulerParser#Calls.
@@ -262,27 +274,32 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#NotExpr.
     def visitNotExpr(self, ctx:SchedulerParser.NotExprContext):
-        return self.visitChildren(ctx)
+        return not self.visit(ctx.expr()) 
 
 
     # Visit a parse tree produced by SchedulerParser#InExpr.
     def visitInExpr(self, ctx:SchedulerParser.InExprContext):
-        return self.visitChildren(ctx)
+        return (self.visit(ctx.expr(0)) in self.visit(ctx.expr(1)))
 
 
     # Visit a parse tree produced by SchedulerParser#OrExpr.
     def visitOrExpr(self, ctx:SchedulerParser.OrExprContext):
-        return self.visitChildren(ctx)
+        return (self.visit(ctx.expr(0)) or self.visit(ctx.expr(1)))
 
 
     # Visit a parse tree produced by SchedulerParser#MultDiv.
     def visitMultDiv(self, ctx:SchedulerParser.MultDivContext):
-        return self.visitChildren(ctx)
+        if ctx.op.text == '*':
+            return self.visit(ctx.expr(0)) * self.visit(ctx.expr(1))
+        else:
+            return self.visit(ctx.expr(0)) / self.visit(ctx.expr(1))
 
 
     # Visit a parse tree produced by SchedulerParser#value.
     def visitValue(self, ctx:SchedulerParser.ValueContext):
-        return ctx.getText()
+        for type in TYPES:
+            if ctx.__getattribute__(type)() is not None:
+                return self.gvm.parse_value(type, ctx.getText())
 
 
     # Visit a parse tree produced by SchedulerParser#comments.
