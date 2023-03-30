@@ -1,17 +1,36 @@
 from dataclasses import dataclass, field
-from datetime import time, date
+from datetime import time, date, timedelta, datetime
 from typing import List, Dict, Tuple, Any
 from copy import deepcopy
 
-TYPES = ('INT', 'BOOL', 'STRING', 'DATE', 'TIME')
-ATTRIBUTES = ('start', 'end', 'subject', 'teacher')
-
+TYPES = set(['INT', 'BOOL', 'STRING', 'DATE', 'TIME'])
+ATTRIBUTES = {'start': 'TIME', 'end': 'TIME', 'subject': 'STRING', 'teacher': 'STRING'}
 
 def parse_date(date_str):
     return date(*list(map(int, date_str.split('/')))[::-1])
 
 def parse_time(time_str):
     return time(*map(int, time_str.split(':')))
+
+# override default date and time classes
+class time(time):
+    def __add__(self, other):
+        if isinstance(other, int):
+            d = datetime(year=2023, month=1, day=1, minute=self.minute, hour=self.hour) + timedelta(minutes=other)
+            return time(d.hour, d.minute)
+        else:
+            raise NotImplementedError
+    def __radd__(self, other):
+        return self.__add__(other)
+class date(date):
+    def __add__(self, other):
+        if isinstance(other, int):
+            return super().__add__(timedelta(days=other))
+        else:
+            raise NotImplementedError
+    def __radd__(self, other):
+        return self.__add__(other)
+        
 
 @dataclass
 class Class_:
@@ -99,40 +118,47 @@ class VariableManager:
 
         return value
     
-    def cast_value(self, type, value):
-        if type == 'INT':
-            value = int(value)
-        elif type == 'BOOL':
-            value = bool(value)
-        elif type == 'STRING':
-            value = str(value)
-        elif type == 'DATE':
-            value = date(value)
-        elif type == 'TIME':
-            value = time(value)
+    def cast_value(self, type_, value):
+        if type_ == 'INT':
+            if not isinstance(value, int):
+                value = int(value)
+        elif type_ == 'BOOL':
+            if not isinstance(value, bool):
+                value = bool(value)
+        elif type_ == 'STRING':
+            if not isinstance(value, str):
+                value = str(value)
+        elif type_ == 'DATE':
+            if not isinstance(value, date):
+                value = date(value)
+        elif type_ == 'TIME':
+            if not isinstance(value, time):
+                value = time(value)
         else:
-            raise Exception(f"Wrong type of variable: {type}")
+            raise Exception(f"Wrong type of variable: {type_}")
 
         return value
 
 
     def _def_variable(self, type, name, value):
+        value = self.cast_value(type, value)
         self.variables[name] = value
         self.vartypes[name] = type
     
     def _def_class(self, name, attrs):
-        attrs = {key: value for key, value in attrs.items() if key in ATTRIBUTES}
-        attrs['start'] = parse_time(attrs['start'])
-        attrs['end'] = parse_time(attrs['end'])
+        attrs = {key: self.cast_value(ATTRIBUTES[key], value) for key, value in attrs.items() if key in ATTRIBUTES}
         new_class = Class_(**attrs)
         self._def_variable('CLASS', name, new_class)
     
     def _assign_variable(self, name, value):
+        type = self.vartypes[name]
+        value = self.cast_value(type, value)
         self.variables[name] = value
     
     def _assign_attribute(self, name, attribute, value):
         if attribute not in ATTRIBUTES:
-            raise Exception()
+            raise Exception(f'Invalid variable attribute: {attribute}')
+        value = self.cast_value(ATTRIBUTES[attribute], value)
         self.variables[name].__setattr__(attribute, value)
     
     def _del_variable(self, name):

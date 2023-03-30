@@ -7,4 +7,5 @@ ADD CLASS kompilatory DATE 4/1/2023;
 ADD CLASS eksploracja DATE 4/1/2023;
 BENC CLASS cszarp DATE 6/1/2023; */
 
-DATE date = 1/1/2022 + 2;
+
+TIME t = 14:15 + 50;
