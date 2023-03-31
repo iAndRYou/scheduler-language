@@ -107,6 +107,10 @@ class VariableManager:
     vartypes: Dict[str, str] = field(default_factory=dict)
     variables: Dict[str, Any | None] = field(default_factory=dict)
 
+    functypes: Dict[str, str] = field(default_factory=dict)
+    funcnodes: Dict[str, Any] = field(default_factory=dict)
+    funcargs: Dict[str, List[Tuple[str, str]]] = field(default_factory=dict)
+
     def parse_value(self, type, value):
         if type == 'INT':
             value = int(value)
@@ -118,6 +122,8 @@ class VariableManager:
             value = parse_date(value)
         elif type == 'TIME':
             value = parse_time(value)
+        elif type == 'VOID':
+            value = None
         else:
             raise Exception(f"Wrong type of variable: {type}")
 
@@ -139,6 +145,10 @@ class VariableManager:
         elif type_ == 'TIME': 
             if not type(value) == time:
                 value = time(value)
+        elif type_ == 'VOID':
+            value = None
+        elif (type_ == 'CLASS' and type(value) == Class_) or (type_ == 'DAY' and type(value) == Day) or (type_ == 'WEEK' and type(value) == Week):
+            pass
         else:
             raise Exception(f"Wrong type of variable: {type_}")
 
@@ -154,6 +164,11 @@ class VariableManager:
         value = [self.cast_value(type, elem) for elem in value]
         self.variables[name] = value
         self.vartypes[name] = "COLLECTION OF " + type
+    
+    def _def_function(self, type, name, code_node, args):
+        self.functypes[name] = type
+        self.funcnodes[name] = code_node
+        self.funcargs[name] = args
             
     
     def _def_class(self, name, attrs):
@@ -161,6 +176,13 @@ class VariableManager:
         new_class = Class_(**attrs)
         self.variables[name] = new_class
         self.vartypes[name] = 'CLASS'
+    
+    def _def_day(self, name, classes):
+        new_day = Day()
+        for class_ in classes:
+            new_day.add_class(class_)
+        self.variables[name] = new_day
+        self.vartypes[name] = 'DAY'
     
     def _assign_variable(self, name, value):
         type = self.vartypes[name]
@@ -181,11 +203,27 @@ class VariableManager:
 class GlobalVariableManager(VariableManager):
     vms: List[VariableManager] = field(default_factory=list)
 
-    def access_variable(self, name):
+    def find_variable_vm(self, name):
         for vm in self.vms[::-1]:
             if name in vm.variables:
-                return (vm.vartypes[name], vm.variables[name])
-        return (self.vartypes[name], self.variables[name])
+                return vm
+        return self
+
+    def find_function_vm(self, name):
+        for vm in self.vms[::-1]:
+            if name in vm.functypes:
+                return vm
+        return self
+
+
+    def access_variable(self, name):
+        vm = self.find_variable_vm(name)
+        return (vm.vartypes[name], vm.variables[name])
+    
+    def access_function(self, name):
+        vm = self.find_function_vm(name)
+        return (vm.functypes[name], vm.funcnodes[name], vm.funcargs[name])
+
     
     def cur_vm(self):
         if len(self.vms) != 0:
@@ -198,15 +236,21 @@ class GlobalVariableManager(VariableManager):
 
     def def_collection(self, type, name, value):
         self.cur_vm()._def_collection(type, name, value)
+    
+    def def_function(self, type, name, code_node, args):
+        self.cur_vm()._def_function(type, name, code_node, args)
 
     def def_class(self, name, attrs):
         self.cur_vm()._def_class(name, attrs)
+
+    def def_day(self, name, classes):
+        self.cur_vm()._def_day(name, classes)
     
     def assign_variable(self, name, value):
-        self.cur_vm()._assign_variable(name, value)
+        self.find_variable_vm(name)._assign_variable(name, value)
     
     def assign_attribute(self, name, attribute, value):
-        self.cur_vm()._assign_attribute(name, attribute, value)
+        self.find_variable_vm(name)._assign_attribute(name, attribute, value)
     
     def del_variable(self, name):
         self.cur_vm()._del_variable(name)

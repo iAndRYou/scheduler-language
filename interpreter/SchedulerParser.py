@@ -10,7 +10,7 @@ else:
 
 def serializedATN():
     return [
-        4,1,57,357,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,57,356,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
         7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,26,
@@ -22,35 +22,35 @@ def serializedATN():
         5,1,6,1,6,1,6,1,6,1,6,3,6,128,8,6,1,7,1,7,1,7,1,7,1,7,3,7,135,8,
         7,1,7,1,7,3,7,139,8,7,1,8,1,8,1,8,3,8,144,8,8,1,8,5,8,147,8,8,10,
         8,12,8,150,9,8,1,9,1,9,3,9,154,8,9,1,9,1,9,1,10,1,10,1,10,1,11,1,
-        11,1,11,1,12,1,12,1,12,3,12,167,8,12,1,13,1,13,3,13,171,8,13,1,14,
-        1,14,1,14,3,14,176,8,14,1,14,1,14,1,14,1,14,1,14,1,15,1,15,1,15,
-        1,15,1,16,1,16,1,16,1,16,1,17,1,17,1,18,1,18,1,18,1,18,3,18,197,
-        8,18,1,18,1,18,1,18,1,19,1,19,1,19,5,19,205,8,19,10,19,12,19,208,
-        9,19,1,20,1,20,1,20,1,21,1,21,1,21,3,21,216,8,21,1,21,1,21,5,21,
-        220,8,21,10,21,12,21,223,9,21,1,21,1,21,1,22,1,22,1,22,1,22,1,22,
-        1,22,1,22,1,22,1,22,1,22,1,22,1,22,3,22,239,8,22,1,23,1,23,1,23,
-        1,23,5,23,245,8,23,10,23,12,23,248,9,23,1,24,1,24,1,24,1,24,1,24,
-        1,25,1,25,1,25,1,25,1,25,1,26,1,26,1,26,1,26,1,26,1,26,1,26,1,26,
-        1,26,3,26,269,8,26,1,27,1,27,1,28,1,28,1,28,1,28,1,29,1,29,3,29,
-        279,8,29,1,29,1,29,1,30,1,30,1,30,5,30,286,8,30,10,30,12,30,289,
-        9,30,1,31,1,31,1,32,1,32,1,32,1,32,1,32,1,33,1,33,1,33,1,33,1,33,
-        3,33,303,8,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,3,33,
-        314,8,33,3,33,316,8,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,
-        33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,
-        33,1,33,1,33,5,33,342,8,33,10,33,12,33,345,9,33,1,34,1,34,3,34,349,
-        8,34,1,35,1,35,1,36,1,36,1,37,1,37,1,37,0,1,66,38,0,2,4,6,8,10,12,
-        14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,
-        58,60,62,64,66,68,70,72,74,0,8,1,0,10,11,1,0,12,13,1,0,14,15,1,0,
-        18,21,1,0,16,17,1,0,7,9,1,0,49,53,1,0,56,57,372,0,77,1,0,0,0,2,88,
-        1,0,0,0,4,99,1,0,0,0,6,107,1,0,0,0,8,109,1,0,0,0,10,113,1,0,0,0,
-        12,122,1,0,0,0,14,129,1,0,0,0,16,140,1,0,0,0,18,153,1,0,0,0,20,157,
-        1,0,0,0,22,160,1,0,0,0,24,166,1,0,0,0,26,170,1,0,0,0,28,172,1,0,
-        0,0,30,182,1,0,0,0,32,186,1,0,0,0,34,190,1,0,0,0,36,192,1,0,0,0,
-        38,201,1,0,0,0,40,209,1,0,0,0,42,212,1,0,0,0,44,238,1,0,0,0,46,240,
-        1,0,0,0,48,249,1,0,0,0,50,254,1,0,0,0,52,268,1,0,0,0,54,270,1,0,
-        0,0,56,272,1,0,0,0,58,276,1,0,0,0,60,282,1,0,0,0,62,290,1,0,0,0,
-        64,292,1,0,0,0,66,315,1,0,0,0,68,348,1,0,0,0,70,350,1,0,0,0,72,352,
-        1,0,0,0,74,354,1,0,0,0,76,78,3,2,1,0,77,76,1,0,0,0,77,78,1,0,0,0,
+        11,1,11,1,12,1,12,3,12,166,8,12,1,12,3,12,169,8,12,1,13,1,13,3,13,
+        173,8,13,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,15,1,15,1,15,1,15,
+        1,16,1,16,1,16,1,16,1,17,1,17,1,18,1,18,1,18,1,18,3,18,196,8,18,
+        1,18,1,18,1,18,1,19,1,19,1,19,5,19,204,8,19,10,19,12,19,207,9,19,
+        1,20,1,20,1,20,1,21,1,21,1,21,3,21,215,8,21,1,21,1,21,5,21,219,8,
+        21,10,21,12,21,222,9,21,1,21,1,21,1,22,1,22,1,22,1,22,1,22,1,22,
+        1,22,1,22,1,22,1,22,1,22,1,22,3,22,238,8,22,1,23,1,23,1,23,1,23,
+        5,23,244,8,23,10,23,12,23,247,9,23,1,24,1,24,1,24,1,24,1,24,1,25,
+        1,25,1,25,1,25,1,25,1,26,1,26,1,26,1,26,1,26,1,26,1,26,1,26,1,26,
+        3,26,268,8,26,1,27,1,27,1,28,1,28,1,28,1,28,1,29,1,29,3,29,278,8,
+        29,1,29,1,29,1,30,1,30,1,30,5,30,285,8,30,10,30,12,30,288,9,30,1,
+        31,1,31,1,32,1,32,1,32,1,32,1,32,1,33,1,33,1,33,1,33,1,33,3,33,302,
+        8,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,3,33,313,8,33,
+        3,33,315,8,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,
+        1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,
+        1,33,5,33,341,8,33,10,33,12,33,344,9,33,1,34,1,34,3,34,348,8,34,
+        1,35,1,35,1,36,1,36,1,37,1,37,1,37,0,1,66,38,0,2,4,6,8,10,12,14,
+        16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,
+        60,62,64,66,68,70,72,74,0,8,1,0,10,11,1,0,12,13,1,0,14,15,1,0,18,
+        21,1,0,16,17,1,0,7,9,1,0,49,53,1,0,56,57,371,0,77,1,0,0,0,2,88,1,
+        0,0,0,4,99,1,0,0,0,6,107,1,0,0,0,8,109,1,0,0,0,10,113,1,0,0,0,12,
+        122,1,0,0,0,14,129,1,0,0,0,16,140,1,0,0,0,18,153,1,0,0,0,20,157,
+        1,0,0,0,22,160,1,0,0,0,24,168,1,0,0,0,26,172,1,0,0,0,28,174,1,0,
+        0,0,30,181,1,0,0,0,32,185,1,0,0,0,34,189,1,0,0,0,36,191,1,0,0,0,
+        38,200,1,0,0,0,40,208,1,0,0,0,42,211,1,0,0,0,44,237,1,0,0,0,46,239,
+        1,0,0,0,48,248,1,0,0,0,50,253,1,0,0,0,52,267,1,0,0,0,54,269,1,0,
+        0,0,56,271,1,0,0,0,58,275,1,0,0,0,60,281,1,0,0,0,62,289,1,0,0,0,
+        64,291,1,0,0,0,66,314,1,0,0,0,68,347,1,0,0,0,70,349,1,0,0,0,72,351,
+        1,0,0,0,74,353,1,0,0,0,76,78,3,2,1,0,77,76,1,0,0,0,77,78,1,0,0,0,
         78,79,1,0,0,0,79,80,5,0,0,1,80,1,1,0,0,0,81,84,3,4,2,0,82,84,3,6,
         3,0,83,81,1,0,0,0,83,82,1,0,0,0,84,85,1,0,0,0,85,86,5,1,0,0,86,89,
         1,0,0,0,87,89,3,74,37,0,88,83,1,0,0,0,88,87,1,0,0,0,89,90,1,0,0,
@@ -76,67 +76,67 @@ def serializedATN():
         1,0,0,0,149,17,1,0,0,0,150,148,1,0,0,0,151,154,5,6,0,0,152,154,3,
         54,27,0,153,151,1,0,0,0,153,152,1,0,0,0,154,155,1,0,0,0,155,156,
         3,66,33,0,156,19,1,0,0,0,157,158,5,3,0,0,158,159,5,52,0,0,159,21,
-        1,0,0,0,160,161,5,4,0,0,161,162,5,52,0,0,162,23,1,0,0,0,163,164,
-        5,45,0,0,164,167,3,66,33,0,165,167,5,46,0,0,166,163,1,0,0,0,166,
-        165,1,0,0,0,167,25,1,0,0,0,168,171,3,28,14,0,169,171,3,30,15,0,170,
-        168,1,0,0,0,170,169,1,0,0,0,171,27,1,0,0,0,172,175,5,43,0,0,173,
-        176,5,6,0,0,174,176,3,70,35,0,175,173,1,0,0,0,175,174,1,0,0,0,176,
-        177,1,0,0,0,177,178,5,55,0,0,178,179,5,25,0,0,179,180,3,66,33,0,
-        180,181,3,8,4,0,181,29,1,0,0,0,182,183,5,44,0,0,183,184,3,34,17,
-        0,184,185,3,8,4,0,185,31,1,0,0,0,186,187,5,42,0,0,187,188,3,34,17,
-        0,188,189,3,8,4,0,189,33,1,0,0,0,190,191,3,66,33,0,191,35,1,0,0,
-        0,192,193,5,41,0,0,193,194,5,55,0,0,194,196,5,27,0,0,195,197,3,38,
-        19,0,196,195,1,0,0,0,196,197,1,0,0,0,197,198,1,0,0,0,198,199,5,28,
-        0,0,199,200,3,8,4,0,200,37,1,0,0,0,201,206,3,40,20,0,202,203,5,32,
-        0,0,203,205,3,40,20,0,204,202,1,0,0,0,205,208,1,0,0,0,206,204,1,
-        0,0,0,206,207,1,0,0,0,207,39,1,0,0,0,208,206,1,0,0,0,209,210,5,6,
-        0,0,210,211,5,55,0,0,211,41,1,0,0,0,212,213,5,55,0,0,213,215,5,27,
-        0,0,214,216,3,66,33,0,215,214,1,0,0,0,215,216,1,0,0,0,216,221,1,
-        0,0,0,217,218,5,32,0,0,218,220,3,66,33,0,219,217,1,0,0,0,220,223,
-        1,0,0,0,221,219,1,0,0,0,221,222,1,0,0,0,222,224,1,0,0,0,223,221,
-        1,0,0,0,224,225,5,28,0,0,225,43,1,0,0,0,226,227,5,6,0,0,227,228,
-        5,55,0,0,228,229,5,34,0,0,229,239,3,66,33,0,230,231,5,35,0,0,231,
-        232,5,6,0,0,232,233,5,55,0,0,233,234,5,34,0,0,234,239,3,66,33,0,
-        235,239,3,48,24,0,236,239,3,46,23,0,237,239,3,50,25,0,238,226,1,
-        0,0,0,238,230,1,0,0,0,238,235,1,0,0,0,238,236,1,0,0,0,238,237,1,
-        0,0,0,239,45,1,0,0,0,240,241,5,7,0,0,241,246,5,55,0,0,242,243,5,
-        5,0,0,243,245,3,66,33,0,244,242,1,0,0,0,245,248,1,0,0,0,246,244,
-        1,0,0,0,246,247,1,0,0,0,247,47,1,0,0,0,248,246,1,0,0,0,249,250,5,
-        8,0,0,250,251,5,55,0,0,251,252,5,10,0,0,252,253,3,58,29,0,253,49,
-        1,0,0,0,254,255,5,9,0,0,255,256,5,55,0,0,256,257,5,11,0,0,257,258,
-        3,58,29,0,258,51,1,0,0,0,259,260,5,55,0,0,260,261,5,34,0,0,261,269,
-        3,66,33,0,262,263,5,55,0,0,263,264,5,31,0,0,264,265,3,54,27,0,265,
-        266,5,34,0,0,266,267,3,66,33,0,267,269,1,0,0,0,268,259,1,0,0,0,268,
-        262,1,0,0,0,269,53,1,0,0,0,270,271,5,5,0,0,271,55,1,0,0,0,272,273,
-        5,55,0,0,273,274,5,31,0,0,274,275,3,54,27,0,275,57,1,0,0,0,276,278,
-        5,29,0,0,277,279,3,60,30,0,278,277,1,0,0,0,278,279,1,0,0,0,279,280,
-        1,0,0,0,280,281,5,30,0,0,281,59,1,0,0,0,282,287,3,62,31,0,283,284,
-        5,32,0,0,284,286,3,62,31,0,285,283,1,0,0,0,286,289,1,0,0,0,287,285,
-        1,0,0,0,287,288,1,0,0,0,288,61,1,0,0,0,289,287,1,0,0,0,290,291,3,
-        66,33,0,291,63,1,0,0,0,292,293,5,55,0,0,293,294,5,29,0,0,294,295,
-        3,66,33,0,295,296,5,30,0,0,296,65,1,0,0,0,297,302,6,33,-1,0,298,
-        303,3,42,21,0,299,303,3,56,28,0,300,303,3,6,3,0,301,303,3,64,32,
-        0,302,298,1,0,0,0,302,299,1,0,0,0,302,300,1,0,0,0,302,301,1,0,0,
-        0,303,316,1,0,0,0,304,305,5,24,0,0,305,316,3,66,33,11,306,307,5,
-        27,0,0,307,308,3,66,33,0,308,309,5,28,0,0,309,316,1,0,0,0,310,314,
-        3,58,29,0,311,314,3,72,36,0,312,314,5,55,0,0,313,310,1,0,0,0,313,
-        311,1,0,0,0,313,312,1,0,0,0,314,316,1,0,0,0,315,297,1,0,0,0,315,
-        304,1,0,0,0,315,306,1,0,0,0,315,313,1,0,0,0,316,343,1,0,0,0,317,
-        318,10,10,0,0,318,319,7,1,0,0,319,342,3,66,33,11,320,321,10,9,0,
-        0,321,322,7,2,0,0,322,342,3,66,33,10,323,324,10,8,0,0,324,325,7,
-        3,0,0,325,342,3,66,33,9,326,327,10,7,0,0,327,328,7,4,0,0,328,342,
-        3,66,33,8,329,330,10,6,0,0,330,331,5,22,0,0,331,342,3,66,33,7,332,
-        333,10,5,0,0,333,334,5,23,0,0,334,342,3,66,33,6,335,336,10,4,0,0,
-        336,337,5,26,0,0,337,342,3,66,33,5,338,339,10,3,0,0,339,340,5,25,
-        0,0,340,342,3,66,33,4,341,317,1,0,0,0,341,320,1,0,0,0,341,323,1,
-        0,0,0,341,326,1,0,0,0,341,329,1,0,0,0,341,332,1,0,0,0,341,335,1,
-        0,0,0,341,338,1,0,0,0,342,345,1,0,0,0,343,341,1,0,0,0,343,344,1,
-        0,0,0,344,67,1,0,0,0,345,343,1,0,0,0,346,349,5,6,0,0,347,349,3,70,
-        35,0,348,346,1,0,0,0,348,347,1,0,0,0,349,69,1,0,0,0,350,351,7,5,
-        0,0,351,71,1,0,0,0,352,353,7,6,0,0,353,73,1,0,0,0,354,355,7,7,0,
-        0,355,75,1,0,0,0,31,77,83,88,90,99,107,119,127,134,138,143,148,153,
-        166,170,175,196,206,215,221,238,246,268,278,287,302,313,315,341,
-        343,348
+        1,0,0,0,160,161,5,4,0,0,161,162,5,52,0,0,162,23,1,0,0,0,163,165,
+        5,45,0,0,164,166,3,66,33,0,165,164,1,0,0,0,165,166,1,0,0,0,166,169,
+        1,0,0,0,167,169,5,46,0,0,168,163,1,0,0,0,168,167,1,0,0,0,169,25,
+        1,0,0,0,170,173,3,28,14,0,171,173,3,30,15,0,172,170,1,0,0,0,172,
+        171,1,0,0,0,173,27,1,0,0,0,174,175,5,43,0,0,175,176,3,68,34,0,176,
+        177,5,55,0,0,177,178,5,25,0,0,178,179,3,66,33,0,179,180,3,8,4,0,
+        180,29,1,0,0,0,181,182,5,44,0,0,182,183,3,34,17,0,183,184,3,8,4,
+        0,184,31,1,0,0,0,185,186,5,42,0,0,186,187,3,34,17,0,187,188,3,8,
+        4,0,188,33,1,0,0,0,189,190,3,66,33,0,190,35,1,0,0,0,191,192,3,68,
+        34,0,192,193,5,55,0,0,193,195,5,27,0,0,194,196,3,38,19,0,195,194,
+        1,0,0,0,195,196,1,0,0,0,196,197,1,0,0,0,197,198,5,28,0,0,198,199,
+        3,8,4,0,199,37,1,0,0,0,200,205,3,40,20,0,201,202,5,32,0,0,202,204,
+        3,40,20,0,203,201,1,0,0,0,204,207,1,0,0,0,205,203,1,0,0,0,205,206,
+        1,0,0,0,206,39,1,0,0,0,207,205,1,0,0,0,208,209,3,68,34,0,209,210,
+        5,55,0,0,210,41,1,0,0,0,211,212,5,55,0,0,212,214,5,27,0,0,213,215,
+        3,66,33,0,214,213,1,0,0,0,214,215,1,0,0,0,215,220,1,0,0,0,216,217,
+        5,32,0,0,217,219,3,66,33,0,218,216,1,0,0,0,219,222,1,0,0,0,220,218,
+        1,0,0,0,220,221,1,0,0,0,221,223,1,0,0,0,222,220,1,0,0,0,223,224,
+        5,28,0,0,224,43,1,0,0,0,225,226,5,6,0,0,226,227,5,55,0,0,227,228,
+        5,34,0,0,228,238,3,66,33,0,229,230,5,35,0,0,230,231,5,6,0,0,231,
+        232,5,55,0,0,232,233,5,34,0,0,233,238,3,66,33,0,234,238,3,48,24,
+        0,235,238,3,46,23,0,236,238,3,50,25,0,237,225,1,0,0,0,237,229,1,
+        0,0,0,237,234,1,0,0,0,237,235,1,0,0,0,237,236,1,0,0,0,238,45,1,0,
+        0,0,239,240,5,7,0,0,240,245,5,55,0,0,241,242,5,5,0,0,242,244,3,66,
+        33,0,243,241,1,0,0,0,244,247,1,0,0,0,245,243,1,0,0,0,245,246,1,0,
+        0,0,246,47,1,0,0,0,247,245,1,0,0,0,248,249,5,8,0,0,249,250,5,55,
+        0,0,250,251,5,10,0,0,251,252,3,58,29,0,252,49,1,0,0,0,253,254,5,
+        9,0,0,254,255,5,55,0,0,255,256,5,11,0,0,256,257,3,58,29,0,257,51,
+        1,0,0,0,258,259,5,55,0,0,259,260,5,34,0,0,260,268,3,66,33,0,261,
+        262,5,55,0,0,262,263,5,31,0,0,263,264,3,54,27,0,264,265,5,34,0,0,
+        265,266,3,66,33,0,266,268,1,0,0,0,267,258,1,0,0,0,267,261,1,0,0,
+        0,268,53,1,0,0,0,269,270,5,5,0,0,270,55,1,0,0,0,271,272,5,55,0,0,
+        272,273,5,31,0,0,273,274,3,54,27,0,274,57,1,0,0,0,275,277,5,29,0,
+        0,276,278,3,60,30,0,277,276,1,0,0,0,277,278,1,0,0,0,278,279,1,0,
+        0,0,279,280,5,30,0,0,280,59,1,0,0,0,281,286,3,62,31,0,282,283,5,
+        32,0,0,283,285,3,62,31,0,284,282,1,0,0,0,285,288,1,0,0,0,286,284,
+        1,0,0,0,286,287,1,0,0,0,287,61,1,0,0,0,288,286,1,0,0,0,289,290,3,
+        66,33,0,290,63,1,0,0,0,291,292,5,55,0,0,292,293,5,29,0,0,293,294,
+        3,66,33,0,294,295,5,30,0,0,295,65,1,0,0,0,296,301,6,33,-1,0,297,
+        302,3,42,21,0,298,302,3,56,28,0,299,302,3,6,3,0,300,302,3,64,32,
+        0,301,297,1,0,0,0,301,298,1,0,0,0,301,299,1,0,0,0,301,300,1,0,0,
+        0,302,315,1,0,0,0,303,304,5,24,0,0,304,315,3,66,33,11,305,306,5,
+        27,0,0,306,307,3,66,33,0,307,308,5,28,0,0,308,315,1,0,0,0,309,313,
+        3,58,29,0,310,313,3,72,36,0,311,313,5,55,0,0,312,309,1,0,0,0,312,
+        310,1,0,0,0,312,311,1,0,0,0,313,315,1,0,0,0,314,296,1,0,0,0,314,
+        303,1,0,0,0,314,305,1,0,0,0,314,312,1,0,0,0,315,342,1,0,0,0,316,
+        317,10,10,0,0,317,318,7,1,0,0,318,341,3,66,33,11,319,320,10,9,0,
+        0,320,321,7,2,0,0,321,341,3,66,33,10,322,323,10,8,0,0,323,324,7,
+        3,0,0,324,341,3,66,33,9,325,326,10,7,0,0,326,327,7,4,0,0,327,341,
+        3,66,33,8,328,329,10,6,0,0,329,330,5,22,0,0,330,341,3,66,33,7,331,
+        332,10,5,0,0,332,333,5,23,0,0,333,341,3,66,33,6,334,335,10,4,0,0,
+        335,336,5,26,0,0,336,341,3,66,33,5,337,338,10,3,0,0,338,339,5,25,
+        0,0,339,341,3,66,33,4,340,316,1,0,0,0,340,319,1,0,0,0,340,322,1,
+        0,0,0,340,325,1,0,0,0,340,328,1,0,0,0,340,331,1,0,0,0,340,334,1,
+        0,0,0,340,337,1,0,0,0,341,344,1,0,0,0,342,340,1,0,0,0,342,343,1,
+        0,0,0,343,67,1,0,0,0,344,342,1,0,0,0,345,348,5,6,0,0,346,348,3,70,
+        35,0,347,345,1,0,0,0,347,346,1,0,0,0,348,69,1,0,0,0,349,350,7,5,
+        0,0,350,71,1,0,0,0,351,352,7,6,0,0,352,73,1,0,0,0,353,354,7,7,0,
+        0,354,75,1,0,0,0,31,77,83,88,90,99,107,119,127,134,138,143,148,153,
+        165,168,172,195,205,214,220,237,245,267,277,286,301,312,314,340,
+        342,347
     ]
 
 class SchedulerParser ( Parser ):
@@ -326,7 +326,7 @@ class SchedulerParser ( Parser ):
             self.state = 77
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 252341182749737944) != 0):
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 252338983726482392) != 0):
                 self.state = 76
                 self.code()
 
@@ -396,11 +396,11 @@ class SchedulerParser ( Parser ):
                 self.state = 88
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
-                if token in [3, 4, 6, 7, 8, 9, 35, 36, 37, 38, 39, 41, 42, 43, 44, 45, 46, 55]:
+                if token in [3, 4, 6, 7, 8, 9, 35, 36, 37, 38, 39, 42, 43, 44, 45, 46, 55]:
                     self.state = 83
                     self._errHandler.sync(self)
                     token = self._input.LA(1)
-                    if token in [6, 7, 8, 9, 35, 41, 42, 43, 44, 45, 46, 55]:
+                    if token in [6, 7, 8, 9, 35, 42, 43, 44, 45, 46, 55]:
                         self.state = 81
                         self.instruction()
                         pass
@@ -424,7 +424,7 @@ class SchedulerParser ( Parser ):
                 self.state = 90 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 252341182749737944) != 0)):
+                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 252338983726482392) != 0)):
                     break
 
         except RecognitionException as re:
@@ -1189,8 +1189,9 @@ class SchedulerParser ( Parser ):
 
         localctx = SchedulerParser.Transfer_statementContext(self, self._ctx, self.state)
         self.enterRule(localctx, 24, self.RULE_transfer_statement)
+        self._la = 0 # Token type
         try:
-            self.state = 166
+            self.state = 168
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [45]:
@@ -1198,13 +1199,19 @@ class SchedulerParser ( Parser ):
                 self.enterOuterAlt(localctx, 1)
                 self.state = 163
                 self.match(SchedulerParser.RETURN)
-                self.state = 164
-                self.expr(0)
+                self.state = 165
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & 53481277055041560) != 0):
+                    self.state = 164
+                    self.expr(0)
+
+
                 pass
             elif token in [46]:
                 localctx = SchedulerParser.BreakContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
-                self.state = 165
+                self.state = 167
                 self.match(SchedulerParser.BREAK)
                 pass
             else:
@@ -1251,17 +1258,17 @@ class SchedulerParser ( Parser ):
         localctx = SchedulerParser.LoopContext(self, self._ctx, self.state)
         self.enterRule(localctx, 26, self.RULE_loop)
         try:
-            self.state = 170
+            self.state = 172
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [43]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 168
+                self.state = 170
                 self.for_loop()
                 pass
             elif token in [44]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 169
+                self.state = 171
                 self.while_loop()
                 pass
             else:
@@ -1286,6 +1293,10 @@ class SchedulerParser ( Parser ):
         def FOR(self):
             return self.getToken(SchedulerParser.FOR, 0)
 
+        def type_(self):
+            return self.getTypedRuleContext(SchedulerParser.TypeContext,0)
+
+
         def VARNAME(self):
             return self.getToken(SchedulerParser.VARNAME, 0)
 
@@ -1298,13 +1309,6 @@ class SchedulerParser ( Parser ):
 
         def block(self):
             return self.getTypedRuleContext(SchedulerParser.BlockContext,0)
-
-
-        def TYPENAME(self):
-            return self.getToken(SchedulerParser.TYPENAME, 0)
-
-        def structure(self):
-            return self.getTypedRuleContext(SchedulerParser.StructureContext,0)
 
 
         def getRuleIndex(self):
@@ -1325,29 +1329,17 @@ class SchedulerParser ( Parser ):
         self.enterRule(localctx, 28, self.RULE_for_loop)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 172
+            self.state = 174
             self.match(SchedulerParser.FOR)
             self.state = 175
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
-            if token in [6]:
-                self.state = 173
-                self.match(SchedulerParser.TYPENAME)
-                pass
-            elif token in [7, 8, 9]:
-                self.state = 174
-                self.structure()
-                pass
-            else:
-                raise NoViableAltException(self)
-
-            self.state = 177
+            self.type_()
+            self.state = 176
             self.match(SchedulerParser.VARNAME)
-            self.state = 178
+            self.state = 177
             self.match(SchedulerParser.IN)
-            self.state = 179
+            self.state = 178
             self.expr(0)
-            self.state = 180
+            self.state = 179
             self.block()
         except RecognitionException as re:
             localctx.exception = re
@@ -1394,11 +1386,11 @@ class SchedulerParser ( Parser ):
         self.enterRule(localctx, 30, self.RULE_while_loop)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 182
+            self.state = 181
             self.match(SchedulerParser.WHILE)
-            self.state = 183
+            self.state = 182
             self.condition()
-            self.state = 184
+            self.state = 183
             self.block()
         except RecognitionException as re:
             localctx.exception = re
@@ -1445,11 +1437,11 @@ class SchedulerParser ( Parser ):
         self.enterRule(localctx, 32, self.RULE_if_statement)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 186
+            self.state = 185
             self.match(SchedulerParser.IF)
-            self.state = 187
+            self.state = 186
             self.condition()
-            self.state = 188
+            self.state = 187
             self.block()
         except RecognitionException as re:
             localctx.exception = re
@@ -1489,7 +1481,7 @@ class SchedulerParser ( Parser ):
         self.enterRule(localctx, 34, self.RULE_condition)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 190
+            self.state = 189
             self.expr(0)
         except RecognitionException as re:
             localctx.exception = re
@@ -1507,8 +1499,9 @@ class SchedulerParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def DEF(self):
-            return self.getToken(SchedulerParser.DEF, 0)
+        def type_(self):
+            return self.getTypedRuleContext(SchedulerParser.TypeContext,0)
+
 
         def VARNAME(self):
             return self.getToken(SchedulerParser.VARNAME, 0)
@@ -1546,23 +1539,23 @@ class SchedulerParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
+            self.state = 191
+            self.type_()
             self.state = 192
-            self.match(SchedulerParser.DEF)
-            self.state = 193
             self.match(SchedulerParser.VARNAME)
-            self.state = 194
+            self.state = 193
             self.match(SchedulerParser.OPEN_PAREN)
-            self.state = 196
+            self.state = 195
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==6:
-                self.state = 195
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 960) != 0):
+                self.state = 194
                 self.args()
 
 
-            self.state = 198
+            self.state = 197
             self.match(SchedulerParser.CLOSE_PAREN)
-            self.state = 199
+            self.state = 198
             self.block()
         except RecognitionException as re:
             localctx.exception = re
@@ -1612,17 +1605,17 @@ class SchedulerParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 201
+            self.state = 200
             self.arg()
-            self.state = 206
+            self.state = 205
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==32:
-                self.state = 202
+                self.state = 201
                 self.match(SchedulerParser.COMMA)
-                self.state = 203
+                self.state = 202
                 self.arg()
-                self.state = 208
+                self.state = 207
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1642,8 +1635,9 @@ class SchedulerParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def TYPENAME(self):
-            return self.getToken(SchedulerParser.TYPENAME, 0)
+        def type_(self):
+            return self.getTypedRuleContext(SchedulerParser.TypeContext,0)
+
 
         def VARNAME(self):
             return self.getToken(SchedulerParser.VARNAME, 0)
@@ -1666,9 +1660,9 @@ class SchedulerParser ( Parser ):
         self.enterRule(localctx, 40, self.RULE_arg)
         try:
             self.enterOuterAlt(localctx, 1)
+            self.state = 208
+            self.type_()
             self.state = 209
-            self.match(SchedulerParser.TYPENAME)
-            self.state = 210
             self.match(SchedulerParser.VARNAME)
         except RecognitionException as re:
             localctx.exception = re
@@ -1727,31 +1721,31 @@ class SchedulerParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 212
+            self.state = 211
             self.match(SchedulerParser.VARNAME)
-            self.state = 213
+            self.state = 212
             self.match(SchedulerParser.OPEN_PAREN)
-            self.state = 215
+            self.state = 214
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & 53481277055041560) != 0):
-                self.state = 214
+                self.state = 213
                 self.expr(0)
 
 
-            self.state = 221
+            self.state = 220
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==32:
-                self.state = 217
+                self.state = 216
                 self.match(SchedulerParser.COMMA)
-                self.state = 218
+                self.state = 217
                 self.expr(0)
-                self.state = 223
+                self.state = 222
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 224
+            self.state = 223
             self.match(SchedulerParser.CLOSE_PAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -1814,46 +1808,46 @@ class SchedulerParser ( Parser ):
         localctx = SchedulerParser.DefContext(self, self._ctx, self.state)
         self.enterRule(localctx, 44, self.RULE_def)
         try:
-            self.state = 238
+            self.state = 237
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [6]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 226
+                self.state = 225
                 self.match(SchedulerParser.TYPENAME)
-                self.state = 227
+                self.state = 226
                 self.match(SchedulerParser.VARNAME)
-                self.state = 228
+                self.state = 227
                 self.match(SchedulerParser.SINGLEEQUAL)
-                self.state = 229
+                self.state = 228
                 self.expr(0)
                 pass
             elif token in [35]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 230
+                self.state = 229
                 self.match(SchedulerParser.COLLECTION_OF)
-                self.state = 231
+                self.state = 230
                 self.match(SchedulerParser.TYPENAME)
-                self.state = 232
+                self.state = 231
                 self.match(SchedulerParser.VARNAME)
-                self.state = 233
+                self.state = 232
                 self.match(SchedulerParser.SINGLEEQUAL)
-                self.state = 234
+                self.state = 233
                 self.expr(0)
                 pass
             elif token in [8]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 235
+                self.state = 234
                 self.dayDef()
                 pass
             elif token in [7]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 236
+                self.state = 235
                 self.classDef()
                 pass
             elif token in [9]:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 237
+                self.state = 236
                 self.weekDef()
                 pass
             else:
@@ -1913,19 +1907,19 @@ class SchedulerParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 240
+            self.state = 239
             self.match(SchedulerParser.CLASSNAME)
-            self.state = 241
+            self.state = 240
             self.match(SchedulerParser.VARNAME)
-            self.state = 246
+            self.state = 245
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==5:
-                self.state = 242
+                self.state = 241
                 self.match(SchedulerParser.CLASS_ATTRIBUTE)
-                self.state = 243
+                self.state = 242
                 self.expr(0)
-                self.state = 248
+                self.state = 247
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1976,13 +1970,13 @@ class SchedulerParser ( Parser ):
         self.enterRule(localctx, 48, self.RULE_dayDef)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 249
+            self.state = 248
             self.match(SchedulerParser.DAYNAME)
-            self.state = 250
+            self.state = 249
             self.match(SchedulerParser.VARNAME)
-            self.state = 251
+            self.state = 250
             self.match(SchedulerParser.CLASSESTOKEN)
-            self.state = 252
+            self.state = 251
             self.collection()
         except RecognitionException as re:
             localctx.exception = re
@@ -2031,13 +2025,13 @@ class SchedulerParser ( Parser ):
         self.enterRule(localctx, 50, self.RULE_weekDef)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 254
+            self.state = 253
             self.match(SchedulerParser.WEEKNAME)
-            self.state = 255
+            self.state = 254
             self.match(SchedulerParser.VARNAME)
-            self.state = 256
+            self.state = 255
             self.match(SchedulerParser.DAYSTOKEN)
-            self.state = 257
+            self.state = 256
             self.collection()
         except RecognitionException as re:
             localctx.exception = re
@@ -2089,30 +2083,30 @@ class SchedulerParser ( Parser ):
         localctx = SchedulerParser.AssignContext(self, self._ctx, self.state)
         self.enterRule(localctx, 52, self.RULE_assign)
         try:
-            self.state = 268
+            self.state = 267
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,22,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 259
+                self.state = 258
                 self.match(SchedulerParser.VARNAME)
-                self.state = 260
+                self.state = 259
                 self.match(SchedulerParser.SINGLEEQUAL)
-                self.state = 261
+                self.state = 260
                 self.expr(0)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 262
+                self.state = 261
                 self.match(SchedulerParser.VARNAME)
-                self.state = 263
+                self.state = 262
                 self.match(SchedulerParser.DOT)
-                self.state = 264
+                self.state = 263
                 self.attribute()
-                self.state = 265
+                self.state = 264
                 self.match(SchedulerParser.SINGLEEQUAL)
-                self.state = 266
+                self.state = 265
                 self.expr(0)
                 pass
 
@@ -2154,7 +2148,7 @@ class SchedulerParser ( Parser ):
         self.enterRule(localctx, 54, self.RULE_attribute)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 270
+            self.state = 269
             self.match(SchedulerParser.CLASS_ATTRIBUTE)
         except RecognitionException as re:
             localctx.exception = re
@@ -2200,11 +2194,11 @@ class SchedulerParser ( Parser ):
         self.enterRule(localctx, 56, self.RULE_attribute_call)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 272
+            self.state = 271
             self.match(SchedulerParser.VARNAME)
-            self.state = 273
+            self.state = 272
             self.match(SchedulerParser.DOT)
-            self.state = 274
+            self.state = 273
             self.attribute()
         except RecognitionException as re:
             localctx.exception = re
@@ -2251,17 +2245,17 @@ class SchedulerParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 276
+            self.state = 275
             self.match(SchedulerParser.OPEN_BRACKET)
-            self.state = 278
+            self.state = 277
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & 53481277055041560) != 0):
-                self.state = 277
+                self.state = 276
                 self.collection_elements()
 
 
-            self.state = 280
+            self.state = 279
             self.match(SchedulerParser.CLOSE_BRACKET)
         except RecognitionException as re:
             localctx.exception = re
@@ -2311,17 +2305,17 @@ class SchedulerParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 282
+            self.state = 281
             self.collection_element()
-            self.state = 287
+            self.state = 286
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==32:
-                self.state = 283
+                self.state = 282
                 self.match(SchedulerParser.COMMA)
-                self.state = 284
+                self.state = 283
                 self.collection_element()
-                self.state = 289
+                self.state = 288
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -2363,7 +2357,7 @@ class SchedulerParser ( Parser ):
         self.enterRule(localctx, 62, self.RULE_collection_element)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 290
+            self.state = 289
             self.expr(0)
         except RecognitionException as re:
             localctx.exception = re
@@ -2412,13 +2406,13 @@ class SchedulerParser ( Parser ):
         self.enterRule(localctx, 64, self.RULE_collection_subscription)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 292
+            self.state = 291
             self.match(SchedulerParser.VARNAME)
-            self.state = 293
+            self.state = 292
             self.match(SchedulerParser.OPEN_BRACKET)
-            self.state = 294
+            self.state = 293
             self.expr(0)
-            self.state = 295
+            self.state = 294
             self.match(SchedulerParser.CLOSE_BRACKET)
         except RecognitionException as re:
             localctx.exception = re
@@ -2736,7 +2730,7 @@ class SchedulerParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 315
+            self.state = 314
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,27,self._ctx)
             if la_ == 1:
@@ -2744,26 +2738,26 @@ class SchedulerParser ( Parser ):
                 self._ctx = localctx
                 _prevctx = localctx
 
-                self.state = 302
+                self.state = 301
                 self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,25,self._ctx)
                 if la_ == 1:
-                    self.state = 298
+                    self.state = 297
                     self.func_call()
                     pass
 
                 elif la_ == 2:
-                    self.state = 299
+                    self.state = 298
                     self.attribute_call()
                     pass
 
                 elif la_ == 3:
-                    self.state = 300
+                    self.state = 299
                     self.canvas_instruction()
                     pass
 
                 elif la_ == 4:
-                    self.state = 301
+                    self.state = 300
                     self.collection_subscription()
                     pass
 
@@ -2774,9 +2768,9 @@ class SchedulerParser ( Parser ):
                 localctx = SchedulerParser.NotExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
-                self.state = 304
+                self.state = 303
                 self.match(SchedulerParser.NOT)
-                self.state = 305
+                self.state = 304
                 self.expr(11)
                 pass
 
@@ -2784,11 +2778,11 @@ class SchedulerParser ( Parser ):
                 localctx = SchedulerParser.ParenthesisContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
-                self.state = 306
+                self.state = 305
                 self.match(SchedulerParser.OPEN_PAREN)
-                self.state = 307
+                self.state = 306
                 self.expr(0)
-                self.state = 308
+                self.state = 307
                 self.match(SchedulerParser.CLOSE_PAREN)
                 pass
 
@@ -2796,19 +2790,19 @@ class SchedulerParser ( Parser ):
                 localctx = SchedulerParser.ValueExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
-                self.state = 313
+                self.state = 312
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [29]:
-                    self.state = 310
+                    self.state = 309
                     self.collection()
                     pass
                 elif token in [49, 50, 51, 52, 53]:
-                    self.state = 311
+                    self.state = 310
                     self.value()
                     pass
                 elif token in [55]:
-                    self.state = 312
+                    self.state = 311
                     self.match(SchedulerParser.VARNAME)
                     pass
                 else:
@@ -2818,7 +2812,7 @@ class SchedulerParser ( Parser ):
 
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 343
+            self.state = 342
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,29,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
@@ -2826,17 +2820,17 @@ class SchedulerParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 341
+                    self.state = 340
                     self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,28,self._ctx)
                     if la_ == 1:
                         localctx = SchedulerParser.MultDivContext(self, SchedulerParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 317
+                        self.state = 316
                         if not self.precpred(self._ctx, 10):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 10)")
-                        self.state = 318
+                        self.state = 317
                         localctx.op = self._input.LT(1)
                         _la = self._input.LA(1)
                         if not(_la==12 or _la==13):
@@ -2844,18 +2838,18 @@ class SchedulerParser ( Parser ):
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 319
+                        self.state = 318
                         self.expr(11)
                         pass
 
                     elif la_ == 2:
                         localctx = SchedulerParser.AddSubContext(self, SchedulerParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 320
+                        self.state = 319
                         if not self.precpred(self._ctx, 9):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 9)")
-                        self.state = 321
+                        self.state = 320
                         localctx.op = self._input.LT(1)
                         _la = self._input.LA(1)
                         if not(_la==14 or _la==15):
@@ -2863,18 +2857,18 @@ class SchedulerParser ( Parser ):
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 322
+                        self.state = 321
                         self.expr(10)
                         pass
 
                     elif la_ == 3:
                         localctx = SchedulerParser.CompareContext(self, SchedulerParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 323
+                        self.state = 322
                         if not self.precpred(self._ctx, 8):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 8)")
-                        self.state = 324
+                        self.state = 323
                         localctx.op = self._input.LT(1)
                         _la = self._input.LA(1)
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 3932160) != 0)):
@@ -2882,18 +2876,18 @@ class SchedulerParser ( Parser ):
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 325
+                        self.state = 324
                         self.expr(9)
                         pass
 
                     elif la_ == 4:
                         localctx = SchedulerParser.EqualExprContext(self, SchedulerParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 326
+                        self.state = 325
                         if not self.precpred(self._ctx, 7):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 7)")
-                        self.state = 327
+                        self.state = 326
                         localctx.op = self._input.LT(1)
                         _la = self._input.LA(1)
                         if not(_la==16 or _la==17):
@@ -2901,64 +2895,64 @@ class SchedulerParser ( Parser ):
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 328
+                        self.state = 327
                         self.expr(8)
                         pass
 
                     elif la_ == 5:
                         localctx = SchedulerParser.AndExprContext(self, SchedulerParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 329
+                        self.state = 328
                         if not self.precpred(self._ctx, 6):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 6)")
-                        self.state = 330
+                        self.state = 329
                         self.match(SchedulerParser.AND)
-                        self.state = 331
+                        self.state = 330
                         self.expr(7)
                         pass
 
                     elif la_ == 6:
                         localctx = SchedulerParser.OrExprContext(self, SchedulerParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 332
+                        self.state = 331
                         if not self.precpred(self._ctx, 5):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 5)")
-                        self.state = 333
+                        self.state = 332
                         self.match(SchedulerParser.OR)
-                        self.state = 334
+                        self.state = 333
                         self.expr(6)
                         pass
 
                     elif la_ == 7:
                         localctx = SchedulerParser.OverlapExprContext(self, SchedulerParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 335
+                        self.state = 334
                         if not self.precpred(self._ctx, 4):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
-                        self.state = 336
+                        self.state = 335
                         self.match(SchedulerParser.OVERLAP)
-                        self.state = 337
+                        self.state = 336
                         self.expr(5)
                         pass
 
                     elif la_ == 8:
                         localctx = SchedulerParser.InExprContext(self, SchedulerParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 338
+                        self.state = 337
                         if not self.precpred(self._ctx, 3):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
-                        self.state = 339
+                        self.state = 338
                         self.match(SchedulerParser.IN)
-                        self.state = 340
+                        self.state = 339
                         self.expr(4)
                         pass
 
              
-                self.state = 345
+                self.state = 344
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,29,self._ctx)
 
@@ -3002,17 +2996,17 @@ class SchedulerParser ( Parser ):
         localctx = SchedulerParser.TypeContext(self, self._ctx, self.state)
         self.enterRule(localctx, 68, self.RULE_type)
         try:
-            self.state = 348
+            self.state = 347
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [6]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 346
+                self.state = 345
                 self.match(SchedulerParser.TYPENAME)
                 pass
             elif token in [7, 8, 9]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 347
+                self.state = 346
                 self.structure()
                 pass
             else:
@@ -3062,7 +3056,7 @@ class SchedulerParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 350
+            self.state = 349
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 896) != 0)):
                 self._errHandler.recoverInline(self)
@@ -3119,7 +3113,7 @@ class SchedulerParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 352
+            self.state = 351
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 17451448556060672) != 0)):
                 self._errHandler.recoverInline(self)
@@ -3167,7 +3161,7 @@ class SchedulerParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 354
+            self.state = 353
             _la = self._input.LA(1)
             if not(_la==56 or _la==57):
                 self._errHandler.recoverInline(self)

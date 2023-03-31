@@ -26,12 +26,16 @@ class VisitorImpl(SchedulerVisitor):
     # Visit a parse tree produced by SchedulerParser#code.
     def visitCode(self, ctx:SchedulerParser.CodeContext):
         for instr in ctx.children:
-            self.visit(instr)
             if instr in ctx.instruction() and instr.transfer_statement():
                 if instr.transfer_statement().RETURN():
-                    return instr.transfer_statement().expr()
+                    if instr.transfer_statement().expr():
+                        return self.visit(instr.transfer_statement().expr())
+                    else:
+                        return None
                 elif instr.transfer_statement().BREAK():
-                    pass
+                    break
+            else:
+                self.visit(instr)
 
 
 
@@ -48,17 +52,22 @@ class VisitorImpl(SchedulerVisitor):
     # Visit a parse tree produced by SchedulerParser#block.
     def visitBlock(self, ctx:SchedulerParser.BlockContext):
         self.gvm.vms.append(VariableManager())
-        self.visit(ctx.code())
+        return_val = self.visit(ctx.code())
         del self.gvm.vms[-1]
+        return return_val
 
 
     # Visit a parse tree produced by SchedulerParser#add.
     def visitAdd(self, ctx:SchedulerParser.AddContext):
         get_args = dict([self.visit(elem) for elem in ctx.get_arg()])
+        structure = self.visit(ctx.structure())
 
-        if self.visit(ctx.structure()) == 'CLASS':
+        if structure == 'CLASS':
             class_, class_date = self.visit(ctx.expr()), get_args['DATE']
             self.canvas.add_class(class_, class_date)
+        elif structure == 'DAY':
+            day, day_date = self.visit(ctx.expr()), get_args['DATE']
+            self.canvas.add_day(day, day_date)
 
 
     # Visit a parse tree produced by SchedulerParser#structure.
@@ -113,10 +122,7 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#for_loop.
     def visitFor_loop(self, ctx:SchedulerParser.For_loopContext):
-        if ctx.TYPENAME():
-            type = ctx.TYPENAME().getText()
-        else:
-            type = self.visit(ctx.structure())
+        type = self.visit(ctx.type_())
         for elem in self.visit(ctx.expr()):
             self.gvm.def_variable(type, ctx.VARNAME().getText(), elem)
             self.visit(ctx.block())
@@ -142,22 +148,34 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#function.
     def visitFunction(self, ctx:SchedulerParser.FunctionContext):
-        return self.visitChildren(ctx)
+        self.gvm.def_function(self.visit(ctx.type_()), ctx.VARNAME().getText(), ctx.block(), self.visit(ctx.args()))
 
 
     # Visit a parse tree produced by SchedulerParser#args.
     def visitArgs(self, ctx:SchedulerParser.ArgsContext):
-        return self.visitChildren(ctx)
+        return [self.visit(node) for node in ctx.arg()]
 
 
     # Visit a parse tree produced by SchedulerParser#arg.
     def visitArg(self, ctx:SchedulerParser.ArgContext):
-        return self.visitChildren(ctx)
+        return (self.visit(ctx.type_()), ctx.VARNAME().getText())
 
 
     # Visit a parse tree produced by SchedulerParser#func_call.
     def visitFunc_call(self, ctx:SchedulerParser.Func_callContext):
-        return self.visitChildren(ctx)
+        name = ctx.VARNAME().getText()
+        arg_vals = [self.visit(node) for node in ctx.expr()]
+        return_type, node, args = self.gvm.access_function(name)
+
+        for (arg_type, arg_name), arg_val in zip(args, arg_vals):
+            self.gvm.def_variable(arg_type, arg_name, arg_val)
+        
+        return_value = self.visit(node)
+        
+        for arg_type, arg_name in args:
+            self.gvm.del_variable(arg_name)
+        
+        return self.gvm.cast_value(return_type, return_value)
 
 
     # Visit a parse tree produced by SchedulerParser#def.
@@ -183,7 +201,9 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#dayDef.
     def visitDayDef(self, ctx:SchedulerParser.DayDefContext):
-        return self.visitChildren(ctx)
+        name = ctx.VARNAME().getText()
+        classes = self.visit(ctx.collection())
+        self.gvm.def_day(name, classes)
 
 
     # Visit a parse tree produced by SchedulerParser#weekDef.
@@ -323,6 +343,12 @@ class VisitorImpl(SchedulerVisitor):
     # Visit a parse tree produced by SchedulerParser#comments.
     def visitComments(self, ctx:SchedulerParser.CommentsContext):
         return self.visitChildren(ctx)
+    
+    def visitType(self, ctx:SchedulerParser.TypeContext):
+        if ctx.TYPENAME():
+            return ctx.TYPENAME().getText()
+        else:
+            return self.visit(ctx.structure())
 
 
 

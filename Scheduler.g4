@@ -41,7 +41,7 @@ end_date: 'END DATE' DATE;
 
 // INSTRUCTIONS
 // transfer statements
-transfer_statement: RETURN expr # Return
+transfer_statement: RETURN expr? # Return
     | BREAK # Break
     ;
 
@@ -50,7 +50,7 @@ loop: for_loop
     | while_loop 
     ;
 // for loops
-for_loop: FOR (TYPENAME | structure) VARNAME IN expr block;
+for_loop: FOR type VARNAME IN expr block;
 // while loops
 while_loop: WHILE condition block;
 
@@ -59,9 +59,9 @@ if_statement : IF condition block;
 condition: expr;
 
 // function definitions 
-function: DEF VARNAME OPEN_PAREN args? CLOSE_PAREN block;
+function: type VARNAME OPEN_PAREN args? CLOSE_PAREN block;
 args: arg (COMMA arg)*;
-arg: TYPENAME VARNAME;
+arg: type VARNAME;
 
 // function call
 func_call: VARNAME OPEN_PAREN  expr? (COMMA expr)* CLOSE_PAREN;
@@ -114,7 +114,7 @@ expr:   (func_call | attribute_call | canvas_instruction | collection_subscripti
 // type rule and tokens 
 type: TYPENAME | structure;
 structure: CLASSNAME | DAYNAME | WEEKNAME;
-TYPENAME: 'INT' | 'BOOL' | 'STRING' | 'DATE' | 'TIME';
+TYPENAME: 'INT' | 'BOOL' | 'STRING' | 'DATE' | 'TIME' | 'VOID';
 CLASSNAME : 'CLASS';
 DAYNAME : 'DAY';
 WEEKNAME : 'WEEK';
