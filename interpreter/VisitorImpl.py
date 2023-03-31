@@ -25,7 +25,14 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#code.
     def visitCode(self, ctx:SchedulerParser.CodeContext):
-        return self.visitChildren(ctx)
+        for instr in ctx.children:
+            self.visit(instr)
+            if instr in ctx.instruction() and instr.transfer_statement():
+                if instr.transfer_statement().RETURN():
+                    return instr.transfer_statement().expr()
+                elif instr.transfer_statement().BREAK():
+                    pass
+
 
 
     # Visit a parse tree produced by SchedulerParser#instruction.
@@ -41,7 +48,7 @@ class VisitorImpl(SchedulerVisitor):
     # Visit a parse tree produced by SchedulerParser#block.
     def visitBlock(self, ctx:SchedulerParser.BlockContext):
         self.gvm.vms.append(VariableManager())
-        self.visitChildren(ctx)
+        self.visit(ctx.code())
         del self.gvm.vms[-1]
 
 

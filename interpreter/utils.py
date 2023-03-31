@@ -22,6 +22,8 @@ class time(time):
             raise NotImplementedError
     def __radd__(self, other):
         return self.__add__(other)
+    def __sub__(self, other):
+        return self.__add__(-other)
 
 class date(date):
     def __add__(self, other):
@@ -31,6 +33,8 @@ class date(date):
             raise NotImplementedError
     def __radd__(self, other):
         return self.__add__(other)
+    def __sub__(self, other):
+        return self.__add__(-other)
         
 
 @dataclass
