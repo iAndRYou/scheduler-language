@@ -24,6 +24,11 @@ class SchedulerVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by SchedulerParser#instruction_without_semicolon.
+    def visitInstruction_without_semicolon(self, ctx:SchedulerParser.Instruction_without_semicolonContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by SchedulerParser#canvas_instruction.
     def visitCanvas_instruction(self, ctx:SchedulerParser.Canvas_instructionContext):
         return self.visitChildren(ctx)

@@ -1,14 +1,16 @@
 grammar Scheduler;        
 prog: code? EOF;
-code: ((instruction | canvas_instruction) ';' | comments)+;
+code: ((instruction | canvas_instruction) ';' | instruction_without_semicolon | comments)+;
 
 // code elements
 instruction: def // Definition
     | assign // Assignment
-    | if_statement // IfStatement
-    | function // FunctionDefinition
-    | func_call //FunctionCall 
+    | expr // Expression 
     | transfer_statement // TransferStatement
+    ;
+// instructions with a block of code
+instruction_without_semicolon:  if_statement // IfStatement
+    | function // FunctionDefinition
     | loop // Loop
     ;
 canvas_instruction: add 
@@ -55,7 +57,7 @@ for_loop: FOR type VARNAME IN expr block;
 while_loop: WHILE condition block;
 
 // if statement
-if_statement : IF condition block;
+if_statement : IF condition block (ELIF condition block)* (ELSE block)?;
 condition: expr;
 
 // function definitions 
@@ -157,6 +159,8 @@ GET_CANVA : 'GET';
 WHERE : 'WHERE';
 DEF : 'DEF';
 IF : 'IF';
+ELIF : 'ELIF';
+ELSE : 'ELSE';
 FOR : 'FOR';
 WHILE : 'WHILE';
 RETURN : 'RETURN';

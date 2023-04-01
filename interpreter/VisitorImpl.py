@@ -54,6 +54,11 @@ class VisitorImpl(SchedulerVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by SchedulerParser#instruction_without_semicolon.
+    def visitInstruction_without_semicolon(self, ctx:SchedulerParser.Instruction_without_semicolonContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by SchedulerParser#canvas_instruction.
     def visitCanvas_instruction(self, ctx:SchedulerParser.Canvas_instructionContext):
         return self.visitChildren(ctx)
@@ -122,6 +127,7 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#Return.
     def visitReturn(self, ctx:SchedulerParser.ReturnContext):
+        self.return_ = True
         if ctx.expr():
             return self.visit(ctx.expr())
         else:
@@ -130,6 +136,7 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#Break.
     def visitBreak(self, ctx:SchedulerParser.BreakContext):
+        self.break_ = True
         return
 
 
@@ -138,32 +145,36 @@ class VisitorImpl(SchedulerVisitor):
         type = self.visit(ctx.type_())
         for elem in self.visit(ctx.expr()):
             self.gvm.def_variable(type, ctx.VARNAME().getText(), elem)
-            self.visit(ctx.block())
+            r = self.visit(ctx.block())
             self.gvm.del_variable(ctx.VARNAME().getText())
 
             if self.break_:
                 self.break_ = False
                 return
             elif self.return_:
-                return
+                return r
 
 
     # Visit a parse tree produced by SchedulerParser#while_loop.
     def visitWhile_loop(self, ctx:SchedulerParser.While_loopContext):
         while self.visit(ctx.condition()):
-            self.visit(ctx.block())
+            r = self.visit(ctx.block())
 
             if self.break_:
                 self.break_ = False
                 return
             elif self.return_:
-                return
+                return r
 
 
     # Visit a parse tree produced by SchedulerParser#if_statement.
     def visitIf_statement(self, ctx:SchedulerParser.If_statementContext):
-        if self.visit(ctx.condition()):
-            self.visit(ctx.block())
+        conditions, blocks = ctx.condition(), ctx.block()
+        for cond, block in zip(conditions, blocks):
+            if self.visit(cond):
+                return self.visit(block)
+        if ctx.ELSE():
+            return self.visit(blocks[-1])
 
 
     # Visit a parse tree produced by SchedulerParser#condition.
@@ -208,7 +219,7 @@ class VisitorImpl(SchedulerVisitor):
     # Visit a parse tree produced by SchedulerParser#def.
     def visitDef(self, ctx:SchedulerParser.DefContext):
         if ctx.dayDef() or ctx.classDef() or ctx.weekDef():
-            self.visitChildren(ctx)
+            return self.visitChildren(ctx)
         else:
             # collection
             if ctx.COLLECTION_OF():
@@ -216,6 +227,7 @@ class VisitorImpl(SchedulerVisitor):
             # variable
             else:
                 self.gvm.def_variable(ctx.TYPENAME().getText(), ctx.VARNAME().getText(), self.visit(ctx.expr()))
+            return self.gvm.access_variable(ctx.VARNAME().getText())[1]
 
 
     # Visit a parse tree produced by SchedulerParser#classDef.
@@ -224,6 +236,7 @@ class VisitorImpl(SchedulerVisitor):
         attr_values = list(map(lambda x: self.visit(x), ctx.expr()))
 
         self.gvm.def_class(ctx.VARNAME().getText(), dict(zip(attrs, attr_values)))
+        return self.gvm.access_variable(ctx.TYPENAME().getText())[1]
 
 
     # Visit a parse tree produced by SchedulerParser#dayDef.
@@ -231,6 +244,7 @@ class VisitorImpl(SchedulerVisitor):
         name = ctx.VARNAME().getText()
         classes = self.visit(ctx.collection())
         self.gvm.def_day(name, classes)
+        return self.gvm.access_variable(ctx.TYPENAME().getText())[1]
 
 
     # Visit a parse tree produced by SchedulerParser#weekDef.
