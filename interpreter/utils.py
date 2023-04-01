@@ -87,6 +87,11 @@ class Canvas:
         if date_ not in self.days:
             self.days[date_] = Day()
         self.days[date_].add_class(class_)
+    
+    def get_days(self, args):
+        pass
+
+
 
 
     def get_all_classes(self):

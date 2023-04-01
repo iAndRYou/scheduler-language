@@ -25,17 +25,18 @@ block: OPEN_CURLY code CLOSE_CURLY;
 
 // CANVAS INSTRUCTIONS
 // adds objects to canvas
-add: ADD_CANVA structure expr get_arg*; // date 
+add: ADD_CANVA structure expr AT DATE expr; // date 
 
 // updates objects on canvas
 update: UPDATE_CANVA (DATE expr | 'DATES' collection); // date or dates
 
 // deletes objects from canvas
-delete : DELETE_CANVA (TYPENAME expr (TYPENAME TIME)? | 'DATES' collection); // date time or dates
+delete : DELETE_CANVA (CLASSESTOKEN | DAYSTOKEN) WHERE? get_arg*; // date time or dates
 
 // gets objects that fulfill the conditions given
-get: GET_CANVA (CLASSESTOKEN | DAYSTOKEN) WHERE? get_arg*;  //you can get CLASSES or DAYS 
+get: GET_CANVA (CLASSESTOKEN | DAYSTOKEN) WHERE? get_arg*;  // arguments: class/day attributes and dates
 get_arg: (TYPENAME | attribute) expr;
+implicit_condition: expr;
 
 start_date: 'START DATE' DATE;
 end_date: 'END DATE' DATE;
@@ -157,6 +158,7 @@ UPDATE_CANVA : 'UPDATE';
 DELETE_CANVA : 'DELETE';
 GET_CANVA : 'GET';
 WHERE : 'WHERE';
+AT  :   'AT';
 DEF : 'DEF';
 IF : 'IF';
 ELIF : 'ELIF';

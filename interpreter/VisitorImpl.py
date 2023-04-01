@@ -236,7 +236,7 @@ class VisitorImpl(SchedulerVisitor):
         attr_values = list(map(lambda x: self.visit(x), ctx.expr()))
 
         self.gvm.def_class(ctx.VARNAME().getText(), dict(zip(attrs, attr_values)))
-        return self.gvm.access_variable(ctx.TYPENAME().getText())[1]
+        return self.gvm.access_variable(ctx.VARNAME().getText())[1]
 
 
     # Visit a parse tree produced by SchedulerParser#dayDef.
@@ -244,7 +244,7 @@ class VisitorImpl(SchedulerVisitor):
         name = ctx.VARNAME().getText()
         classes = self.visit(ctx.collection())
         self.gvm.def_day(name, classes)
-        return self.gvm.access_variable(ctx.TYPENAME().getText())[1]
+        return self.gvm.access_variable(ctx.VARNAME().getText())[1]
 
 
     # Visit a parse tree produced by SchedulerParser#weekDef.
