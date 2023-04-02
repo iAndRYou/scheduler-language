@@ -85,47 +85,119 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#delete.
     def visitDelete(self, ctx:SchedulerParser.DeleteContext):
-        return self.visitChildren(ctx)
+        condition = ctx.condition()
+        is_variable = bool(ctx.VARNAME())
+        if is_variable:
+            tmp_name = ctx.VARNAME().getText()
+
+        if ctx.CLASSESTOKEN():
+            if not condition:
+                classes = self.canvas.get_all_classes()
+                self.canvas.days = dict()
+                return classes
+
+            classes = []
+            day_keys_to_del = []
+            if is_variable:
+                self.gvm.tmp_vm._def_class(tmp_name, dict())
+            self.gvm.tmp_vm._def_variable('DATE', 'date', date(2023, 1, 1))
+
+            for date_, day in self.canvas.days.items():
+                class_indices_to_del = []
+                for j, elem in enumerate(day.classes):
+                    if is_variable:
+                        self.gvm.tmp_vm._assign_variable(tmp_name, elem)
+                    self.gvm.tmp_vm._assign_variable('date', date_)
+                    satisfied = self.visit(condition)
+                    if satisfied:
+                        class_indices_to_del.append(j)
+                        classes.append(elem)
+                for ind in class_indices_to_del[::-1]:
+                    del self.canvas.days[date_].classes[ind]
+                if len(self.canvas.days[date_].classes) == 0:
+                    day_keys_to_del.append(date_)
+            
+            for key in day_keys_to_del:
+                del self.canvas.days[key]
+            
+            if is_variable:
+                self.gvm.tmp_vm._del_variable(tmp_name)
+            self.gvm.tmp_vm._del_variable('date')
+            
+            return classes
+
+
+        elif ctx.DAYSTOKEN():
+            if not condition:
+                days = self.canvas.days.values()
+                self.canvas.days = dict()
+                return days
+            
+            day_keys_to_del = []
+            days = []
+            if is_variable:
+                self.gvm.tmp_vm._def_day(tmp_name, [])
+            self.gvm.tmp_vm._def_variable('DATE', 'date', date(2023, 1, 1))
+
+            for date_, day in self.canvas.days.items():
+                if is_variable:
+                    self.gvm.tmp_vm._assign_variable(tmp_name, day)
+                self.gvm.tmp_vm._assign_variable('date', date_)
+                if self.visit(condition):
+                    day_keys_to_del.append(date_)
+                    days.append(day)
+            
+            for key in day_keys_to_del:
+                del self.canvas.days[key]
+            
+            if is_variable:
+                self.gvm.tmp_vm._del_variable(tmp_name)
+            self.gvm.tmp_vm._del_variable('date')
+            
+            return days
 
 
     # Visit a parse tree produced by SchedulerParser#get.
     def visitGet(self, ctx:SchedulerParser.GetContext):
-        conditions = ctx.condition()
-        tmp_name = ctx.VARNAME().getText()
-        elems = self.canvas.get_all_classes if ctx.CLASSESTOKEN() else (self.canvas.days if ctx.DAYSTOKEN() else None)
+        condition = ctx.condition()
+        is_variable = bool(ctx.VARNAME())
+        if is_variable:
+            tmp_name = ctx.VARNAME().getText()
 
+        self.gvm.tmp_vm._def_variable('DATE', 'date', date(2023, 1, 1))
         if ctx.CLASSESTOKEN():
-            elems = self.canvas.get_all_classes()
-            self.gvm.def_class(tmp_name, dict())
+            elems = [(date_, class_) for date_, day in self.canvas.days.items() for class_ in day.classes]
+            if is_variable:
+                self.gvm.tmp_vm._def_class(tmp_name, dict())
         elif ctx.DAYSTOKEN():
-            elems = self.canvas.days
-            self.gvm.def_day(tmp_name, [])
+            elems = self.canvas.days.items()
+            if is_variable:
+                self.gvm.tmp_vm._def_day(tmp_name, [])
         else:
             raise Exception()
 
-        if not conditions:
+        if not condition:
             return elems
 
         result = [] 
-        for elem in elems:
-            self.gvm.assign_variable(tmp_name, elem)
-            satisfied = True
-            for condition in ctx.condition():
-                satisfied = (satisfied and self.visit(condition))
+        for date_, elem in elems:
+            if is_variable:
+                self.gvm.tmp_vm._assign_variable(tmp_name, elem)
+            self.gvm.tmp_vm._assign_variable('date', date_)
+            satisfied = self.visit(condition)
+            if satisfied and ctx.DISTINCT():
+                for r in result:
+                    if elem == r:
+                        satisfied = False
+                        break
             if satisfied:
                 result.append(elem)
         
-        self.gvm.del_variable(tmp_name)
+        if is_variable:
+            self.gvm.tmp_vm._del_variable(tmp_name)
+        self.gvm.tmp_vm._del_variable('date')
 
         return result
-
-
-    # Visit a parse tree produced by SchedulerParser#get_arg.
-    # def visitGet_arg(self, ctx:SchedulerParser.Get_argContext):
-    #     if ctx.TYPENAME():
-    #         return (ctx.TYPENAME().getText(), self.visit(ctx.expr()))
-    #     else:
-    #         return (self.visit(ctx.attribute()), self.visit(ctx.expr()))
 
 
     # Visit a parse tree produced by SchedulerParser#start_date.
@@ -314,7 +386,7 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#AndExpr.
     def visitAndExpr(self, ctx:SchedulerParser.AndExprContext):
-        return self.visitChildren(ctx)
+        return (self.visit(ctx.expr(0)) and self.visit(ctx.expr(1)))
 
 
     # Visit a parse tree produced by SchedulerParser#ValueExpr.
@@ -405,10 +477,21 @@ class VisitorImpl(SchedulerVisitor):
         return self.visitChildren(ctx)
     
     def visitType(self, ctx:SchedulerParser.TypeContext):
+        s = ""
+
+        if ctx.COLLECTION_OF():
+            s += ctx.COLLECTION_OF().getText()
+
         if ctx.TYPENAME():
-            return ctx.TYPENAME().getText()
+            s += ctx.TYPENAME().getText()
         else:
-            return self.visit(ctx.structure())
+            s += self.visit(ctx.structure())
+
+        return s
+
+    # Visit a parse tree produced by SchedulerParser#print.
+    def visitPrint(self, ctx:SchedulerParser.PrintContext):
+        print(self.visit(ctx.expr()))
 
 
 

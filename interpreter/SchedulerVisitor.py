@@ -39,6 +39,11 @@ class SchedulerVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by SchedulerParser#print.
+    def visitPrint(self, ctx:SchedulerParser.PrintContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by SchedulerParser#add.
     def visitAdd(self, ctx:SchedulerParser.AddContext):
         return self.visitChildren(ctx)

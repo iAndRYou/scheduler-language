@@ -7,6 +7,7 @@ instruction: def // Definition
     | assign // Assignment
     | expr // Expression 
     | transfer_statement // TransferStatement
+    | print // PrintStatement
     ;
 // instructions with a block of code
 instruction_without_semicolon:  if_statement // IfStatement
@@ -22,6 +23,8 @@ canvas_instruction: add
     ;
 block: OPEN_CURLY code CLOSE_CURLY;
 
+print: PRINT expr;
+
 
 // CANVAS INSTRUCTIONS
 // adds objects to canvas
@@ -31,10 +34,10 @@ add: ADD_CANVA structure expr AT TYPENAME expr; // TYPENAME = date
 update: UPDATE_CANVA (DATE expr | 'DATES' collection); // date or dates
 
 // deletes objects from canvas
-delete : DELETE_CANVA (CLASSESTOKEN | DAYSTOKEN) (VARNAME SATISFYING condition)? condition*; // date time or dates
+delete : DELETE_CANVA (CLASSESTOKEN | DAYSTOKEN) (VARNAME)? (SATISFYING condition)?; // date time or dates
 
 // gets objects that fulfill the conditions given
-get: GET_CANVA (CLASSESTOKEN | DAYSTOKEN) (VARNAME SATISFYING condition)? condition*;  // arguments: class/day attributes and dates
+get: GET_CANVA DISTINCT? (CLASSESTOKEN | DAYSTOKEN) (VARNAME)? (SATISFYING condition)?;  // arguments: class/day attributes and dates
 
 start_date: 'START DATE' DATE;
 end_date: 'END DATE' DATE;
@@ -113,7 +116,7 @@ expr:   (func_call | attribute_call | canvas_instruction | collection_subscripti
 
 
 // type rule and tokens 
-type: TYPENAME | structure;
+type: TYPENAME | structure | COLLECTION_OF TYPENAME | COLLECTION_OF structure;
 structure: CLASSNAME | DAYNAME | WEEKNAME;
 TYPENAME: 'INT' | 'BOOL' | 'STRING' | 'DATE' | 'TIME' | 'VOID';
 CLASSNAME : 'CLASS';
@@ -168,6 +171,8 @@ RETURN : 'RETURN';
 BREAK : 'BREAK';
 OPEN_CURLY : '{';
 CLOSE_CURLY : '}';
+DISTINCT: 'DISTINCT';
+PRINT: 'PRINT';
 
 
 // values

@@ -24,6 +24,10 @@ class time(time):
         return self.__add__(other)
     def __sub__(self, other):
         return self.__add__(-other)
+    def __repr__(self):
+        return f"{self.hour}:{self.minute}"
+    def __str__(self) -> str:
+        return f"{self.hour}:{self.minute}"
 
 class date(date):
     def __add__(self, other):
@@ -35,6 +39,10 @@ class date(date):
         return self.__add__(other)
     def __sub__(self, other):
         return self.__add__(-other)
+    def __repr__(self):
+        return f"{self.day}/{self.month}/{self.year}"
+    def __str__(self):
+        return f"{self.day}/{self.month}/{self.year}"
         
 
 @dataclass
@@ -65,7 +73,7 @@ class Day:
                 return bs(a, m, e)
         ind = bs(-1, len(self.classes), class_.start)
         if ind < len(self.classes)-1 and self.classes[ind+1].start < class_.end:
-            raise Exception()
+            raise Exception("Classes overlap")
         else:
             self.classes.insert(ind+1, class_)
 
@@ -99,7 +107,7 @@ class Canvas:
 
     def print(self):
         for date_ in sorted(self.days):
-            print("DAY:", date_)
+            print("DATE:", date_)
             for class_ in self.days[date_].classes:
                 print(class_)
             print()
@@ -135,6 +143,7 @@ class VariableManager:
         return value
     
     def cast_value(self, type_, value):
+        # print(type_, value)
         if type_ == 'INT':
             if not type(value) == int:
                 value = int(value)
@@ -154,6 +163,10 @@ class VariableManager:
             value = None
         elif (type_ == 'CLASS' and type(value) == Class_) or (type_ == 'DAY' and type(value) == Day) or (type_ == 'WEEK' and type(value) == Week):
             pass
+        elif 'COLLECTION OF' in type_ and type(value) == list:
+            undertype = type_.replace('COLLECTION OF', '')
+            for i, elem in enumerate(value):
+                value[i] = self.cast_value(undertype, elem)
         else:
             raise Exception(f"Wrong type of variable: {type_}")
 
@@ -207,14 +220,19 @@ class VariableManager:
 @dataclass
 class GlobalVariableManager(VariableManager):
     vms: List[VariableManager] = field(default_factory=list)
+    tmp_vm: VariableManager = field(default_factory=VariableManager) # variable manager for temporary overhead variables
 
     def find_variable_vm(self, name):
+        if name in self.tmp_vm.variables:
+            return self.tmp_vm
         for vm in self.vms[::-1]:
             if name in vm.variables:
                 return vm
         return self
 
     def find_function_vm(self, name):
+        if name in self.tmp_vm.functypes:
+            return self.tmp_vm
         for vm in self.vms[::-1]:
             if name in vm.functypes:
                 return vm

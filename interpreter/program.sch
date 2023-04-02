@@ -1,3 +1,13 @@
+VOID rektorskie(DATE d){
+    DELETE CLASSES SATISFYING date == d;
+    RETURN;
+}
+
+VOID rektorskieKolekcja(COLLECTION OF DATE dates){
+    DELETE CLASSES SATISFYING date IN dates; 
+    RETURN;
+}
+
 VOID f(DAY day, INT nweeks, DATE startdate, DATE enddate){
     INT i = 0;
     IF nweeks >= 0{
@@ -21,8 +31,17 @@ DAY sroda CLASSES [kompilatory, eksploracja];
 
 f(sroda, -1, 1/1/2023, 1/3/2023);
 
+rektorskie(15/1/2023);
+rektorskieKolekcja([1/1/2023, 8/1/2023]);
 
-COLLECTION OF CLASS a = GET CLASSES class SATISFYING class.TEACHER == "Dariusz Palka";
+
+
+
+/*
+COLLECTION OF CLASS a = GET DISTINCT CLASSES class SATISFYING class.TEACHER == "Dariusz Palka";
+CLASS komp;
+komp = a[0];
+*/
 
 
 /* STRING f(INT i){
