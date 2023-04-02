@@ -2,13 +2,13 @@ VOID f(DAY day, INT nweeks, DATE startdate, DATE enddate){
     INT i = 0;
     IF nweeks >= 0{
         WHILE i < nweeks{
-            ADD DAY day DATE startdate + 7*i;
+            ADD DAY day AT DATE startdate + 7*i;
             i = i + 1;
         }
         RETURN;
     }
     WHILE startdate + 7*i <= enddate{
-        ADD DAY day DATE startdate + 7*i;
+        ADD DAY day AT DATE startdate + 7*i;
         i = i + 1;
     }
     RETURN;
@@ -20,6 +20,9 @@ CLASS eksploracja START 16:15 END 17:45 SUBJECT "Eksploracja podwodna" TEACHER "
 DAY sroda CLASSES [kompilatory, eksploracja];
 
 f(sroda, -1, 1/1/2023, 1/3/2023);
+
+
+COLLECTION OF CLASS a = GET CLASSES class SATISFYING class.TEACHER == "Dariusz Palka";
 
 
 /* STRING f(INT i){

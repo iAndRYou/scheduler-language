@@ -19,9 +19,9 @@ class ErrorListenerImpl(ErrorListener):
         pass
  
 def main(argv):
+    el = ErrorListenerImpl()
     input_stream = FileStream(argv[1])
     lexer = SchedulerLexer(input_stream)
-    el = ErrorListenerImpl()
     lexer.addErrorListener(el)
     stream = CommonTokenStream(lexer)
     parser = SchedulerParser(stream)

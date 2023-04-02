@@ -25,18 +25,16 @@ block: OPEN_CURLY code CLOSE_CURLY;
 
 // CANVAS INSTRUCTIONS
 // adds objects to canvas
-add: ADD_CANVA structure expr AT DATE expr; // date 
+add: ADD_CANVA structure expr AT TYPENAME expr; // TYPENAME = date
 
 // updates objects on canvas
 update: UPDATE_CANVA (DATE expr | 'DATES' collection); // date or dates
 
 // deletes objects from canvas
-delete : DELETE_CANVA (CLASSESTOKEN | DAYSTOKEN) WHERE? get_arg*; // date time or dates
+delete : DELETE_CANVA (CLASSESTOKEN | DAYSTOKEN) (VARNAME SATISFYING condition)? condition*; // date time or dates
 
 // gets objects that fulfill the conditions given
-get: GET_CANVA (CLASSESTOKEN | DAYSTOKEN) WHERE? get_arg*;  // arguments: class/day attributes and dates
-get_arg: (TYPENAME | attribute) expr;
-implicit_condition: expr;
+get: GET_CANVA (CLASSESTOKEN | DAYSTOKEN) (VARNAME SATISFYING condition)? condition*;  // arguments: class/day attributes and dates
 
 start_date: 'START DATE' DATE;
 end_date: 'END DATE' DATE;
@@ -71,7 +69,7 @@ func_call: VARNAME OPEN_PAREN  expr? (COMMA expr)* CLOSE_PAREN;
 
 // variable definitions
 def:  TYPENAME VARNAME SINGLEEQUAL expr
-    | COLLECTION_OF TYPENAME VARNAME SINGLEEQUAL expr
+    | COLLECTION_OF type VARNAME SINGLEEQUAL expr
     | dayDef
     | classDef
     | weekDef
@@ -158,6 +156,7 @@ UPDATE_CANVA : 'UPDATE';
 DELETE_CANVA : 'DELETE';
 GET_CANVA : 'GET';
 WHERE : 'WHERE';
+SATISFYING: 'SATISFYING';
 AT  :   'AT';
 DEF : 'DEF';
 IF : 'IF';

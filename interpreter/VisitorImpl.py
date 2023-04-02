@@ -27,19 +27,6 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#code.
     def visitCode(self, ctx:SchedulerParser.CodeContext):
-        # for instr in ctx.children:
-        #     if instr in ctx.instruction() and instr.transfer_statement():
-        #         if instr.transfer_statement().RETURN():
-        #             self.return_ = True
-        #             if instr.transfer_statement().expr():
-        #                 return self.visit(instr.transfer_statement().expr())
-        #             else:
-        #                 return None
-        #         elif instr.transfer_statement().BREAK():
-        #             self.break_ = True
-        #             return
-        #     else:
-        #         self.visit(instr)
         for instr in ctx.children:
             r = self.visit(instr)
             if self.return_:
@@ -74,14 +61,15 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#add.
     def visitAdd(self, ctx:SchedulerParser.AddContext):
-        get_args = dict([self.visit(elem) for elem in ctx.get_arg()])
         structure = self.visit(ctx.structure())
 
         if structure == 'CLASS':
-            class_, class_date = self.visit(ctx.expr()), get_args['DATE']
+            class_  = self.visit(ctx.expr(0)) 
+            class_date = self.gvm.cast_value('DATE', self.visit(ctx.expr(1)))
             self.canvas.add_class(class_, class_date)
         elif structure == 'DAY':
-            day, day_date = self.visit(ctx.expr()), get_args['DATE']
+            day = self.visit(ctx.expr(0))
+            day_date = self.gvm.cast_value('DATE', self.visit(ctx.expr(1))) 
             self.canvas.add_day(day, day_date)
 
 
@@ -102,15 +90,42 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#get.
     def visitGet(self, ctx:SchedulerParser.GetContext):
-        return self.visitChildren(ctx)
+        conditions = ctx.condition()
+        tmp_name = ctx.VARNAME().getText()
+        elems = self.canvas.get_all_classes if ctx.CLASSESTOKEN() else (self.canvas.days if ctx.DAYSTOKEN() else None)
+
+        if ctx.CLASSESTOKEN():
+            elems = self.canvas.get_all_classes()
+            self.gvm.def_class(tmp_name, dict())
+        elif ctx.DAYSTOKEN():
+            elems = self.canvas.days
+            self.gvm.def_day(tmp_name, [])
+        else:
+            raise Exception()
+
+        if not conditions:
+            return elems
+
+        result = [] 
+        for elem in elems:
+            self.gvm.assign_variable(tmp_name, elem)
+            satisfied = True
+            for condition in ctx.condition():
+                satisfied = (satisfied and self.visit(condition))
+            if satisfied:
+                result.append(elem)
+        
+        self.gvm.del_variable(tmp_name)
+
+        return result
 
 
     # Visit a parse tree produced by SchedulerParser#get_arg.
-    def visitGet_arg(self, ctx:SchedulerParser.Get_argContext):
-        if ctx.TYPENAME():
-            return (ctx.TYPENAME().getText(), self.visit(ctx.expr()))
-        else:
-            return (self.visit(ctx.attribute()), self.visit(ctx.expr()))
+    # def visitGet_arg(self, ctx:SchedulerParser.Get_argContext):
+    #     if ctx.TYPENAME():
+    #         return (ctx.TYPENAME().getText(), self.visit(ctx.expr()))
+    #     else:
+    #         return (self.visit(ctx.attribute()), self.visit(ctx.expr()))
 
 
     # Visit a parse tree produced by SchedulerParser#start_date.
@@ -223,7 +238,7 @@ class VisitorImpl(SchedulerVisitor):
         else:
             # collection
             if ctx.COLLECTION_OF():
-                self.gvm.def_collection(ctx.TYPENAME().getText(), ctx.VARNAME().getText(), self.visit(ctx.expr()))
+                self.gvm.def_collection(self.visit(ctx.type_()), ctx.VARNAME().getText(), self.visit(ctx.expr()))
             # variable
             else:
                 self.gvm.def_variable(ctx.TYPENAME().getText(), ctx.VARNAME().getText(), self.visit(ctx.expr()))
@@ -267,7 +282,11 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#attribute_call.
     def visitAttribute_call(self, ctx:SchedulerParser.Attribute_callContext):
-        return self.visitChildren(ctx)
+        var_name = ctx.VARNAME().getText()
+        attr_name = self.visit(ctx.attribute()).lower()
+
+        var = self.gvm.access_variable(var_name)[1]
+        return var.__getattribute__(attr_name)
 
 
     # Visit a parse tree produced by SchedulerParser#collection.

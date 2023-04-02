@@ -39,10 +39,10 @@ class date(date):
 
 @dataclass
 class Class_:
-    start: time = None
-    end: time = None
-    subject: str = None
-    teacher: str = None
+    start: time = field(default_factory=time)
+    end: time = field(default_factory=time)
+    subject: str = field(default_factory=str)
+    teacher: str = field(default_factory=str)
 
     def __repr__(self):
         return f"{self.start} - {self.end}, {self.subject}, {self.teacher}"
@@ -95,7 +95,7 @@ class Canvas:
 
 
     def get_all_classes(self):
-        return [elem for day in self.days for elem in day.classes]
+        return [elem for day in self.days.values() for elem in day.classes]
 
     def print(self):
         for date_ in sorted(self.days):

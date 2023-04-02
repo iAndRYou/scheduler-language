@@ -59,11 +59,6 @@ class SchedulerVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by SchedulerParser#get_arg.
-    def visitGet_arg(self, ctx:SchedulerParser.Get_argContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by SchedulerParser#start_date.
     def visitStart_date(self, ctx:SchedulerParser.Start_dateContext):
         return self.visitChildren(ctx)
