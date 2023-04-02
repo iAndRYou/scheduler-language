@@ -143,7 +143,6 @@ class VariableManager:
         return value
     
     def cast_value(self, type_, value):
-        # print(type_, value)
         if type_ == 'INT':
             if not type(value) == int:
                 value = int(value)
@@ -164,7 +163,7 @@ class VariableManager:
         elif (type_ == 'CLASS' and type(value) == Class_) or (type_ == 'DAY' and type(value) == Day) or (type_ == 'WEEK' and type(value) == Week):
             pass
         elif 'COLLECTION OF' in type_ and type(value) == list:
-            undertype = type_.replace('COLLECTION OF', '')
+            undertype = type_.replace('COLLECTION OF', '').strip()
             for i, elem in enumerate(value):
                 value[i] = self.cast_value(undertype, elem)
         else:
