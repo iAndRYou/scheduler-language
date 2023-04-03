@@ -1,5 +1,7 @@
 VOID rektorskie(DATE d){
     DELETE CLASSES SATISFYING date == d;
+    CLASS rekt START 00:00 END 23:59 SUBJECT "Godziny rektorskie";
+    ADD CLASS rekt ON DATE d;
     RETURN;
 }
 
@@ -8,40 +10,37 @@ VOID rektorskieKolekcja(COLLECTION OF DATE dates){
     RETURN;
 }
 
-COLLECTION OF DATE echo(COLLECTION OF INT ints){
-    COLLECTION OF DATE r = [];
-    FOR INT i IN ints{
-        r = r + [1/1/2022 + i];
+
+COLLECTION OF INT range(INT a, INT b){
+    COLLECTION OF INT r = [];
+    WHILE a < b{
+        r = r + [a];
+        a = a + 1;
     }
     RETURN r;
 }
 
-VOID f(DAY day, INT nweeks, DATE startdate, DATE enddate){
-    INT i = 0;
-    IF nweeks >= 0{
-        WHILE i < nweeks{
-            ADD DAY day AT DATE startdate + 7*i;
-            i = i + 1;
+COLLECTION OF DATE daterange(DATE a, DATE b, COLLECTION OF DATE excludedDates){
+    COLLECTION OF DATE r = [];
+    WHILE a < b{
+        IF NOT (a IN excludedDates){
+            r = r + [a];
         }
-        RETURN;
+        a = a + 1;
     }
-    WHILE startdate + 7*i <= enddate{
-        ADD DAY day AT DATE startdate + 7*i;
-        i = i + 1;
-    }
-    RETURN;
+    RETURN r;
 }
+
 
 CLASS kompilatory START 13:15 END 14:45 SUBJECT "Teoria kompilacji" TEACHER "Dariusz Palka";
 CLASS eksploracja START 16:15 END 17:45 SUBJECT "Eksploracja podwodna" TEACHER "Krzysztof Broda";
 
 DAY sroda CLASSES [kompilatory, eksploracja];
 
-// f(sroda, -1, 1/1/2023, 1/3/2023);
-
-COLLECTION OF DATE a = echo([0, 1, 2, 3, 4, 5]);
+COLLECTION OF DATE a = daterange(1/1/2023, 1/2/2023, daterange(10/1/2023, 25/1/2023, []));
 PRINT a;
-
+ADD CLASS kompilatory ON DATES a;
+rektorskie(2/1/2023);
 
 
 

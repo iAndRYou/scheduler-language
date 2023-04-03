@@ -28,10 +28,10 @@ print: PRINT expr;
 
 // CANVAS INSTRUCTIONS
 // adds objects to canvas
-add: ADD_CANVA structure expr AT TYPENAME expr; // TYPENAME = date
+add: ADD_CANVA structure expr ON (TYPENAME | DATESTOKEN) expr; // TYPENAME = date
 
 // updates objects on canvas
-update: UPDATE_CANVA (DATE expr | 'DATES' collection); // date or dates
+update: UPDATE_CANVA (DATE expr | DATESTOKEN collection); // date or dates
 
 // deletes objects from canvas
 delete : DELETE_CANVA (CLASSESTOKEN | DAYSTOKEN) (VARNAME)? (SATISFYING condition)?; // date time or dates
@@ -161,6 +161,7 @@ GET_CANVA : 'GET';
 WHERE : 'WHERE';
 SATISFYING: 'SATISFYING';
 AT  :   'AT';
+ON: 'ON';
 DEF : 'DEF';
 IF : 'IF';
 ELIF : 'ELIF';
@@ -173,6 +174,7 @@ OPEN_CURLY : '{';
 CLOSE_CURLY : '}';
 DISTINCT: 'DISTINCT';
 PRINT: 'PRINT';
+DATESTOKEN: 'DATES';
 
 
 // values

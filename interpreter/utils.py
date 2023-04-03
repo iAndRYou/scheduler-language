@@ -25,9 +25,9 @@ class time(time):
     def __sub__(self, other):
         return self.__add__(-other)
     def __repr__(self):
-        return f"{self.hour}:{self.minute}"
+        return f"{self.hour:02}:{self.minute:02}"
     def __str__(self) -> str:
-        return f"{self.hour}:{self.minute}"
+        return f"{self.hour:02}:{self.minute:02}"
 
 class date(date):
     def __add__(self, other):
@@ -75,7 +75,7 @@ class Day:
         if ind < len(self.classes)-1 and self.classes[ind+1].start < class_.end:
             raise Exception("Classes overlap")
         else:
-            self.classes.insert(ind+1, class_)
+            self.classes.insert(ind+1, deepcopy(class_))
 
 @dataclass
 class Week:

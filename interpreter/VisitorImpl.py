@@ -63,14 +63,17 @@ class VisitorImpl(SchedulerVisitor):
     def visitAdd(self, ctx:SchedulerParser.AddContext):
         structure = self.visit(ctx.structure())
 
-        if structure == 'CLASS':
-            class_  = self.visit(ctx.expr(0)) 
-            class_date = self.gvm.cast_value('DATE', self.visit(ctx.expr(1)))
-            self.canvas.add_class(class_, class_date)
-        elif structure == 'DAY':
-            day = self.visit(ctx.expr(0))
-            day_date = self.gvm.cast_value('DATE', self.visit(ctx.expr(1))) 
-            self.canvas.add_day(day, day_date)
+        dates = []
+        if ctx.DATESTOKEN():
+            for date_ in self.visit(ctx.expr(1)):
+                dates.append(self.gvm.cast_value('DATE', date_))
+        else:
+            dates.append(self.gvm.cast_value('DATE', self.visit(ctx.expr(1))))
+
+        add_func = self.canvas.add_class if structure == 'CLASS' else (self.canvas.add_day if structure == 'DAY' else None)
+
+        for date_ in dates:
+            add_func(self.visit(ctx.expr(0)), date_)
 
 
     # Visit a parse tree produced by SchedulerParser#structure.
