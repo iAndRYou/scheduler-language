@@ -41,27 +41,3 @@ COLLECTION OF DATE a = daterange(1/1/2023, 1/2/2023, daterange(10/1/2023, 25/1/2
 PRINT a;
 ADD CLASS kompilatory ON DATES a;
 rektorskie(2/1/2023);
-
-
-
-
-/*
-COLLECTION OF CLASS a = GET DISTINCT CLASSES class SATISFYING class.TEACHER == "Dariusz Palka";
-CLASS komp;
-komp = a[0];
-*/
-
-
-/* STRING f(INT i){
-    IF i < 10{
-        RETURN "Mniejsze niz 10";
-    }
-    ELIF i == 10{
-        RETURN "Rowne 10";
-    }
-    ELSE{
-        RETURN "Wieksze niz 10";
-    }
-}
-
-STRING a = f(11); */
