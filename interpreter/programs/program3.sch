@@ -1,10 +1,15 @@
-// gotowy plan z poprzedniego programu
-VOID dumpPlanu(){
+// stworzenie planu
+VOID generacjaPlanu(){
     CLASS eksploracja START 16:15 END 17:45 SUBJECT "Eksploracja podwodna" TEACHER "dr inz Krzysztof Broda";
     CLASS uczmasz START 11:30 END 13:00 SUBJECT "Uczenie maszynowe" TEACHER "dr hab inz Igor Wojnicki";
-    ADD CLASS eksploracja ON DATES [5/4/2023, 12/4/2023];
+
     DAY sroda CLASSES [eksploracja, uczmasz];
-    ADD DAY sroda ON DATE 19/4/2023;
+
+    DATE d = 5/4/2023; 
+    WHILE d < 30/6/2023{
+        ADD DAY sroda ON DATE d;
+        d = d + 7; // skok o tydzien
+    }
 }
 
 // sprawdzanie czy przedzialy czasowe na siebie nachodza
@@ -28,6 +33,6 @@ VOID rektorskieGodziny(DATE d, TIME start_time, TIME end_time){
     RETURN;
 }
 
-dumpPlanu();
+generacjaPlanu();
 
-rektorskieGodziny(19/4/2023, 15:00, 17:20);
+rektorskieGodziny(28/6/2023, 15:00, 17:20);
