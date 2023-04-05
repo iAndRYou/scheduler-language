@@ -288,12 +288,6 @@ public class SchedulerParser extends Parser {
 		public PrintContext print() {
 			return getRuleContext(PrintContext.class,0);
 		}
-		public LoadContext load() {
-			return getRuleContext(LoadContext.class,0);
-		}
-		public DumpContext dump() {
-			return getRuleContext(DumpContext.class,0);
-		}
 		public InstructionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -304,7 +298,7 @@ public class SchedulerParser extends Parser {
 		InstructionContext _localctx = new InstructionContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_instruction);
 		try {
-			setState(106);
+			setState(104);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
@@ -342,20 +336,6 @@ public class SchedulerParser extends Parser {
 				print();
 				}
 				break;
-			case 6:
-				enterOuterAlt(_localctx, 6);
-				{
-				setState(104);
-				load();
-				}
-				break;
-			case 7:
-				enterOuterAlt(_localctx, 7);
-				{
-				setState(105);
-				dump();
-				}
-				break;
 			}
 		}
 		catch (RecognitionException re) {
@@ -389,13 +369,13 @@ public class SchedulerParser extends Parser {
 		Instruction_without_semicolonContext _localctx = new Instruction_without_semicolonContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_instruction_without_semicolon);
 		try {
-			setState(111);
+			setState(109);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IF:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(108);
+				setState(106);
 				if_statement();
 				}
 				break;
@@ -406,7 +386,7 @@ public class SchedulerParser extends Parser {
 			case COLLECTION_OF:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(109);
+				setState(107);
 				function();
 				}
 				break;
@@ -414,7 +394,7 @@ public class SchedulerParser extends Parser {
 			case WHILE:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(110);
+				setState(108);
 				loop();
 				}
 				break;
@@ -452,6 +432,12 @@ public class SchedulerParser extends Parser {
 		public End_dateContext end_date() {
 			return getRuleContext(End_dateContext.class,0);
 		}
+		public LoadContext load() {
+			return getRuleContext(LoadContext.class,0);
+		}
+		public DumpContext dump() {
+			return getRuleContext(DumpContext.class,0);
+		}
 		public Canvas_instructionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -468,43 +454,57 @@ public class SchedulerParser extends Parser {
 			case ADD_CANVA:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(113);
+				setState(111);
 				add();
 				}
 				break;
 			case UPDATE_CANVA:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(114);
+				setState(112);
 				update();
 				}
 				break;
 			case DELETE_CANVA:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(115);
+				setState(113);
 				delete();
 				}
 				break;
 			case GET_CANVA:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(116);
+				setState(114);
 				get();
 				}
 				break;
 			case T__3:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(117);
+				setState(115);
 				start_date();
 				}
 				break;
 			case T__4:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(118);
+				setState(116);
 				end_date();
+				}
+				break;
+			case T__1:
+				enterOuterAlt(_localctx, 7);
+				{
+				setState(117);
+				load();
+				}
+				break;
+			case T__2:
+				enterOuterAlt(_localctx, 8);
+				{
+				setState(118);
+				dump();
 				}
 				break;
 			default:
@@ -1025,7 +1025,7 @@ public class SchedulerParser extends Parser {
 				setState(177);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if (((((_la - 4)) & ~0x3f) == 0 && ((1L << (_la - 4)) & ((1L << (T__3 - 4)) | (1L << (T__4 - 4)) | (1L << (NOT - 4)) | (1L << (OPEN_PAREN - 4)) | (1L << (OPEN_BRACKET - 4)) | (1L << (ADD_CANVA - 4)) | (1L << (UPDATE_CANVA - 4)) | (1L << (DELETE_CANVA - 4)) | (1L << (GET_CANVA - 4)) | (1L << (INT - 4)) | (1L << (BOOL - 4)) | (1L << (STRING - 4)) | (1L << (DATE - 4)) | (1L << (TIME - 4)) | (1L << (VARNAME - 4)))) != 0)) {
+				if (((((_la - 2)) & ~0x3f) == 0 && ((1L << (_la - 2)) & ((1L << (T__1 - 2)) | (1L << (T__2 - 2)) | (1L << (T__3 - 2)) | (1L << (T__4 - 2)) | (1L << (NOT - 2)) | (1L << (OPEN_PAREN - 2)) | (1L << (OPEN_BRACKET - 2)) | (1L << (ADD_CANVA - 2)) | (1L << (UPDATE_CANVA - 2)) | (1L << (DELETE_CANVA - 2)) | (1L << (GET_CANVA - 2)) | (1L << (INT - 2)) | (1L << (BOOL - 2)) | (1L << (STRING - 2)) | (1L << (DATE - 2)) | (1L << (TIME - 2)) | (1L << (VARNAME - 2)))) != 0)) {
 					{
 					setState(176);
 					expr(0);
@@ -1489,7 +1489,7 @@ public class SchedulerParser extends Parser {
 			setState(238);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (((((_la - 4)) & ~0x3f) == 0 && ((1L << (_la - 4)) & ((1L << (T__3 - 4)) | (1L << (T__4 - 4)) | (1L << (NOT - 4)) | (1L << (OPEN_PAREN - 4)) | (1L << (OPEN_BRACKET - 4)) | (1L << (ADD_CANVA - 4)) | (1L << (UPDATE_CANVA - 4)) | (1L << (DELETE_CANVA - 4)) | (1L << (GET_CANVA - 4)) | (1L << (INT - 4)) | (1L << (BOOL - 4)) | (1L << (STRING - 4)) | (1L << (DATE - 4)) | (1L << (TIME - 4)) | (1L << (VARNAME - 4)))) != 0)) {
+			if (((((_la - 2)) & ~0x3f) == 0 && ((1L << (_la - 2)) & ((1L << (T__1 - 2)) | (1L << (T__2 - 2)) | (1L << (T__3 - 2)) | (1L << (T__4 - 2)) | (1L << (NOT - 2)) | (1L << (OPEN_PAREN - 2)) | (1L << (OPEN_BRACKET - 2)) | (1L << (ADD_CANVA - 2)) | (1L << (UPDATE_CANVA - 2)) | (1L << (DELETE_CANVA - 2)) | (1L << (GET_CANVA - 2)) | (1L << (INT - 2)) | (1L << (BOOL - 2)) | (1L << (STRING - 2)) | (1L << (DATE - 2)) | (1L << (TIME - 2)) | (1L << (VARNAME - 2)))) != 0)) {
 				{
 				setState(237);
 				expr(0);
@@ -1915,7 +1915,7 @@ public class SchedulerParser extends Parser {
 			setState(302);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (((((_la - 4)) & ~0x3f) == 0 && ((1L << (_la - 4)) & ((1L << (T__3 - 4)) | (1L << (T__4 - 4)) | (1L << (NOT - 4)) | (1L << (OPEN_PAREN - 4)) | (1L << (OPEN_BRACKET - 4)) | (1L << (ADD_CANVA - 4)) | (1L << (UPDATE_CANVA - 4)) | (1L << (DELETE_CANVA - 4)) | (1L << (GET_CANVA - 4)) | (1L << (INT - 4)) | (1L << (BOOL - 4)) | (1L << (STRING - 4)) | (1L << (DATE - 4)) | (1L << (TIME - 4)) | (1L << (VARNAME - 4)))) != 0)) {
+			if (((((_la - 2)) & ~0x3f) == 0 && ((1L << (_la - 2)) & ((1L << (T__1 - 2)) | (1L << (T__2 - 2)) | (1L << (T__3 - 2)) | (1L << (T__4 - 2)) | (1L << (NOT - 2)) | (1L << (OPEN_PAREN - 2)) | (1L << (OPEN_BRACKET - 2)) | (1L << (ADD_CANVA - 2)) | (1L << (UPDATE_CANVA - 2)) | (1L << (DELETE_CANVA - 2)) | (1L << (GET_CANVA - 2)) | (1L << (INT - 2)) | (1L << (BOOL - 2)) | (1L << (STRING - 2)) | (1L << (DATE - 2)) | (1L << (TIME - 2)) | (1L << (VARNAME - 2)))) != 0)) {
 				{
 				setState(301);
 				collection_elements();
@@ -2706,7 +2706,7 @@ public class SchedulerParser extends Parser {
 		"\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36\4\37\t\37\4 \t \4!"+
 		"\t!\4\"\t\"\4#\t#\4$\t$\4%\t%\4&\t&\4\'\t\'\4(\t(\4)\t)\4*\t*\3\2\5\2"+
 		"V\n\2\3\2\3\2\3\3\3\3\5\3\\\n\3\3\3\3\3\3\3\3\3\6\3b\n\3\r\3\16\3c\3\4"+
-		"\3\4\3\4\3\4\3\4\3\4\3\4\5\4m\n\4\3\5\3\5\3\5\5\5r\n\5\3\6\3\6\3\6\3\6"+
+		"\3\4\3\4\3\4\3\4\5\4k\n\4\3\5\3\5\3\5\5\5p\n\5\3\6\3\6\3\6\3\6\3\6\3\6"+
 		"\3\6\3\6\5\6z\n\6\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\t\3\t\3\t\3\n\3\n\3\n"+
 		"\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\f\5\f\u0095\n\f"+
 		"\3\r\3\r\3\r\5\r\u009a\n\r\3\r\3\r\5\r\u009e\n\r\3\16\3\16\5\16\u00a2"+
@@ -2728,8 +2728,8 @@ public class SchedulerParser extends Parser {
 		"\f&\16&\u0173\13&\3\'\3\'\3\'\3\'\3\'\3\'\5\'\u017b\n\'\3(\3(\3)\3)\3"+
 		"*\3*\3*\2\3J+\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64"+
 		"\668:<>@BDFHJLNPR\2\13\4\2\t\t;;\3\2\r\16\3\2\17\20\3\2\21\22\3\2\25\30"+
-		"\3\2\23\24\3\2\n\f\3\2<@\3\2CD\2\u0195\2U\3\2\2\2\4a\3\2\2\2\6l\3\2\2"+
-		"\2\bq\3\2\2\2\ny\3\2\2\2\f{\3\2\2\2\16\177\3\2\2\2\20\u0082\3\2\2\2\22"+
+		"\3\2\23\24\3\2\n\f\3\2<@\3\2CD\2\u0195\2U\3\2\2\2\4a\3\2\2\2\6j\3\2\2"+
+		"\2\bo\3\2\2\2\ny\3\2\2\2\f{\3\2\2\2\16\177\3\2\2\2\20\u0082\3\2\2\2\22"+
 		"\u0085\3\2\2\2\24\u0088\3\2\2\2\26\u008f\3\2\2\2\30\u0096\3\2\2\2\32\u009f"+
 		"\3\2\2\2\34\u00ab\3\2\2\2\36\u00ae\3\2\2\2 \u00b6\3\2\2\2\"\u00ba\3\2"+
 		"\2\2$\u00bc\3\2\2\2&\u00c3\3\2\2\2(\u00c7\3\2\2\2*\u00d7\3\2\2\2,\u00d9"+
@@ -2740,21 +2740,21 @@ public class SchedulerParser extends Parser {
 		"\2\2R\u0180\3\2\2\2TV\5\4\3\2UT\3\2\2\2UV\3\2\2\2VW\3\2\2\2WX\7\2\2\3"+
 		"X\3\3\2\2\2Y\\\5\6\4\2Z\\\5\n\6\2[Y\3\2\2\2[Z\3\2\2\2\\]\3\2\2\2]^\7\3"+
 		"\2\2^b\3\2\2\2_b\5\b\5\2`b\5R*\2a[\3\2\2\2a_\3\2\2\2a`\3\2\2\2bc\3\2\2"+
-		"\2ca\3\2\2\2cd\3\2\2\2d\5\3\2\2\2em\5\64\33\2fm\5<\37\2gm\5J&\2hm\5 \21"+
-		"\2im\5\16\b\2jm\5\20\t\2km\5\22\n\2le\3\2\2\2lf\3\2\2\2lg\3\2\2\2lh\3"+
-		"\2\2\2li\3\2\2\2lj\3\2\2\2lk\3\2\2\2m\7\3\2\2\2nr\5(\25\2or\5,\27\2pr"+
-		"\5\"\22\2qn\3\2\2\2qo\3\2\2\2qp\3\2\2\2r\t\3\2\2\2sz\5\24\13\2tz\5\26"+
-		"\f\2uz\5\30\r\2vz\5\32\16\2wz\5\34\17\2xz\5\36\20\2ys\3\2\2\2yt\3\2\2"+
-		"\2yu\3\2\2\2yv\3\2\2\2yw\3\2\2\2yx\3\2\2\2z\13\3\2\2\2{|\7\67\2\2|}\5"+
-		"\4\3\2}~\78\2\2~\r\3\2\2\2\177\u0080\7:\2\2\u0080\u0081\5J&\2\u0081\17"+
-		"\3\2\2\2\u0082\u0083\7\4\2\2\u0083\u0084\7>\2\2\u0084\21\3\2\2\2\u0085"+
-		"\u0086\7\5\2\2\u0086\u0087\7>\2\2\u0087\23\3\2\2\2\u0088\u0089\7\'\2\2"+
-		"\u0089\u008a\5N(\2\u008a\u008b\5J&\2\u008b\u008c\7.\2\2\u008c\u008d\t"+
-		"\2\2\2\u008d\u008e\5J&\2\u008e\25\3\2\2\2\u008f\u0094\7(\2\2\u0090\u0091"+
-		"\7?\2\2\u0091\u0095\5J&\2\u0092\u0093\7;\2\2\u0093\u0095\5B\"\2\u0094"+
-		"\u0090\3\2\2\2\u0094\u0092\3\2\2\2\u0095\27\3\2\2\2\u0096\u0097\7)\2\2"+
-		"\u0097\u0099\t\3\2\2\u0098\u009a\7B\2\2\u0099\u0098\3\2\2\2\u0099\u009a"+
-		"\3\2\2\2\u009a\u009d\3\2\2\2\u009b\u009c\7,\2\2\u009c\u009e\5*\26\2\u009d"+
+		"\2ca\3\2\2\2cd\3\2\2\2d\5\3\2\2\2ek\5\64\33\2fk\5<\37\2gk\5J&\2hk\5 \21"+
+		"\2ik\5\16\b\2je\3\2\2\2jf\3\2\2\2jg\3\2\2\2jh\3\2\2\2ji\3\2\2\2k\7\3\2"+
+		"\2\2lp\5(\25\2mp\5,\27\2np\5\"\22\2ol\3\2\2\2om\3\2\2\2on\3\2\2\2p\t\3"+
+		"\2\2\2qz\5\24\13\2rz\5\26\f\2sz\5\30\r\2tz\5\32\16\2uz\5\34\17\2vz\5\36"+
+		"\20\2wz\5\20\t\2xz\5\22\n\2yq\3\2\2\2yr\3\2\2\2ys\3\2\2\2yt\3\2\2\2yu"+
+		"\3\2\2\2yv\3\2\2\2yw\3\2\2\2yx\3\2\2\2z\13\3\2\2\2{|\7\67\2\2|}\5\4\3"+
+		"\2}~\78\2\2~\r\3\2\2\2\177\u0080\7:\2\2\u0080\u0081\5J&\2\u0081\17\3\2"+
+		"\2\2\u0082\u0083\7\4\2\2\u0083\u0084\7>\2\2\u0084\21\3\2\2\2\u0085\u0086"+
+		"\7\5\2\2\u0086\u0087\7>\2\2\u0087\23\3\2\2\2\u0088\u0089\7\'\2\2\u0089"+
+		"\u008a\5N(\2\u008a\u008b\5J&\2\u008b\u008c\7.\2\2\u008c\u008d\t\2\2\2"+
+		"\u008d\u008e\5J&\2\u008e\25\3\2\2\2\u008f\u0094\7(\2\2\u0090\u0091\7?"+
+		"\2\2\u0091\u0095\5J&\2\u0092\u0093\7;\2\2\u0093\u0095\5B\"\2\u0094\u0090"+
+		"\3\2\2\2\u0094\u0092\3\2\2\2\u0095\27\3\2\2\2\u0096\u0097\7)\2\2\u0097"+
+		"\u0099\t\3\2\2\u0098\u009a\7B\2\2\u0099\u0098\3\2\2\2\u0099\u009a\3\2"+
+		"\2\2\u009a\u009d\3\2\2\2\u009b\u009c\7,\2\2\u009c\u009e\5*\26\2\u009d"+
 		"\u009b\3\2\2\2\u009d\u009e\3\2\2\2\u009e\31\3\2\2\2\u009f\u00a1\7*\2\2"+
 		"\u00a0\u00a2\79\2\2\u00a1\u00a0\3\2\2\2\u00a1\u00a2\3\2\2\2\u00a2\u00a3"+
 		"\3\2\2\2\u00a3\u00a5\t\3\2\2\u00a4\u00a6\7B\2\2\u00a5\u00a4\3\2\2\2\u00a5"+
@@ -2828,7 +2828,7 @@ public class SchedulerParser extends Parser {
 		"\u017b\5N(\2\u017a\u0174\3\2\2\2\u017a\u0175\3\2\2\2\u017a\u0176\3\2\2"+
 		"\2\u017a\u0178\3\2\2\2\u017bM\3\2\2\2\u017c\u017d\t\b\2\2\u017dO\3\2\2"+
 		"\2\u017e\u017f\t\t\2\2\u017fQ\3\2\2\2\u0180\u0181\t\n\2\2\u0181S\3\2\2"+
-		"\2#U[aclqy\u0094\u0099\u009d\u00a1\u00a5\u00a9\u00b3\u00b6\u00ba\u00d0"+
+		"\2#U[acjoy\u0094\u0099\u009d\u00a1\u00a5\u00a9\u00b3\u00b6\u00ba\u00d0"+
 		"\u00d5\u00dd\u00e7\u00f0\u00f6\u0108\u0110\u0126\u0130\u0139\u0148\u0153"+
 		"\u0155\u016f\u0171\u017a";
 	public static final ATN _ATN =

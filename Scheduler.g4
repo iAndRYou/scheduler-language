@@ -8,8 +8,6 @@ instruction: def // Definition
     | expr // Expression 
     | transfer_statement // TransferStatement
     | print // PrintStatement
-    | load
-    | dump
     ;
 // instructions with a block of code
 instruction_without_semicolon:  if_statement // IfStatement
@@ -22,6 +20,8 @@ canvas_instruction: add
     | get // Get specified objects from canvas as a collection
     | start_date
     | end_date
+    | load
+    | dump
     ;
 block: OPEN_CURLY code CLOSE_CURLY;
 
