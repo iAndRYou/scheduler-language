@@ -10,6 +10,7 @@ VOID generacjaPlanu(){
         ADD DAY sroda ON DATE d;
         d = d + 7; // skok o tydzien
     }
+    RETURN;
 }
 
 // sprawdzanie czy przedzialy czasowe na siebie nachodza
