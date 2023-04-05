@@ -184,10 +184,22 @@ class VisitorImpl(SchedulerVisitor):
         else:
             raise Exception()
 
-        if not condition:
-            return elems
-
         result = [] 
+
+        if not condition:
+            if ctx.DISTINCT():
+                for date_, elem in elems:
+                    satisfied = True
+                    for r in result:
+                        if elem == r:
+                            satisfied = False
+                            break
+                    if satisfied:
+                        result.append(elem)
+                return result
+            else:
+                return elems
+
         for date_, elem in elems:
             if is_variable:
                 self.gvm.tmp_vm._assign_variable(tmp_name, elem)
@@ -279,7 +291,11 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#function.
     def visitFunction(self, ctx:SchedulerParser.FunctionContext):
-        self.gvm.def_function(self.visit(ctx.type_()), ctx.VARNAME().getText(), ctx.block(), self.visit(ctx.args()))
+        if ctx.args():
+            args = self.visit(ctx.args())
+        else:
+            args = []
+        self.gvm.def_function(self.visit(ctx.type_()), ctx.VARNAME().getText(), ctx.block(), args)
 
 
     # Visit a parse tree produced by SchedulerParser#args.

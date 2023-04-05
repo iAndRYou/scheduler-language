@@ -54,8 +54,8 @@ DAY sroda CLASSES [eksploracja, uczmasz];
 COLLECTION OF DATE a = daterange(1/1/2023, 1/2/2023, 7, [8/1/2023]);
 PRINT a;
 ADD DAY sroda ON DATES a;
-// rektorskieGodziny(1/1/2023, 10:00, 12:00);
-// rektorskieCalyDzienKolekcja([4/1/2023, 5/1/2023, 6/1/2023]);
+rektorskieGodziny(1/1/2023, 10:00, 12:00);
+rektorskieCalyDzienKolekcja([4/1/2023, 5/1/2023, 6/1/2023]);
 
 COLLECTION OF CLASS zajeciaDrBrody = GET DISTINCT CLASSES class SATISFYING class.TEACHER == "dr inz Krzysztof Broda";
 PRINT zajeciaDrBrody;

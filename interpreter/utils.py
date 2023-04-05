@@ -73,7 +73,9 @@ class Day:
                 return bs(a, m, e)
         ind = bs(-1, len(self.classes), class_.start)
         if ind < len(self.classes)-1 and self.classes[ind+1].start < class_.end:
-            raise Exception("Classes overlap")
+            print(f"Exception: Classes '{class_.subject}' and '{self.classes[ind+1].subject}' overlap")
+            exit()
+            # raise Exception("Classes overlap")
         else:
             self.classes.insert(ind+1, deepcopy(class_))
 
