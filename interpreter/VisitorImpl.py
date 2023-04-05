@@ -13,6 +13,10 @@ else:
 
 class VisitorImpl(SchedulerVisitor):
 
+    def __init__(self, debug, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.debug = debug
+
     # Visit a parse tree produced by SchedulerParser#prog.
     def visitProg(self, ctx:SchedulerParser.ProgContext):
         self.gvm = GlobalVariableManager()
@@ -21,7 +25,8 @@ class VisitorImpl(SchedulerVisitor):
         self.break_ = False
 
         self.visitChildren(ctx)
-        print(self.gvm)
+        if self.debug:
+            print(self.gvm)
         self.canvas.print()
 
 

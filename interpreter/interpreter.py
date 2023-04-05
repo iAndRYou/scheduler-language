@@ -30,7 +30,7 @@ def main(argv):
 
     el = ErrorListener()
 
-    visitor = VisitorImpl()
+    visitor = VisitorImpl(debug=False)
     visitor.visit(tree)
 
  

@@ -199,7 +199,7 @@ WS : [ \t\r\n]+ -> skip;
 
 
 // varnames
-VARNAME : [a-zA-Z][a-zA-Z0-9]*; 
+VARNAME : [a-zA-Z_][a-zA-Z0-9_]*; 
 
 
 // comments

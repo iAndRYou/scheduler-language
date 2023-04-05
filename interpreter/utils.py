@@ -53,7 +53,7 @@ class Class_:
     teacher: str = field(default_factory=str)
 
     def __repr__(self):
-        return f"{self.start} - {self.end}, {self.subject}, {self.teacher}"
+        return f"{self.start} - {self.end}" + (f", {self.subject}" if self.subject else "") + (f", {self.teacher}" if self.teacher else "")
 
 @dataclass
 class Day:
