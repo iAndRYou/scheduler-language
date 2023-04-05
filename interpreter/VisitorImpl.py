@@ -4,18 +4,23 @@ if __name__ is not None and "." in __name__:
     from .SchedulerParser import SchedulerParser
     from .SchedulerVisitor import SchedulerVisitor
     from .utils import *
+    import os.path
+    import json
 else:
     from SchedulerParser import SchedulerParser
     from SchedulerVisitor import SchedulerVisitor
     from utils import *
+    import os.path
+    import json
 
 # This class defines a complete generic visitor for a parse tree produced by SchedulerParser.
 
 class VisitorImpl(SchedulerVisitor):
 
-    def __init__(self, debug, *args, **kwargs):
+    def __init__(self, debug, path, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.debug = debug
+        self.path = path
 
     # Visit a parse tree produced by SchedulerParser#prog.
     def visitProg(self, ctx:SchedulerParser.ProgContext):
@@ -25,6 +30,7 @@ class VisitorImpl(SchedulerVisitor):
         self.break_ = False
 
         self.visitChildren(ctx)
+
         if self.debug:
             print(self.gvm)
         self.canvas.print()
@@ -38,7 +44,6 @@ class VisitorImpl(SchedulerVisitor):
                 return r
             elif self.break_:
                 return
-
 
 
     # Visit a parse tree produced by SchedulerParser#instruction.
@@ -516,6 +521,20 @@ class VisitorImpl(SchedulerVisitor):
     # Visit a parse tree produced by SchedulerParser#print.
     def visitPrint(self, ctx:SchedulerParser.PrintContext):
         print(self.visit(ctx.expr()))
+
+
+    # Visit a parse tree produced by SchedulerParser#load.
+    def visitLoad(self, ctx:SchedulerParser.LoadContext):
+        file_name = self.gvm.parse_value('STRING', ctx.STRING().getText())
+        with open(os.path.join(self.path, file_name + '.json'), 'r') as file:
+            self.canvas = json_to_canvas(json.load(file))
+
+
+    # Visit a parse tree produced by SchedulerParser#dump.
+    def visitDump(self, ctx:SchedulerParser.DumpContext):
+        file_name = self.gvm.parse_value('STRING', ctx.STRING().getText())
+        with open(os.path.join(self.path, file_name + '.json'), 'w') as file:
+            json.dump(canvas_to_json(self.canvas), file)
 
 
 

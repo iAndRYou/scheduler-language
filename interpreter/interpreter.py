@@ -1,4 +1,5 @@
 import sys
+import os.path
 from antlr4 import *
 from SchedulerLexer import SchedulerLexer
 from SchedulerParser import SchedulerParser
@@ -19,8 +20,9 @@ class ErrorListenerImpl(ErrorListener):
         pass
  
 def main(argv):
+    full_path = argv[1]
     el = ErrorListenerImpl()
-    input_stream = FileStream(argv[1])
+    input_stream = FileStream(full_path)
     lexer = SchedulerLexer(input_stream)
     lexer.addErrorListener(el)
     stream = CommonTokenStream(lexer)
@@ -30,7 +32,7 @@ def main(argv):
 
     el = ErrorListener()
 
-    visitor = VisitorImpl(debug=False)
+    visitor = VisitorImpl(debug=False, path=os.path.dirname(full_path))
     visitor.visit(tree)
 
  

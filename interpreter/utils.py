@@ -278,3 +278,32 @@ class GlobalVariableManager(VariableManager):
     
     def del_variable(self, name):
         self.cur_vm()._del_variable(name)
+
+
+def canvas_to_json(canvas: Canvas):
+    j = {}
+    for date_, day in canvas.days.items():
+        date_json = date_.__str__()
+        day_json = []
+        for class_ in day.classes:
+            class_json = {'start': [class_.start.hour, class_.start.minute],
+                          'end': [class_.end.hour, class_.end.minute],
+                          'subject': class_.subject,
+                          'teacher': class_.teacher}
+            day_json.append(class_json)
+        j[date_json] = day_json
+    return j
+
+def json_to_canvas(j):
+    canvas = Canvas()
+    for date_, day in j.items():
+        classes = []
+        for class_ in day:
+            c = Class_()
+            c.start = time(*class_['start'])
+            c.end = time(*class_['end'])
+            c.subject = class_['subject']
+            c.teacher = class_['teacher']
+            classes.append(c)
+        canvas.days[date(*list(map(int, date_.split('/')))[::-1])] = Day(classes=classes)
+    return canvas
