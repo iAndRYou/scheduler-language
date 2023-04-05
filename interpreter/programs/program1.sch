@@ -1,5 +1,8 @@
+STRING eksploracja_teacher = "dr inz Krzysztof Broda";
+TIME eksploracja_start = 16:15;
+
 // definiowanie jednostek zajeciowych
-CLASS eksploracja START 16:15 END 17:45 SUBJECT "Eksploracja podwodna" TEACHER "dr inz Krzysztof Broda";
+CLASS eksploracja START eksploracja_start END 17:45 SUBJECT "Eksploracja podwodna" TEACHER eksploracja_teacher;
 CLASS uczmasz START 11:30 END 13:00 SUBJECT "Uczenie maszynowe" TEACHER "dr hab inz Igor Wojnicki";
 
 // dodawanie jednostki zajeciowej do planu
