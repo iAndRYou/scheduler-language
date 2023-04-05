@@ -34,6 +34,8 @@ VOID rektorskieGodziny(DATE d, TIME start_time, TIME end_time){
     RETURN;
 }
 
+/////////////
+
 generacjaPlanu();
 
 rektorskieGodziny(28/6/2023, 15:00, 17:20);
