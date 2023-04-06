@@ -81,12 +81,10 @@ def:  TYPENAME VARNAME SINGLEEQUAL expr
     | COLLECTION_OF type VARNAME SINGLEEQUAL expr
     | dayDef
     | classDef
-    | weekDef
     ;
 // classDef: 'CLASS' VARNAME 'SUBJECT' STRING 'TEACHER' STRING 'START' TIME 'END' TIME;
 classDef: CLASSNAME VARNAME (CLASS_ATTRIBUTE expr)*;
 dayDef: DAYNAME VARNAME CLASSESTOKEN collection;
-weekDef: WEEKNAME VARNAME DAYSTOKEN collection;
 
 // variable assignments and variable attribute assignments
 assign: VARNAME SINGLEEQUAL expr
@@ -123,11 +121,10 @@ expr:   (func_call | attribute_call | canvas_instruction | collection_subscripti
 
 // type rule and tokens 
 type: TYPENAME | structure | COLLECTION_OF TYPENAME | COLLECTION_OF structure;
-structure: CLASSNAME | DAYNAME | WEEKNAME;
+structure: CLASSNAME | DAYNAME;
 TYPENAME: 'INT' | 'BOOL' | 'STRING' | 'DATE' | 'TIME' | 'VOID';
 CLASSNAME : 'CLASS';
 DAYNAME : 'DAY';
-WEEKNAME : 'WEEK';
 
 
 // canvas collection keywords
@@ -135,7 +132,7 @@ CLASSESTOKEN: 'CLASSES';
 DAYSTOKEN: 'DAYS';
 
 
-// Expression tokens
+// Miscellaneous Tokens
 MULTIPLY : '*';
 DIVIDE : '/';
 ADD : '+';
@@ -150,7 +147,7 @@ AND : 'AND';
 OR : 'OR';
 NOT : 'NOT';
 IN : 'IN';
-OVERLAP : '#';
+OVERLAP : '@';
 OPEN_PAREN : '(';
 CLOSE_PAREN : ')';
 OPEN_BRACKET : '[';

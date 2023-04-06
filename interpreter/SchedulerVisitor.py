@@ -154,11 +154,6 @@ class SchedulerVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by SchedulerParser#weekDef.
-    def visitWeekDef(self, ctx:SchedulerParser.WeekDefContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by SchedulerParser#assign.
     def visitAssign(self, ctx:SchedulerParser.AssignContext):
         return self.visitChildren(ctx)

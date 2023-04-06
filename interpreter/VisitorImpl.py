@@ -334,7 +334,7 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#def.
     def visitDef(self, ctx:SchedulerParser.DefContext):
-        if ctx.dayDef() or ctx.classDef() or ctx.weekDef():
+        if ctx.dayDef() or ctx.classDef():
             return self.visitChildren(ctx)
         else:
             # collection
@@ -361,11 +361,6 @@ class VisitorImpl(SchedulerVisitor):
         classes = self.visit(ctx.collection())
         self.gvm.def_day(name, classes)
         return self.gvm.access_variable(ctx.VARNAME().getText())[1]
-
-
-    # Visit a parse tree produced by SchedulerParser#weekDef.
-    def visitWeekDef(self, ctx:SchedulerParser.WeekDefContext):
-        return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by SchedulerParser#assign.
@@ -456,7 +451,7 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#OverlapExpr.
     def visitOverlapExpr(self, ctx:SchedulerParser.OverlapExprContext):
-        return self.visitChildren(ctx)
+        return (self.visit(ctx.expr(0)) @ self.visit(ctx.expr(1)))
 
 
     # Visit a parse tree produced by SchedulerParser#Compare.

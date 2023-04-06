@@ -29,6 +29,7 @@ class time(time):
     def __str__(self) -> str:
         return f"{self.hour:02}:{self.minute:02}"
 
+
 class date(date):
     def __add__(self, other):
         if isinstance(other, int):
@@ -54,6 +55,13 @@ class Class_:
 
     def __repr__(self):
         return f"{self.start} - {self.end}" + (f", {self.subject}" if self.subject else "") + (f", {self.teacher}" if self.teacher else "")
+    def __matmul__(self, other): # overlap operator
+        if self.start >= other.end:
+            return False
+        elif self.end <= other.start:
+            return False
+        else:
+            return True
 
 @dataclass
 class Day:
@@ -78,6 +86,14 @@ class Day:
             # raise Exception("Classes overlap")
         else:
             self.classes.insert(ind+1, deepcopy(class_))
+    
+    def __add__(self, other):
+        new_day = deepcopy(self)
+        for class_ in other.classes:
+            if class_ in self.classes:
+                continue
+            new_day.add_class(class_)
+        return new_day
 
 @dataclass
 class Week:
