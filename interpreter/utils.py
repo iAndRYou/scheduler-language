@@ -302,8 +302,8 @@ def canvas_to_json(canvas: Canvas):
         date_json = date_.__str__()
         day_json = []
         for class_ in day.classes:
-            class_json = {'start': [class_.start.hour, class_.start.minute],
-                          'end': [class_.end.hour, class_.end.minute],
+            class_json = {'start': class_.start.__str__(),
+                          'end': class_.end.__str__(),
                           'subject': class_.subject,
                           'teacher': class_.teacher}
             day_json.append(class_json)
@@ -316,8 +316,8 @@ def json_to_canvas(j):
         classes = []
         for class_ in day:
             c = Class_()
-            c.start = time(*class_['start'])
-            c.end = time(*class_['end'])
+            c.start = time(*list(map(int, class_['start'].split(':'))))
+            c.end = time(*list(map(int, class_['end'].split(':'))))
             c.subject = class_['subject']
             c.teacher = class_['teacher']
             classes.append(c)

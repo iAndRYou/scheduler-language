@@ -27,9 +27,9 @@ block: OPEN_CURLY code CLOSE_CURLY;
 
 print: PRINT expr;
 
-load: 'LOAD' STRING;
+load: LOADTOKEN STRING;
 
-dump: 'DUMP' STRING;
+dump: DUMPTOKEN STRING;
 
 
 // CANVAS INSTRUCTIONS
@@ -178,6 +178,8 @@ CLOSE_CURLY : '}';
 DISTINCT: 'DISTINCT';
 PRINT: 'PRINT';
 DATESTOKEN: 'DATES';
+LOADTOKEN: 'LOAD';
+DUMPTOKEN: 'DUMP';
 
 
 // values
@@ -193,7 +195,7 @@ value: INT
 INT : '-'? [0-9]+ ;
 BOOL    : 'True' | 'False';
 // STRING : '"' [a-zA-Z0-9 ]* '"'; // Old def [a-zA-Z0-9]+
-STRING  :   '"' .*? '"';
+STRING  :   '"' (~'"')* '"';
 DATE    : ('0'?[1-9] | [1-2][0-9] | '3'[0-1]) '/' ('0'?[1-9] | '1'[0-2]) '/' ([0-9][0-9][0-9][0-9]);
 TIME    :  ([0-1]?[0-9] | '2'[0-3]) ':' [0-5][0-9];
 
