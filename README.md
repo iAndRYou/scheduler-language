@@ -194,7 +194,8 @@ VOID rektorskieGodziny(DATE d, TIME start_time, TIME end_time){
     RETURN;
 }
 
-rektorskieGodziny(28/6/2023, 15:00, 17:20);
+rektorskieGodziny(19/4/2023, 15:00, 17:20);
+
 STRING sciezka = "plany/plan1";
 DUMP sciezka;
 ```
