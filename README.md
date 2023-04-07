@@ -113,7 +113,7 @@
      ```
  - Definicja funkcji
      ```
-     <typ/struktura> czyKompilatory(<typ/struktura> <nazwa_zmiennej>, ...){
+     <typ/struktura> <nazwa_funkcji>(<typ/struktura> <nazwa_zmiennej>, ...){
         // kod
      }
      ```
