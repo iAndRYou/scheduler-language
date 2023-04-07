@@ -2,7 +2,7 @@
 
 ## Opis języka
     
- - Język do tworzenia planów zajęć.
+ - Język do tworzenia planów zajęć
  - Zamysłem języka jest podział logiki na:
     - canvas - plan zajęć niebędący zwykłą zmienną, a "płótnem" programu do którego dodajemy zajęcia, usuwamy je, a także odzyskujemy aby wykonać na nich dalsze operacje
     - struktury reprezentujące zajęcia i dni zajęciowe - element elastyczności języka, struktury możemy w różny sposób łączyć oraz modyfikować
