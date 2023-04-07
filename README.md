@@ -67,7 +67,7 @@
       ```
     - ```
       COLLECTION OF DATE kolekcja = [5/4/2023];
-      kolekcja = kolekcja + [12/4/2023, 19/4/2023;
+      kolekcja = kolekcja + [12/4/2023, 19/4/2023];
       ```
   
 ## Instrukcje
@@ -130,7 +130,7 @@
      ADD <CLASS/DAY> <wyrazenie> ON <DATE/DATES> <wyrazenie (data/kolekcja dat)>;
      ```
     - zostanie wyrzucony wyjątek jeśli nastąpi kolizja z istniejącymi już zajęciami w planie
- - Usuwanie dodanych wcześniej do canvas struktur:\
+ - Usuwanie dodanych wcześniej do canvas struktur:
      ```
      DELETE <CLASSES/DAYS> <nazwa_zmiennej (opcjonalne)> SATISFYING <warunek>;
      ```
