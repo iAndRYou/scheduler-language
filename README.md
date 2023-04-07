@@ -199,6 +199,19 @@ rektorskieGodziny(19/4/2023, 15:00, 17:20);
 STRING sciezka = "plany/plan1";
 DUMP sciezka;
 ```
+
+Wynikiem programu jest wypisanie do konsoli:
+```
+DATE: 5/4/2023
+16:15 - 17:45, Eksploracja podwodna, dr inz Krzysztof Broda
+
+DATE: 12/4/2023
+16:15 - 17:45, Eksploracja podwodna, dr inz Krzysztof Broda
+
+DATE: 19/4/2023
+11:30 - 13:00, Uczenie maszynowe, dr hab inz Igor Wojnicki
+15:00 - 17:20, Godziny rektorskie
+```
         
         
         
