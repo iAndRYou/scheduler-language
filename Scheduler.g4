@@ -27,9 +27,11 @@ block: OPEN_CURLY code CLOSE_CURLY;
 
 print: PRINT expr;
 
-load: LOADTOKEN STRING;
+load: LOADTOKEN file_path;
 
-dump: DUMPTOKEN STRING;
+dump: DUMPTOKEN file_path;
+
+file_path: STRING;
 
 
 // CANVAS INSTRUCTIONS

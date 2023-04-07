@@ -54,6 +54,11 @@ class SchedulerVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by SchedulerParser#file_path.
+    def visitFile_path(self, ctx:SchedulerParser.File_pathContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by SchedulerParser#add.
     def visitAdd(self, ctx:SchedulerParser.AddContext):
         return self.visitChildren(ctx)

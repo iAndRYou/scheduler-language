@@ -520,16 +520,25 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#load.
     def visitLoad(self, ctx:SchedulerParser.LoadContext):
-        file_name = self.gvm.parse_value('STRING', ctx.STRING().getText())
-        with open(os.path.join(self.path, file_name + '.json'), 'r') as file:
+        file_path = self.gvm.parse_value('STRING', self.visit(ctx.file_path()))
+        if '/' in file_path:
+            file_path = os.path.join(*file_path.split('/'))
+        with open(os.path.join(self.path, file_path + '.json'), 'r') as file:
             self.canvas = json_to_canvas(json.load(file))
 
 
     # Visit a parse tree produced by SchedulerParser#dump.
     def visitDump(self, ctx:SchedulerParser.DumpContext):
-        file_name = self.gvm.parse_value('STRING', ctx.STRING().getText())
-        with open(os.path.join(self.path, file_name + '.json'), 'w') as file:
+        file_path = self.gvm.parse_value('STRING', self.visit(ctx.file_path()))
+        if '/' in file_path:
+            file_path = os.path.join(*file_path.split('/'))
+        with open(os.path.join(self.path, file_path + '.json'), 'w') as file:
             json.dump(canvas_to_json(self.canvas), file)
+
+
+    # Visit a parse tree produced by SchedulerParser#file_path.
+    def visitFile_path(self, ctx:SchedulerParser.File_pathContext):
+        return ctx.getText()
 
 
 

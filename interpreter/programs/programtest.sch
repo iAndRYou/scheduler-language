@@ -6,4 +6,4 @@ DAY sroda2 CLASSES [uczmasz];
 
 ADD DAY sroda1+sroda2 ON DATE 5/4/2023;
 
-LOAD "test";
+DUMP "plany/test";
