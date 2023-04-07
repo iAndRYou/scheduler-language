@@ -358,7 +358,10 @@ class VisitorImpl(SchedulerVisitor):
     # Visit a parse tree produced by SchedulerParser#dayDef.
     def visitDayDef(self, ctx:SchedulerParser.DayDefContext):
         name = ctx.VARNAME().getText()
-        classes = self.visit(ctx.collection())
+        if ctx.expr():
+            classes = self.gvm.cast_value("COLLECTION OF CLASS", self.visit(ctx.expr()))
+        else:
+            classes = []
         self.gvm.def_day(name, classes)
         return self.gvm.access_variable(ctx.VARNAME().getText())[1]
 
@@ -373,7 +376,10 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#attribute.
     def visitAttribute(self, ctx:SchedulerParser.AttributeContext):
-        return ctx.getText()
+        if ctx.day_attribute(): # day attribute
+            return self.visit(ctx.day_attribute())
+        else: # class attribute
+            return ctx.getText()
 
 
     # Visit a parse tree produced by SchedulerParser#attribute_call.
@@ -520,7 +526,7 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#load.
     def visitLoad(self, ctx:SchedulerParser.LoadContext):
-        file_path = self.gvm.parse_value('STRING', self.visit(ctx.file_path()))
+        file_path = self.gvm.cast_value('STRING', self.visit(ctx.file_path()))
         if '/' in file_path:
             file_path = os.path.join(*file_path.split('/'))
         with open(os.path.join(self.path, file_path + '.json'), 'r') as file:
@@ -529,7 +535,7 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#dump.
     def visitDump(self, ctx:SchedulerParser.DumpContext):
-        file_path = self.gvm.parse_value('STRING', self.visit(ctx.file_path()))
+        file_path = self.gvm.cast_value('STRING', self.visit(ctx.file_path()))
         if '/' in file_path:
             file_path = os.path.join(*file_path.split('/'))
         with open(os.path.join(self.path, file_path + '.json'), 'w') as file:
@@ -538,8 +544,12 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#file_path.
     def visitFile_path(self, ctx:SchedulerParser.File_pathContext):
-        return ctx.getText()
+        return self.visit(ctx.expr())
 
+
+    # Visit a parse tree produced by SchedulerParser#day_attribute.
+    def visitDay_attribute(self, ctx:SchedulerParser.Day_attributeContext):
+        return ctx.getText()
 
 
 del SchedulerParser

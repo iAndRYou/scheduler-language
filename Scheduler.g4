@@ -31,7 +31,7 @@ load: LOADTOKEN file_path;
 
 dump: DUMPTOKEN file_path;
 
-file_path: STRING;
+file_path: expr;
 
 
 // CANVAS INSTRUCTIONS
@@ -86,16 +86,17 @@ def:  TYPENAME VARNAME SINGLEEQUAL expr
     ;
 // classDef: 'CLASS' VARNAME 'SUBJECT' STRING 'TEACHER' STRING 'START' TIME 'END' TIME;
 classDef: CLASSNAME VARNAME (CLASS_ATTRIBUTE expr)*;
-dayDef: DAYNAME VARNAME CLASSESTOKEN collection;
+dayDef: DAYNAME VARNAME (day_attribute expr)?;
 
 // variable assignments and variable attribute assignments
 assign: VARNAME SINGLEEQUAL expr
     | VARNAME DOT attribute SINGLEEQUAL expr
     ;
-attribute: CLASS_ATTRIBUTE;
+attribute: CLASS_ATTRIBUTE | day_attribute;
 attribute_call: VARNAME DOT attribute;
 // attribute names
 CLASS_ATTRIBUTE: 'START' | 'END' | 'SUBJECT' | 'TEACHER';
+day_attribute: CLASSESTOKEN;
 
 // collections 
 collection: OPEN_BRACKET  collection_elements?  CLOSE_BRACKET;

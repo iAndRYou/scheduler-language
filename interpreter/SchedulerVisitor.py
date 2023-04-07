@@ -174,6 +174,11 @@ class SchedulerVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by SchedulerParser#day_attribute.
+    def visitDay_attribute(self, ctx:SchedulerParser.Day_attributeContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by SchedulerParser#collection.
     def visitCollection(self, ctx:SchedulerParser.CollectionContext):
         return self.visitChildren(ctx)

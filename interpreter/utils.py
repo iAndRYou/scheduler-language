@@ -4,7 +4,7 @@ from typing import List, Dict, Tuple, Any
 from copy import deepcopy
 
 TYPES = set(['INT', 'BOOL', 'STRING', 'DATE', 'TIME'])
-ATTRIBUTES = {'start': 'TIME', 'end': 'TIME', 'subject': 'STRING', 'teacher': 'STRING'}
+ATTRIBUTES = {'start': 'TIME', 'end': 'TIME', 'subject': 'STRING', 'teacher': 'STRING', 'classes': 'COLLECTION OF CLASS'}
 
 def parse_date(date_str):
     return date(*list(map(int, date_str.split('/')))[::-1])
@@ -48,10 +48,10 @@ class date(date):
 
 @dataclass
 class Class_:
-    start: time = field(default_factory=time)
-    end: time = field(default_factory=time)
-    subject: str = field(default_factory=str)
-    teacher: str = field(default_factory=str)
+    start: time = field(default_factory=lambda: time(0, 0))
+    end: time = field(default_factory=lambda: time(0, 0))
+    subject: str = field(default_factory=lambda: "")
+    teacher: str = field(default_factory=lambda: "")
 
     def __repr__(self):
         return f"{self.start} - {self.end}" + (f", {self.subject}" if self.subject else "") + (f", {self.teacher}" if self.teacher else "")
@@ -114,10 +114,6 @@ class Canvas:
             self.days[date_] = Day()
         self.days[date_].add_class(class_)
     
-    def get_days(self, args):
-        pass
-
-
 
 
     def get_all_classes(self):
