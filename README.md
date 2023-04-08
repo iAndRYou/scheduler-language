@@ -7,7 +7,7 @@
     - canvas - plan zajęć niebędący zwykłą zmienną, a "płótnem" programu do którego dodajemy zajęcia, usuwamy je, a także odzyskujemy aby wykonać na nich dalsze operacje
     - struktury reprezentujące zajęcia i dni zajęciowe - element elastyczności języka, struktury możemy w różny sposób łączyć oraz modyfikować
  - Wynik działania programu: wypisane (docelowo wyświetlane w osobnym oknie) w kolejności dni z zajęciami które się wtedy odbywają 
- - Typowany język skryptowy imperatywny:
+ - Typowany język skryptowy proceduralny:
     - słowa kluczowe pisane wielkimi literami
     - instrukcje niezawierające bloku kodu zakończone są średnikiem
     - możliwość komentowania kodu zarówno w pojedynczych liniach (`//`), jak i w blokach tekstu (`/* */`)
