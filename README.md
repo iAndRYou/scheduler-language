@@ -212,8 +212,41 @@ DATE: 19/4/2023
 11:30 - 13:00, Uczenie maszynowe, dr hab inz Igor Wojnicki
 15:00 - 17:20, Godziny rektorskie
 ```
-        
-        
+oraz zapisanie planu do pliku ./plany/plan1.json
+```json
+{
+   "5/4/2023":[
+      {
+         "start":"16:15",
+         "end":"17:45",
+         "subject":"Eksploracja podwodna",
+         "teacher":"dr inz Krzysztof Broda"
+      }
+   ],
+   "12/4/2023":[
+      {
+         "start":"16:15",
+         "end":"17:45",
+         "subject":"Eksploracja podwodna",
+         "teacher":"dr inz Krzysztof Broda"
+      }
+   ],
+   "19/4/2023":[
+      {
+         "start":"11:30",
+         "end":"13:00",
+         "subject":"Uczenie maszynowe",
+         "teacher":"dr hab inz Igor Wojnicki"
+      },
+      {
+         "start":"15:00",
+         "end":"17:20",
+         "subject":"Godziny rektorskie",
+         "teacher":""
+      }
+   ]
+}
+```
         
 Powyższy przykład jest kompletnym skryptem tworzący plan zajęć.
 
