@@ -247,13 +247,3 @@ oraz zapisanie planu do pliku ./plany/plan1.json
    ]
 }
 ```
-        
-Powyższy przykład jest kompletnym skryptem tworzący plan zajęć.
-
-Na start definiujemy jednostki zajęciowe typu CLASS po czym dodajemy je do planu w datach 5. kwietnia 2023 oraz 12. kwietnia 2023.
-
-Następne definiowany jest dzień, klasa DAY, zawierający uprzednio zdefiniowane zajęcia. W następującej instrukcji dodajemy DAY zawierający zajęcia dnia 19. kwietnia 2023.
-
-Funkcja rektorskieGodziny usuwa z planu zajęcia w wybranej dacie oraz dodaje "przedmiot" symbolizujący godziny rektorskie. 
-
-Instrukcją `DUMP` zapisujemy plan do pliku `plan1.json` w utworzonym wcześniej folderze `/plany`.
