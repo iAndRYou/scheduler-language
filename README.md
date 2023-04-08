@@ -136,7 +136,7 @@
      ```
     - zmienna opcjonalna służy do stawiania warunków na struktury w planie
         - ```
-          DELETE CLASSES zajecia SATISFYING zajecia.SUBJECT == "Teoria kompilacji i kompilatory";
+          DELETE CLASSES zajecia SATISFYING zajecia.SUBJECT != "Teoria kompilacji i kompilatory";
           ```
     - warunek może także korzystać ze zmiennych tymczasowych, np. `date`:
         - ```
