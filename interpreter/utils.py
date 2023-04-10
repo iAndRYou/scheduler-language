@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 from datetime import time, date, timedelta, datetime
 from typing import List, Dict, Tuple, Any
 from copy import deepcopy
+from icalendar import Calendar, Event, vCalAddress, vText
 
 TYPES = set(['INT', 'BOOL', 'STRING', 'DATE', 'TIME'])
 ATTRIBUTES = {'start': 'TIME', 'end': 'TIME', 'subject': 'STRING', 'teacher': 'STRING', 'classes': 'COLLECTION OF CLASS'}
@@ -305,6 +306,21 @@ def canvas_to_json(canvas: Canvas):
             day_json.append(class_json)
         j[date_json] = day_json
     return j
+
+def canvas_to_ics(canvas: Canvas):
+    cal = Calendar()
+    cal['name'] = 'Scheduler'
+    for date_, day in canvas.days.items():
+        for class_ in day.classes:
+            event = Event()
+            event.add('summary', class_.subject)
+            event.add('description', class_.teacher)
+            event.add('dtstart', datetime.combine(date_, class_.start))
+            event.add('dtend', datetime.combine(date_, class_.end))
+            organizer = vCalAddress('')
+            organizer.params['cn'] = vText(class_.teacher)
+            cal.add_component(event)
+    return cal.to_ical()
 
 def json_to_canvas(j):
     canvas = Canvas()

@@ -540,6 +540,8 @@ class VisitorImpl(SchedulerVisitor):
             file_path = os.path.join(*file_path.split('/'))
         with open(os.path.join(self.path, file_path + '.json'), 'w') as file:
             json.dump(canvas_to_json(self.canvas), file)
+        with open(os.path.join(self.path, file_path + '.ics'), 'wb') as file2:
+            file2.write(canvas_to_ics(self.canvas))
 
 
     # Visit a parse tree produced by SchedulerParser#file_path.
