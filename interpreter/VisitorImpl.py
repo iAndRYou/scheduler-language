@@ -3,13 +3,17 @@ from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .SchedulerParser import SchedulerParser
     from .SchedulerVisitor import SchedulerVisitor
-    from .utils import *
+    from .modules.types_structures import *
+    from .modules.utils import *
+    from .modules.variable_manager import *
     import os.path
     import json
 else:
     from SchedulerParser import SchedulerParser
     from SchedulerVisitor import SchedulerVisitor
+    from modules.types_structures import *
     from utils import *
+    from modules.variable_manager import *
     import os.path
     import json
 
@@ -112,15 +116,15 @@ class VisitorImpl(SchedulerVisitor):
             classes = []
             day_keys_to_del = []
             if is_variable:
-                self.gvm.tmp_vm._def_class(tmp_name, dict())
-            self.gvm.tmp_vm._def_variable('DATE', 'date', date(2023, 1, 1))
+                self.gvm.def_class(tmp_name, dict(), tmp_vm=True)
+            self.gvm.def_variable('DATE', 'date', date(2023, 1, 1), tmp_vm=True)
 
             for date_, day in self.canvas.days.items():
                 class_indices_to_del = []
                 for j, elem in enumerate(day.classes):
                     if is_variable:
-                        self.gvm.tmp_vm._assign_variable(tmp_name, elem)
-                    self.gvm.tmp_vm._assign_variable('date', date_)
+                        self.gvm.assign_variable(tmp_name, elem)
+                    self.gvm.assign_variable('date', date_)
                     satisfied = self.visit(condition)
                     if satisfied:
                         class_indices_to_del.append(j)
@@ -134,8 +138,8 @@ class VisitorImpl(SchedulerVisitor):
                 del self.canvas.days[key]
             
             if is_variable:
-                self.gvm.tmp_vm._del_variable(tmp_name)
-            self.gvm.tmp_vm._del_variable('date')
+                self.gvm.del_variable(tmp_name)
+            self.gvm.del_variable('date')
             
             return classes
 
@@ -149,13 +153,13 @@ class VisitorImpl(SchedulerVisitor):
             day_keys_to_del = []
             days = []
             if is_variable:
-                self.gvm.tmp_vm._def_day(tmp_name, [])
-            self.gvm.tmp_vm._def_variable('DATE', 'date', date(2023, 1, 1))
+                self.gvm.def_day(tmp_name, [], tmp_vm=True)
+            self.gvm.def_variable('DATE', 'date', date(2023, 1, 1), tmp_vm=True)
 
             for date_, day in self.canvas.days.items():
                 if is_variable:
-                    self.gvm.tmp_vm._assign_variable(tmp_name, day)
-                self.gvm.tmp_vm._assign_variable('date', date_)
+                    self.gvm.assign_variable(tmp_name, day)
+                self.gvm.assign_variable('date', date_)
                 if self.visit(condition):
                     day_keys_to_del.append(date_)
                     days.append(day)
@@ -164,8 +168,8 @@ class VisitorImpl(SchedulerVisitor):
                 del self.canvas.days[key]
             
             if is_variable:
-                self.gvm.tmp_vm._del_variable(tmp_name)
-            self.gvm.tmp_vm._del_variable('date')
+                self.gvm.del_variable(tmp_name)
+            self.gvm.del_variable('date')
             
             return days
 
@@ -177,15 +181,15 @@ class VisitorImpl(SchedulerVisitor):
         if is_variable:
             tmp_name = ctx.VARNAME().getText()
 
-        self.gvm.tmp_vm._def_variable('DATE', 'date', date(2023, 1, 1))
+        self.gvm.def_variable('DATE', 'date', date(2023, 1, 1), tmp_vm=True)
         if ctx.CLASSESTOKEN():
             elems = [(date_, class_) for date_, day in self.canvas.days.items() for class_ in day.classes]
             if is_variable:
-                self.gvm.tmp_vm._def_class(tmp_name, dict())
+                self.gvm.def_class(tmp_name, dict(), tmp_vm=True)
         elif ctx.DAYSTOKEN():
             elems = self.canvas.days.items()
             if is_variable:
-                self.gvm.tmp_vm._def_day(tmp_name, [])
+                self.gvm.def_day(tmp_name, [], tmp_vm=True)
         else:
             raise Exception()
 
@@ -207,8 +211,8 @@ class VisitorImpl(SchedulerVisitor):
 
         for date_, elem in elems:
             if is_variable:
-                self.gvm.tmp_vm._assign_variable(tmp_name, elem)
-            self.gvm.tmp_vm._assign_variable('date', date_)
+                self.gvm.assign_variable(tmp_name, elem)
+            self.gvm.assign_variable('date', date_)
             satisfied = self.visit(condition)
             if satisfied and ctx.DISTINCT():
                 for r in result:
@@ -219,8 +223,8 @@ class VisitorImpl(SchedulerVisitor):
                 result.append(elem)
         
         if is_variable:
-            self.gvm.tmp_vm._del_variable(tmp_name)
-        self.gvm.tmp_vm._del_variable('date')
+            self.gvm.del_variable(tmp_name)
+        self.gvm.del_variable('date')
 
         return result
 

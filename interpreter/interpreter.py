@@ -4,6 +4,7 @@ from antlr4 import *
 from SchedulerLexer import SchedulerLexer
 from SchedulerParser import SchedulerParser
 from VisitorImpl import VisitorImpl
+from ListenerImpl import ListenerImpl
 from antlr4.error.ErrorListener import ErrorListener
 
 class ErrorListenerImpl(ErrorListener):
@@ -30,7 +31,10 @@ def main(argv):
     parser.addErrorListener(el)
     tree = parser.prog()
 
-    el = ErrorListener()
+
+    # walker = ParseTreeWalker()
+    # listener = ListenerImpl()
+    # walker.walk(listener, tree)
 
     visitor = VisitorImpl(debug=False, path=os.path.dirname(full_path))
     visitor.visit(tree)
