@@ -334,6 +334,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_prog
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterProg" ):
+                listener.enterProg(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitProg" ):
+                listener.exitProg(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitProg" ):
                 return visitor.visitProg(self)
@@ -406,6 +414,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_code
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterCode" ):
+                listener.enterCode(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitCode" ):
+                listener.exitCode(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitCode" ):
@@ -505,6 +521,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_instruction
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterInstruction" ):
+                listener.enterInstruction(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitInstruction" ):
+                listener.exitInstruction(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitInstruction" ):
                 return visitor.visitInstruction(self)
@@ -583,6 +607,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_instruction_without_semicolon
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterInstruction_without_semicolon" ):
+                listener.enterInstruction_without_semicolon(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitInstruction_without_semicolon" ):
+                listener.exitInstruction_without_semicolon(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitInstruction_without_semicolon" ):
@@ -669,6 +701,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_canvas_instruction
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterCanvas_instruction" ):
+                listener.enterCanvas_instruction(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitCanvas_instruction" ):
+                listener.exitCanvas_instruction(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitCanvas_instruction" ):
@@ -759,6 +799,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_block
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBlock" ):
+                listener.enterBlock(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBlock" ):
+                listener.exitBlock(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitBlock" ):
                 return visitor.visitBlock(self)
@@ -806,6 +854,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_print
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterPrint" ):
+                listener.enterPrint(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitPrint" ):
+                listener.exitPrint(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitPrint" ):
                 return visitor.visitPrint(self)
@@ -850,6 +906,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_load
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterLoad" ):
+                listener.enterLoad(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitLoad" ):
+                listener.exitLoad(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLoad" ):
@@ -896,6 +960,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_dump
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDump" ):
+                listener.enterDump(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDump" ):
+                listener.exitDump(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDump" ):
                 return visitor.visitDump(self)
@@ -937,6 +1009,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_file_path
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterFile_path" ):
+                listener.enterFile_path(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitFile_path" ):
+                listener.exitFile_path(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitFile_path" ):
@@ -996,6 +1076,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_add
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAdd" ):
+                listener.enterAdd(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAdd" ):
+                listener.exitAdd(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAdd" ):
@@ -1065,6 +1153,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_update
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterUpdate" ):
+                listener.enterUpdate(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitUpdate" ):
+                listener.exitUpdate(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitUpdate" ):
@@ -1138,6 +1234,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_delete
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDelete" ):
+                listener.enterDelete(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDelete" ):
+                listener.exitDelete(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDelete" ):
@@ -1223,6 +1327,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_get
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterGet" ):
+                listener.enterGet(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitGet" ):
+                listener.exitGet(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitGet" ):
                 return visitor.visitGet(self)
@@ -1296,6 +1408,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_start_date
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterStart_date" ):
+                listener.enterStart_date(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitStart_date" ):
+                listener.exitStart_date(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitStart_date" ):
                 return visitor.visitStart_date(self)
@@ -1336,6 +1456,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_end_date
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterEnd_date" ):
+                listener.enterEnd_date(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitEnd_date" ):
+                listener.exitEnd_date(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitEnd_date" ):
@@ -1394,6 +1522,14 @@ class SchedulerParser ( Parser ):
             return self.getTypedRuleContext(SchedulerParser.ExprContext,0)
 
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterReturn" ):
+                listener.enterReturn(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitReturn" ):
+                listener.exitReturn(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitReturn" ):
                 return visitor.visitReturn(self)
@@ -1409,6 +1545,14 @@ class SchedulerParser ( Parser ):
 
         def BREAK(self):
             return self.getToken(SchedulerParser.BREAK, 0)
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBreak" ):
+                listener.enterBreak(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBreak" ):
+                listener.exitBreak(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitBreak" ):
@@ -1476,6 +1620,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_loop
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterLoop" ):
+                listener.enterLoop(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitLoop" ):
+                listener.exitLoop(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLoop" ):
@@ -1547,6 +1699,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_for_loop
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterFor_loop" ):
+                listener.enterFor_loop(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitFor_loop" ):
+                listener.exitFor_loop(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitFor_loop" ):
                 return visitor.visitFor_loop(self)
@@ -1603,6 +1763,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_while_loop
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterWhile_loop" ):
+                listener.enterWhile_loop(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitWhile_loop" ):
+                listener.exitWhile_loop(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitWhile_loop" ):
@@ -1669,6 +1837,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_if_statement
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterIf_statement" ):
+                listener.enterIf_statement(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitIf_statement" ):
+                listener.exitIf_statement(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitIf_statement" ):
@@ -1739,6 +1915,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_condition
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterCondition" ):
+                listener.enterCondition(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitCondition" ):
+                listener.exitCondition(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitCondition" ):
                 return visitor.visitCondition(self)
@@ -1795,6 +1979,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_function
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterFunction" ):
+                listener.enterFunction(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitFunction" ):
+                listener.exitFunction(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitFunction" ):
@@ -1862,6 +2054,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_args
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterArgs" ):
+                listener.enterArgs(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitArgs" ):
+                listener.exitArgs(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitArgs" ):
                 return visitor.visitArgs(self)
@@ -1917,6 +2117,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_arg
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterArg" ):
+                listener.enterArg(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitArg" ):
+                listener.exitArg(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitArg" ):
@@ -1977,6 +2185,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_func_call
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterFunc_call" ):
+                listener.enterFunc_call(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitFunc_call" ):
+                listener.exitFunc_call(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitFunc_call" ):
@@ -2066,6 +2282,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_def
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDef" ):
+                listener.enterDef(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDef" ):
+                listener.exitDef(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDef" ):
@@ -2159,6 +2383,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_classDef
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterClassDef" ):
+                listener.enterClassDef(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitClassDef" ):
+                listener.exitClassDef(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitClassDef" ):
                 return visitor.visitClassDef(self)
@@ -2223,6 +2455,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_dayDef
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDayDef" ):
+                listener.enterDayDef(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDayDef" ):
+                listener.exitDayDef(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDayDef" ):
@@ -2289,6 +2529,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_assign
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAssign" ):
+                listener.enterAssign(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAssign" ):
+                listener.exitAssign(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAssign" ):
@@ -2358,6 +2606,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_attribute
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAttribute" ):
+                listener.enterAttribute(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAttribute" ):
+                listener.exitAttribute(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAttribute" ):
                 return visitor.visitAttribute(self)
@@ -2417,6 +2673,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_attribute_call
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAttribute_call" ):
+                listener.enterAttribute_call(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAttribute_call" ):
+                listener.exitAttribute_call(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAttribute_call" ):
                 return visitor.visitAttribute_call(self)
@@ -2459,6 +2723,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_day_attribute
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDay_attribute" ):
+                listener.enterDay_attribute(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDay_attribute" ):
+                listener.exitDay_attribute(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDay_attribute" ):
@@ -2505,6 +2777,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_collection
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterCollection" ):
+                listener.enterCollection(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitCollection" ):
+                listener.exitCollection(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitCollection" ):
@@ -2566,6 +2846,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_collection_elements
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterCollection_elements" ):
+                listener.enterCollection_elements(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitCollection_elements" ):
+                listener.exitCollection_elements(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitCollection_elements" ):
                 return visitor.visitCollection_elements(self)
@@ -2619,6 +2907,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_collection_element
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterCollection_element" ):
+                listener.enterCollection_element(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitCollection_element" ):
+                listener.exitCollection_element(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitCollection_element" ):
                 return visitor.visitCollection_element(self)
@@ -2667,6 +2963,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_collection_subscription
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterCollection_subscription" ):
+                listener.enterCollection_subscription(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitCollection_subscription" ):
+                listener.exitCollection_subscription(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitCollection_subscription" ):
@@ -2731,6 +3035,14 @@ class SchedulerParser ( Parser ):
         def AND(self):
             return self.getToken(SchedulerParser.AND, 0)
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAndExpr" ):
+                listener.enterAndExpr(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAndExpr" ):
+                listener.exitAndExpr(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAndExpr" ):
                 return visitor.visitAndExpr(self)
@@ -2752,6 +3064,14 @@ class SchedulerParser ( Parser ):
 
         def VARNAME(self):
             return self.getToken(SchedulerParser.VARNAME, 0)
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterValueExpr" ):
+                listener.enterValueExpr(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitValueExpr" ):
+                listener.exitValueExpr(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitValueExpr" ):
@@ -2778,6 +3098,14 @@ class SchedulerParser ( Parser ):
         def NOT_EQUAL(self):
             return self.getToken(SchedulerParser.NOT_EQUAL, 0)
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterEqualExpr" ):
+                listener.enterEqualExpr(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitEqualExpr" ):
+                listener.exitEqualExpr(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitEqualExpr" ):
                 return visitor.visitEqualExpr(self)
@@ -2798,6 +3126,14 @@ class SchedulerParser ( Parser ):
 
         def CLOSE_PAREN(self):
             return self.getToken(SchedulerParser.CLOSE_PAREN, 0)
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterParenthesis" ):
+                listener.enterParenthesis(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitParenthesis" ):
+                listener.exitParenthesis(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitParenthesis" ):
@@ -2823,6 +3159,14 @@ class SchedulerParser ( Parser ):
             return self.getToken(SchedulerParser.ADD, 0)
         def SUBTRACT(self):
             return self.getToken(SchedulerParser.SUBTRACT, 0)
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAddSub" ):
+                listener.enterAddSub(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAddSub" ):
+                listener.exitAddSub(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAddSub" ):
@@ -2850,6 +3194,14 @@ class SchedulerParser ( Parser ):
             return self.getTypedRuleContext(SchedulerParser.Collection_subscriptionContext,0)
 
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterCalls" ):
+                listener.enterCalls(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitCalls" ):
+                listener.exitCalls(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitCalls" ):
                 return visitor.visitCalls(self)
@@ -2871,6 +3223,14 @@ class SchedulerParser ( Parser ):
 
         def OVERLAP(self):
             return self.getToken(SchedulerParser.OVERLAP, 0)
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterOverlapExpr" ):
+                listener.enterOverlapExpr(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitOverlapExpr" ):
+                listener.exitOverlapExpr(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitOverlapExpr" ):
@@ -2901,6 +3261,14 @@ class SchedulerParser ( Parser ):
         def GREATER_THAN_OR_EQUAL(self):
             return self.getToken(SchedulerParser.GREATER_THAN_OR_EQUAL, 0)
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterCompare" ):
+                listener.enterCompare(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitCompare" ):
+                listener.exitCompare(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitCompare" ):
                 return visitor.visitCompare(self)
@@ -2919,6 +3287,14 @@ class SchedulerParser ( Parser ):
         def expr(self):
             return self.getTypedRuleContext(SchedulerParser.ExprContext,0)
 
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterNotExpr" ):
+                listener.enterNotExpr(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitNotExpr" ):
+                listener.exitNotExpr(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitNotExpr" ):
@@ -2942,6 +3318,14 @@ class SchedulerParser ( Parser ):
         def IN(self):
             return self.getToken(SchedulerParser.IN, 0)
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterInExpr" ):
+                listener.enterInExpr(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitInExpr" ):
+                listener.exitInExpr(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitInExpr" ):
                 return visitor.visitInExpr(self)
@@ -2963,6 +3347,14 @@ class SchedulerParser ( Parser ):
 
         def OR(self):
             return self.getToken(SchedulerParser.OR, 0)
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterOrExpr" ):
+                listener.enterOrExpr(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitOrExpr" ):
+                listener.exitOrExpr(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitOrExpr" ):
@@ -2988,6 +3380,14 @@ class SchedulerParser ( Parser ):
             return self.getToken(SchedulerParser.MULTIPLY, 0)
         def DIVIDE(self):
             return self.getToken(SchedulerParser.DIVIDE, 0)
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterMultDiv" ):
+                listener.enterMultDiv(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitMultDiv" ):
+                listener.exitMultDiv(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitMultDiv" ):
@@ -3262,6 +3662,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_type
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterType" ):
+                listener.enterType(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitType" ):
+                listener.exitType(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitType" ):
                 return visitor.visitType(self)
@@ -3333,6 +3741,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_structure
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterStructure" ):
+                listener.enterStructure(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitStructure" ):
+                listener.exitStructure(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitStructure" ):
                 return visitor.visitStructure(self)
@@ -3390,6 +3806,14 @@ class SchedulerParser ( Parser ):
         def getRuleIndex(self):
             return SchedulerParser.RULE_value
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterValue" ):
+                listener.enterValue(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitValue" ):
+                listener.exitValue(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitValue" ):
                 return visitor.visitValue(self)
@@ -3437,6 +3861,14 @@ class SchedulerParser ( Parser ):
 
         def getRuleIndex(self):
             return SchedulerParser.RULE_comments
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterComments" ):
+                listener.enterComments(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitComments" ):
+                listener.exitComments(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitComments" ):
