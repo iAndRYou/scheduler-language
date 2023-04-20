@@ -122,7 +122,7 @@ class GlobalVariableManager(VariableManager):
         cur_vm_methods = (self.def_variable, self.def_collection, self.def_function, self.def_class, self.def_day)
         # methods with the need to extract the specific variable manager where the variable was defined
         variable_vm_methods = (self.assign_variable, self.assign_attribute, self.del_variable)
-        function_vm_methods = tuple()
+        function_vm_methods = ()
 
         for method in cur_vm_methods:
             self.__setattr__(method.__name__, GlobalVariableManager.get_cur_vm(method))
