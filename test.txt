@@ -1,0 +1,29 @@
+Kryptografia to dziedzina matematyki zajmująca się bezpieczeństwem przesyłania i
+
+przechowywania informacji. Od dawna jest uważana za jeden z najważniejszych aspektów
+
+współczesnej komunikacji. Wraz z rozwojem technologii i wzrostem liczby urządzeń, które
+
+przetwarzają dane, zwiększa się znaczenie kryptografii.
+
+Przez wieki kryptografia była dziedziną sztuki, a klucze szyfrujące były utrzymywane
+
+w tajemnicy przez osoby odpowiedzialne za ich przekazywanie. Jednym z pierwszych
+
+szyfrów opartych na algorytmach matematycznych był szyfr Cezara, który został opracowany
+
+około 2000 lat temu. Szyfr Cezara polega na przesuwaniu liter w alfabecie o stała liczbę
+
+pozycji. To proste szyfrowanie zostało powszechnie stosowane w wojskowości i dyplomacji.
+
+W XX wieku pojawiły się pierwsze szyfry oparte na matematyce, takie jak szyfr RSA,
+
+który został opracowany w 1978 roku przez Ronalda Rivesta, Adi Shamira i Leonarda
+
+Adlemana. Szyfr RSA jest oparty na trudności rozwiązania problemu faktoryzacji dużych
+
+liczb. To rozwiązanie stało się podstawą wielu innych algorytmów szyfrujących.
+
+W niniejszej pracy omówimy jedną z dziedzin matematyki, jaką jest algebra liniowa i
+
+przedstawimy jej zastosowanie w kryptografii.

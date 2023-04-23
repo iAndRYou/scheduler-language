@@ -3,8 +3,6 @@ from typing import List, Dict, Tuple, Any
 from copy import deepcopy
 from . import types_structures
 
-TYPES = set(['INT', 'BOOL', 'STRING', 'DATE', 'TIME'])
-ATTRIBUTES = {'start': 'TIME', 'end': 'TIME', 'subject': 'STRING', 'teacher': 'STRING', 'classes': 'COLLECTION OF CLASS'}
 
 def parse_date(date_str):
     return types_structures.date(*list(map(int, date_str.split('/')))[::-1])

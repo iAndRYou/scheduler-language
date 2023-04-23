@@ -167,7 +167,8 @@ class GlobalVariableManager(VariableManager):
     def get_cur_vm(method):
         def new_method(*args, **kwargs):
             self = method.__self__
-            if 'tmp_vm' in kwargs and kwargs['tmp_vm']:
+            tmp_vm = kwargs.pop('tmp_vm', False)
+            if tmp_vm:
                 vm = self.tmp_vm
             else:
                 vm = self.cur_vm()
@@ -175,8 +176,6 @@ class GlobalVariableManager(VariableManager):
                 super_method = getattr(super(GlobalVariableManager, vm), method.__name__)
             else:
                 super_method = vm.__getattribute__(method.__name__)
-            if 'tmp_vm' in kwargs:
-                del kwargs['tmp_vm']
             return super_method(*args, **kwargs)
         return new_method
 
@@ -184,7 +183,8 @@ class GlobalVariableManager(VariableManager):
     def get_variable_vm(method):
         def new_method(*args, **kwargs):
             self = method.__self__
-            vm = self.find_variable_vm(args[0])
+            var_name = args[0] # first pos argument
+            vm = self.find_variable_vm(var_name)
             if isinstance(vm, GlobalVariableManager):
                 super_method = getattr(super(GlobalVariableManager, vm), method.__name__)
             else:
@@ -196,7 +196,8 @@ class GlobalVariableManager(VariableManager):
     def get_function_vm(method):
         def new_method(*args, **kwargs):
             self = method.__self__
-            vm = self.find_function_vm(args[0])
+            var_name = args[0] # first pos argument
+            vm = self.find_function_vm(var_name)
             if isinstance(vm, GlobalVariableManager):
                 super_method = getattr(super(GlobalVariableManager, vm), method.__name__)
             else:

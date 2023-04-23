@@ -3,6 +3,12 @@ from datetime import time, date, timedelta, datetime
 from typing import List, Dict, Tuple, Any
 from copy import deepcopy
 
+TYPES = set(['INT', 'BOOL', 'STRING', 'DATE', 'TIME'])
+STRUCTURES = set(['CLASS', 'DAY'])
+ATTRIBUTES = {'start': 'TIME', 'end': 'TIME', 'subject': 'STRING', 'teacher': 'STRING', 'classes': 'COLLECTION OF CLASS'}
+
+class Type:
+    pass
 
 # override default date and time classes
 class time(time):

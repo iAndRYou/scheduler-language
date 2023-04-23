@@ -1,16 +1,10 @@
-def dec(f):
-    def g(*args, **kwargs):
-        print("dekorator")
-        return f(*args, **kwargs)
-    return g
+s = ""
 
-@dec
-def func(a, b):
-    return a+b
-
-@dec
-def func2(a, b, c):
-    return a+b+c
+with open("test.txt", "r") as f:
+    s = f.read()
 
 
-print(func(1, 2))
+o = s.replace("\n", " ")
+
+with open("output.txt", "w") as f:
+    f.write(o)
