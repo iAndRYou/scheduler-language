@@ -7,7 +7,7 @@ TYPES = set(['INT', 'BOOL', 'STRING', 'DATE', 'TIME'])
 STRUCTURES = set(['CLASS', 'DAY'])
 ATTRIBUTES = {'start': 'TIME', 'end': 'TIME', 'subject': 'STRING', 'teacher': 'STRING', 'classes': 'COLLECTION OF CLASS'}
 
-class Type:
+class DataClass:
     pass
 
 # override default date and time classes

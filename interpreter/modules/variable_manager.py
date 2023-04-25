@@ -165,9 +165,8 @@ class GlobalVariableManager(VariableManager):
 
     @staticmethod
     def get_cur_vm(method):
-        def new_method(*args, **kwargs):
+        def new_method(*args, tmp_vm=False, **kwargs):
             self = method.__self__
-            tmp_vm = kwargs.pop('tmp_vm', False)
             if tmp_vm:
                 vm = self.tmp_vm
             else:
@@ -175,7 +174,7 @@ class GlobalVariableManager(VariableManager):
             if isinstance(vm, GlobalVariableManager):
                 super_method = getattr(super(GlobalVariableManager, vm), method.__name__)
             else:
-                super_method = vm.__getattribute__(method.__name__)
+                super_method = getattr(vm, method.__name__)
             return super_method(*args, **kwargs)
         return new_method
 
@@ -188,7 +187,7 @@ class GlobalVariableManager(VariableManager):
             if isinstance(vm, GlobalVariableManager):
                 super_method = getattr(super(GlobalVariableManager, vm), method.__name__)
             else:
-                super_method = vm.__getattribute__(method.__name__)
+                super_method = getattr(vm, method.__name__)
             return super_method(*args, **kwargs)
         return new_method
 
@@ -201,7 +200,7 @@ class GlobalVariableManager(VariableManager):
             if isinstance(vm, GlobalVariableManager):
                 super_method = getattr(super(GlobalVariableManager, vm), method.__name__)
             else:
-                super_method = vm.__getattribute__(method.__name__)
+                super_method = getattr(vm, method.__name__)
             return super_method(*args, **kwargs)
         return new_method
     
