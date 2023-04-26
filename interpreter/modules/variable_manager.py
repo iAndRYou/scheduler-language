@@ -162,9 +162,6 @@ class VariableManager:
         if declare:
             if key in self.functypes:
                 raise Exception(f"Function \'{name}\' with signature {arg_types} already declared")
-            self.functypes[key] = type
-            self.funcargs[key] = args
-            return
         self.functypes[key] = type
         self.funcnodes[key] = code_node
         self.funcargs[key] = args
@@ -265,6 +262,8 @@ class GlobalVariableManager(VariableManager):
 
     def access_variable(self, name):
         vm = self.find_variable_vm(name)
+        if name not in vm.variables:
+            raise Exception(f'Variable \'{name}\' has not been initialized')
         return (vm.vartypes[name], vm.variables[name])
     
     def access_function(self, name, arg_types):

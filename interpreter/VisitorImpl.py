@@ -457,17 +457,9 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#AddSub.
     def visitAddSub(self, ctx:SchedulerParser.AddSubContext):
-        if ctx.op.text == '+':
-            a = self.visit(ctx.expr(0))
-            b = self.visit(ctx.expr(1))
-            return apply_operator('+', [a, b])
-            # return self.visit(ctx.expr(0)) + self.visit(ctx.expr(1))
-        else:
-            a = self.visit(ctx.expr(0))
-            b = self.visit(ctx.expr(1))
-            return apply_operator('-', [a, b])
-            # return self.visit(ctx.expr(0)) - self.visit(ctx.expr(1))
-
+        a = self.visit(ctx.expr(0))
+        b = self.visit(ctx.expr(1))
+        return apply_operator(ctx.op.text, [a, b])
 
     # Visit a parse tree produced by SchedulerParser#Calls.
     def visitCalls(self, ctx:SchedulerParser.CallsContext):
@@ -476,24 +468,24 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#OverlapExpr.
     def visitOverlapExpr(self, ctx:SchedulerParser.OverlapExprContext):
-        return (self.visit(ctx.expr(0)) @ self.visit(ctx.expr(1)))
+        a = self.visit(ctx.expr(0))
+        b = self.visit(ctx.expr(1))
+        return apply_operator('@', [a, b])
+        # return (self.visit(ctx.expr(0)) @ self.visit(ctx.expr(1)))
 
 
     # Visit a parse tree produced by SchedulerParser#Compare.
     def visitCompare(self, ctx:SchedulerParser.CompareContext):
-        if ctx.op.text == '<':
-            return (self.visit(ctx.expr(0)) < self.visit(ctx.expr(1)))
-        elif ctx.op.text == '<=':
-            return (self.visit(ctx.expr(0)) <= self.visit(ctx.expr(1)))
-        elif ctx.op.text == '>':
-            return (self.visit(ctx.expr(0)) > self.visit(ctx.expr(1)))
-        elif ctx.op.text == '>=':
-            return (self.visit(ctx.expr(0)) >= self.visit(ctx.expr(1)))
+        a = self.visit(ctx.expr(0))
+        b = self.visit(ctx.expr(1))
+        return apply_operator(ctx.op.text, [a, b])
 
 
     # Visit a parse tree produced by SchedulerParser#NotExpr.
     def visitNotExpr(self, ctx:SchedulerParser.NotExprContext):
-        return not self.visit(ctx.expr()) 
+        a = self.visit(ctx.expr())
+        return apply_operator('NOT', [a])
+        # return not self.visit(ctx.expr()) 
 
 
     # Visit a parse tree produced by SchedulerParser#InExpr.
@@ -518,16 +510,9 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#MultDiv.
     def visitMultDiv(self, ctx:SchedulerParser.MultDivContext):
-        if ctx.op.text == '*':
-            a = self.visit(ctx.expr(0))
-            b = self.visit(ctx.expr(1))
-            return apply_operator('*', [a, b])
-            # return self.visit(ctx.expr(0)) * self.visit(ctx.expr(1))
-        else:
-            a = self.visit(ctx.expr(0))
-            b = self.visit(ctx.expr(1))
-            return apply_operator('/', [a, b])
-            # return self.visit(ctx.expr(0)) / self.visit(ctx.expr(1))
+        a = self.visit(ctx.expr(0))
+        b = self.visit(ctx.expr(1))
+        return apply_operator(ctx.op.text, [a, b])
 
 
     # Visit a parse tree produced by SchedulerParser#value.

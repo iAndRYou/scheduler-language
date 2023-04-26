@@ -22,7 +22,6 @@ else:
 # This class defines a complete generic visitor for a parse tree produced by SchedulerParser.
 
 class VisitorImpl1(SchedulerVisitor):
-
     # Visit a parse tree produced by SchedulerParser#prog.
     def visitProg(self, ctx:SchedulerParser.ProgContext):
         self.gvm = GlobalVariableManager()
@@ -145,7 +144,7 @@ class VisitorImpl1(SchedulerVisitor):
             args = self.visit(ctx.args())
         else:
             args = []
-        self.gvm.def_function(self.visit(ctx.type_()), ctx.VARNAME().getText(), None, args, declare=True)
+        self.gvm.def_function(self.visit(ctx.type_()), ctx.VARNAME().getText(), ctx.block(), args, declare=True)
 
 
     # Visit a parse tree produced by SchedulerParser#args.
@@ -178,7 +177,7 @@ class VisitorImpl1(SchedulerVisitor):
     # Visit a parse tree produced by SchedulerParser#classDef.
     def visitClassDef(self, ctx:SchedulerParser.ClassDefContext):
         name = ctx.VARNAME().getText()
-        self.gvm.def_class(name, None, None, declare=True)
+        self.gvm.def_class(name, None, declare=True)
 
 
     # Visit a parse tree produced by SchedulerParser#dayDef.

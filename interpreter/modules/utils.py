@@ -21,6 +21,8 @@ def determine_type(value):
         val_type = 'DAY'
     elif type(value) == list:
         val_type = 'COLLECTION OF ' + determine_type(value[0])
+    elif value is None:
+        val_type = 'VOID'
     else:
         raise Exception(f"Unknown type {type(value)}")
     return val_type
