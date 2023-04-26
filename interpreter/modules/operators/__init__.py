@@ -1,0 +1,6 @@
+__import__('modules.operators.addition')
+__import__('modules.operators.and')
+__import__('modules.operators.division')
+__import__('modules.operators.multiplication')
+__import__('modules.operators.or')
+__import__('modules.operators.subtraction')

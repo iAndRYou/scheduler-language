@@ -4,6 +4,7 @@ from antlr4 import *
 from SchedulerLexer import SchedulerLexer
 from SchedulerParser import SchedulerParser
 from VisitorImpl import VisitorImpl
+from VisitorImpl1 import VisitorImpl1
 from ListenerImpl import ListenerImpl
 from antlr4.error.ErrorListener import ErrorListener
 
@@ -21,6 +22,7 @@ class ErrorListenerImpl(ErrorListener):
         pass
  
 def main(argv):
+    sys.tracebacklimit = 0
     full_path = argv[1]
     el = ErrorListenerImpl()
     input_stream = FileStream(full_path)
@@ -35,8 +37,10 @@ def main(argv):
     # walker = ParseTreeWalker()
     # listener = ListenerImpl()
     # walker.walk(listener, tree)
+    visitor1 = VisitorImpl1()
+    visitor1.visit(tree)
 
-    visitor = VisitorImpl(debug=False, path=os.path.dirname(full_path))
+    visitor = VisitorImpl(debug=False, path=os.path.dirname(full_path), gvm=visitor1.gvm)
     visitor.visit(tree)
 
  

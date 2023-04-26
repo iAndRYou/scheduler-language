@@ -4,6 +4,28 @@ from copy import deepcopy
 from . import types_structures
 
 
+def determine_type(value):
+    if type(value) == int:
+        val_type = 'INT'
+    elif type(value) == bool:
+        val_type = 'BOOL'
+    elif type(value) == str:
+        val_type = 'STRING'
+    elif type(value) == types_structures.date:
+        val_type = 'DATE'
+    elif type(value) == types_structures.time:
+        val_type = 'TIME'
+    elif type(value) == types_structures.Class_:
+        val_type = 'CLASS'
+    elif type(value) == types_structures.Day:
+        val_type = 'DAY'
+    elif type(value) == list:
+        val_type = 'COLLECTION OF ' + determine_type(value[0])
+    else:
+        raise Exception(f"Unknown type {type(value)}")
+    return val_type
+
+
 def parse_date(date_str):
     return types_structures.date(*list(map(int, date_str.split('/')))[::-1])
 

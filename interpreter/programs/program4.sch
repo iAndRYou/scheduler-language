@@ -1,2 +1,7 @@
-INT a = 2*2;
-PRINT a;
+INT f(INT b){
+    RETURN "dfkslfd";
+}
+
+INT INT = 3;
+
+PRINT f(3);

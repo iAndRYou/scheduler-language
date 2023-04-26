@@ -18,3 +18,5 @@ class ValueParser:
             raise Exception(f"Wrong type of variable: {type}")
 
         return value
+    
+    

@@ -34,59 +34,159 @@ class VariableManager:
 
         return value
     
-    def cast_value(self, type_, value):
-        if type_ == 'INT':
-            if not type(value) == int:
-                value = int(value)
-        elif type_ == 'BOOL':
-            if not type(value) == bool:
-                value = bool(value)
-        elif type_ == 'STRING':
-            if not type(value) == str:
+    # def cast_value(self, type_, value):
+    #     if type_ == 'INT':
+    #         if not type(value) == int:
+    #             value = int(value)
+    #     elif type_ == 'BOOL':
+    #         if not type(value) == bool:
+    #             value = bool(value)
+    #     elif type_ == 'STRING':
+    #         if not type(value) == str:
+    #             value = str(value)
+    #     elif type_ == 'DATE':
+    #         if not type(value) == date:
+    #             value = date(value)
+    #     elif type_ == 'TIME': 
+    #         if not type(value) == time:
+    #             value = time(value)
+    #     elif type_ == 'VOID':
+    #         value = None
+    #     elif (type_ == 'CLASS' and type(value) == Class_) or (type_ == 'DAY' and type(value) == Day) or (type_ == 'WEEK' and type(value) == Week):
+    #         pass
+    #     elif 'COLLECTION OF' in type_ and type(value) == list:
+    #         undertype = type_.replace('COLLECTION OF', '').strip()
+    #         for i, elem in enumerate(value):
+    #             value[i] = self.cast_value(undertype, elem)
+    #     else:
+    #         raise Exception(f"Wrong type of variable: {type_}")
+
+    #     return value
+
+    def cast_value(self, type_to, value, type_from=None):
+        if type_from is None:
+            type_from = determine_type(value)
+        if type_to == 'INT':
+            if type_from == 'INT':
+                pass
+            elif type_from == 'BOOL':
+                if value:
+                    value = 1
+                else:
+                    value = 0
+            elif type_from == 'STRING':
+                try:
+                    value = int(value)
+                except:
+                    raise Exception(f"Cannot cast STRING with value \'{value}\' to INT") from None
+            else:
+                raise Exception(f"Cannot cast {type_from} to {type_to}")
+        elif type_to == 'BOOL':
+            if type_from == 'INT':
+                if value == 0:
+                    value = False
+                else:
+                    value = True
+            elif type_from == 'BOOL':
+                pass
+            elif type_from == 'STRING':
+                if value == 'True':
+                    value = True
+                elif value == 'False':
+                    value = False
+                else:
+                    raise Exception(f"Cannot cast STRING with value \'{value}\' to BOOL")
+            else:
+                raise Exception(f"Cannot cast {type_from} to {type_to}")
+        elif type_to == 'STRING':
+            if type_from == 'INT':
                 value = str(value)
-        elif type_ == 'DATE':
-            if not type(value) == date:
-                value = date(value)
-        elif type_ == 'TIME': 
-            if not type(value) == time:
-                value = time(value)
-        elif type_ == 'VOID':
+            elif type_from == 'BOOL':
+                value = str(value)
+            elif type_from == 'STRING':
+                pass
+            elif type_from == 'DATE' or type_from == 'TIME':
+                value = value.__str__()
+            else:
+                raise Exception(f"Cannot cast {type_from} to {type_to}")
+        elif type_to == 'DATE':
+            if type_from == 'DATE':
+                pass
+            elif type_from == 'STRING':
+                value = parse_date(value)
+            else:
+                raise Exception(f"Cannot cast {type_from} to {type_to}")
+        elif type_to == 'TIME':
+            if type_from == 'TIME':
+                pass
+            elif type_from == 'STRING':
+                value = parse_time(value)
+            else:
+                raise Exception(f"Cannot cast {type_from} to {type_to}")
+        elif type_to == 'VOID':
             value = None
-        elif (type_ == 'CLASS' and type(value) == Class_) or (type_ == 'DAY' and type(value) == Day) or (type_ == 'WEEK' and type(value) == Week):
+        elif type_from == type_to:
             pass
-        elif 'COLLECTION OF' in type_ and type(value) == list:
-            undertype = type_.replace('COLLECTION OF', '').strip()
+        elif 'COLLECTION OF' in type_to and type(value) == list:
+            undertype = type_to.replace('COLLECTION OF', '').strip()
             for i, elem in enumerate(value):
                 value[i] = self.cast_value(undertype, elem)
         else:
-            raise Exception(f"Wrong type of variable: {type_}")
-
+            raise Exception(f"Unknown type of variable: {type_to}")
         return value
 
 
-    def def_variable(self, type, name, value):
+    def def_variable(self, type, name, value, declare=False):
+        if declare:
+            if name in self.vartypes:
+                raise Exception(f"Variable \'{name}\' already declared")
+            self.vartypes[name] = type
+            return
         value = self.cast_value(type, value)
         self.variables[name] = value
         self.vartypes[name] = type
     
-    def def_collection(self, type, name, value):
+    def def_collection(self, type, name, value, declare=False):
+        if declare:
+            if name in self.vartypes:
+                raise Exception(f"Variable \'{name}\' already declared")
+            self.vartypes[name] = type
+            return
         value = [self.cast_value(type, elem) for elem in value]
         self.variables[name] = value
         self.vartypes[name] = "COLLECTION OF " + type
     
-    def def_function(self, type, name, code_node, args):
-        self.functypes[name] = type
-        self.funcnodes[name] = code_node
-        self.funcargs[name] = args
+    def def_function(self, type, name, code_node, args, declare=False):
+        arg_types = tuple(arg[0] for arg in args)
+        key = (name, arg_types)
+        if declare:
+            if key in self.functypes:
+                raise Exception(f"Function \'{name}\' with signature {arg_types} already declared")
+            self.functypes[key] = type
+            self.funcargs[key] = args
+            return
+        self.functypes[key] = type
+        self.funcnodes[key] = code_node
+        self.funcargs[key] = args
             
     
-    def def_class(self, name, attrs):
+    def def_class(self, name, attrs, declare=False):
+        if declare:
+            if name in self.vartypes:
+                raise Exception(f"Variable \'{name}\' already declared")
+            self.vartypes[name] = 'CLASS'
+            return
         attrs = {key: self.cast_value(ATTRIBUTES[key], value) for key, value in attrs.items() if key in ATTRIBUTES}
         new_class = Class_(**attrs)
         self.variables[name] = new_class
         self.vartypes[name] = 'CLASS'
     
-    def def_day(self, name, classes):
+    def def_day(self, name, classes, declare=False):
+        if declare:
+            if name in self.vartypes:
+                raise Exception(f"Variable \'{name}\' already declared")
+            self.vartypes[name] = 'DAY'
+            return
         new_day = Day()
         for class_ in classes:
             new_day.add_class(class_)
@@ -100,7 +200,7 @@ class VariableManager:
     
     def assign_attribute(self, name, attribute, value):
         if attribute not in ATTRIBUTES:
-            raise Exception(f'Invalid variable attribute: {attribute}')
+            raise Exception(f'Invalid variable attribute: \'{attribute}\'')
         value = self.cast_value(ATTRIBUTES[attribute], value)
         self.variables[name].__setattr__(attribute, value)
     
@@ -117,6 +217,7 @@ class GlobalVariableManager(VariableManager):
         super().__init__()
         self.vms: List[VariableManager] = []
         self.tmp_vm: VariableManager = VariableManager()
+        self.decl_vm = VariableManager()
 
         # methods where current variable manager needs to be extracted
         cur_vm_methods = (self.def_variable, self.def_collection, self.def_function, self.def_class, self.def_day)
@@ -143,31 +244,42 @@ class GlobalVariableManager(VariableManager):
         for vm in self.vms[::-1]:
             if name in vm.variables:
                 return vm
-        return self
+        if name in self.variables:
+            return self
+        if name in self.decl_vm.vartypes:
+            return self.decl_vm
+        raise Exception(f'Variable \'{name}\' was not declared in any scope')
 
-    def find_function_vm(self, name):
-        if name in self.tmp_vm.functypes:
+    def find_function_vm(self, key):
+        if key in self.tmp_vm.functypes:
             return self.tmp_vm
         for vm in self.vms[::-1]:
-            if name in vm.functypes:
+            if key in vm.functypes:
                 return vm
-        return self
+        if key in self.functypes:
+            return self
+        if key in self.decl_vm.functypes:
+            return self.decl_vm
+        raise Exception(f'Function \'{key[0]}\' with signature {key[1]} was not declared in any scope')
 
 
     def access_variable(self, name):
         vm = self.find_variable_vm(name)
         return (vm.vartypes[name], vm.variables[name])
     
-    def access_function(self, name):
-        vm = self.find_function_vm(name)
-        return (vm.functypes[name], vm.funcnodes[name], vm.funcargs[name])
+    def access_function(self, name, arg_types):
+        key = (name, tuple(arg_types))
+        vm = self.find_function_vm(key)
+        return (vm.functypes[key], vm.funcnodes[key], vm.funcargs[key])
 
 
     @staticmethod
     def get_cur_vm(method):
-        def new_method(*args, tmp_vm=False, **kwargs):
+        def new_method(*args, tmp_vm=False, declare=False, **kwargs):
             self = method.__self__
-            if tmp_vm:
+            if declare:
+                vm = self.decl_vm
+            elif tmp_vm:
                 vm = self.tmp_vm
             else:
                 vm = self.cur_vm()
@@ -175,7 +287,7 @@ class GlobalVariableManager(VariableManager):
                 super_method = getattr(super(GlobalVariableManager, vm), method.__name__)
             else:
                 super_method = getattr(vm, method.__name__)
-            return super_method(*args, **kwargs)
+            return super_method(*args, declare=declare, **kwargs)
         return new_method
 
     @staticmethod

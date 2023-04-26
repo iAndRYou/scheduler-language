@@ -1,4 +1,4 @@
-from .. import types_structures
+from .. import types_structures, utils, variable_manager
 from typing import List
 
 class Operator:
@@ -23,19 +23,25 @@ class Operator:
         return self.name
 
     def __call__(self, args):
-        arg_types = tuple(elem[0] for elem in args) # turned into tuple to be hashable
-        arg_vals = [elem[1] for elem in args]
+        arg_types = tuple(utils.determine_type(arg) for arg in args) # turned into tuple to be hashable
+        arg_vals = args
 
         if arg_types not in self.function_map:
             # all arguments are of the same type supported by the default operator
             if self.default_operator is not None and len(set(arg_types)) == 1 and arg_types[0] in self.default_types: 
                 try:
-                    return arg_vals[0].__getattribute__(self.default_operator)(*arg_vals[1:])
+                    result = arg_vals[0].__getattribute__(self.default_operator)(*arg_vals[1:])
+                    if arg_types[0] == 'INT':
+                        result = int(result)
+                    return result
                 except:
-                    raise Exception(f"Operator {self.name} does not support arguments of types {arg_types}")
+                    raise Exception(f"Operator {self.name} does not support arguments of types {arg_types}") from None
             else:
                 raise Exception(f"Operator {self.name} does not support arguments of types {arg_types}")
         
         return self.function_map[arg_types](*arg_vals)
 
 operator_dict = dict()
+
+def apply_operator(name, args):
+    return operator_dict[name](args)

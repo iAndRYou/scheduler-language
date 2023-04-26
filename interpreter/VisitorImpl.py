@@ -6,6 +6,7 @@ if __name__ is not None and "." in __name__:
     from .modules.types_structures import *
     from .modules.utils import *
     from .modules.variable_manager import *
+    from .modules.operators.operator import operator_dict, apply_operator
     import os.path
     import json
 else:
@@ -14,6 +15,7 @@ else:
     from modules.types_structures import *
     from utils import *
     from modules.variable_manager import *
+    from modules.operators.operator import operator_dict, apply_operator
     import os.path
     import json
 
@@ -21,14 +23,17 @@ else:
 
 class VisitorImpl(SchedulerVisitor):
 
-    def __init__(self, debug, path, *args, **kwargs):
+    def __init__(self, debug, path, *args, gvm=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.debug = debug
         self.path = path
+        if gvm is None:
+            self.gvm = GlobalVariableManager()
+        else:
+            self.gvm = gvm
 
     # Visit a parse tree produced by SchedulerParser#prog.
     def visitProg(self, ctx:SchedulerParser.ProgContext):
-        self.gvm = GlobalVariableManager()
         self.canvas = Canvas()
         self.return_ = False
         self.break_ = False
@@ -321,7 +326,8 @@ class VisitorImpl(SchedulerVisitor):
     def visitFunc_call(self, ctx:SchedulerParser.Func_callContext):
         name = ctx.VARNAME().getText()
         arg_vals = [self.visit(node) for node in ctx.expr()]
-        return_type, node, args = self.gvm.access_function(name)
+        arg_types = [determine_type(arg_val) for arg_val in arg_vals]
+        return_type, node, args = self.gvm.access_function(name, arg_types)
 
         for (arg_type, arg_name), arg_val in zip(args, arg_vals):
             self.gvm.def_variable(arg_type, arg_name, arg_val)
@@ -420,7 +426,10 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#AndExpr.
     def visitAndExpr(self, ctx:SchedulerParser.AndExprContext):
-        return (self.visit(ctx.expr(0)) and self.visit(ctx.expr(1)))
+        a = self.visit(ctx.expr(0))
+        b = self.visit(ctx.expr(1))
+        return apply_operator('AND', [a, b])
+        # return (self.visit(ctx.expr(0)) and self.visit(ctx.expr(1)))
 
 
     # Visit a parse tree produced by SchedulerParser#ValueExpr.
@@ -449,9 +458,15 @@ class VisitorImpl(SchedulerVisitor):
     # Visit a parse tree produced by SchedulerParser#AddSub.
     def visitAddSub(self, ctx:SchedulerParser.AddSubContext):
         if ctx.op.text == '+':
-            return self.visit(ctx.expr(0)) + self.visit(ctx.expr(1))
+            a = self.visit(ctx.expr(0))
+            b = self.visit(ctx.expr(1))
+            return apply_operator('+', [a, b])
+            # return self.visit(ctx.expr(0)) + self.visit(ctx.expr(1))
         else:
-            return self.visit(ctx.expr(0)) - self.visit(ctx.expr(1))
+            a = self.visit(ctx.expr(0))
+            b = self.visit(ctx.expr(1))
+            return apply_operator('-', [a, b])
+            # return self.visit(ctx.expr(0)) - self.visit(ctx.expr(1))
 
 
     # Visit a parse tree produced by SchedulerParser#Calls.
@@ -483,20 +498,36 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#InExpr.
     def visitInExpr(self, ctx:SchedulerParser.InExprContext):
-        return (self.visit(ctx.expr(0)) in self.visit(ctx.expr(1)))
+        a = self.visit(ctx.expr(0))
+        b = self.visit(ctx.expr(1))
+        a_type = determine_type(a)
+        b_type = determine_type(b)
+        if 'COLLECTION OF' in b_type:
+            return a in b
+        else:
+            raise Exception('Cannot use IN operator on non-collection type')
 
 
     # Visit a parse tree produced by SchedulerParser#OrExpr.
     def visitOrExpr(self, ctx:SchedulerParser.OrExprContext):
-        return (self.visit(ctx.expr(0)) or self.visit(ctx.expr(1)))
+        a = self.visit(ctx.expr(0))
+        b = self.visit(ctx.expr(1))
+        return apply_operator('-', [a, b])
+        # return (self.visit(ctx.expr(0)) or self.visit(ctx.expr(1)))
 
 
     # Visit a parse tree produced by SchedulerParser#MultDiv.
     def visitMultDiv(self, ctx:SchedulerParser.MultDivContext):
         if ctx.op.text == '*':
-            return self.visit(ctx.expr(0)) * self.visit(ctx.expr(1))
+            a = self.visit(ctx.expr(0))
+            b = self.visit(ctx.expr(1))
+            return apply_operator('*', [a, b])
+            # return self.visit(ctx.expr(0)) * self.visit(ctx.expr(1))
         else:
-            return self.visit(ctx.expr(0)) / self.visit(ctx.expr(1))
+            a = self.visit(ctx.expr(0))
+            b = self.visit(ctx.expr(1))
+            return apply_operator('/', [a, b])
+            # return self.visit(ctx.expr(0)) / self.visit(ctx.expr(1))
 
 
     # Visit a parse tree produced by SchedulerParser#value.
