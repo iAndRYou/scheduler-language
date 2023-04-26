@@ -34,13 +34,13 @@ def main(argv):
     tree = parser.prog()
 
 
-    # walker = ParseTreeWalker()
-    # listener = ListenerImpl()
-    # walker.walk(listener, tree)
     visitor1 = VisitorImpl1()
-    visitor1.visit(tree)
+    # visitor1.visit(tree)
 
-    visitor = VisitorImpl(debug=False, path=os.path.dirname(full_path), gvm=visitor1.gvm)
+    visitor = VisitorImpl(debug=False,
+                          path=os.path.dirname(full_path),
+                          gvm=visitor1.gvm
+                          )
     visitor.visit(tree)
 
  

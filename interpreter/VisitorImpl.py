@@ -248,10 +248,12 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#Return.
     def visitReturn(self, ctx:SchedulerParser.ReturnContext):
-        self.return_ = True
         if ctx.expr():
-            return self.visit(ctx.expr())
+            return_value = self.visit(ctx.expr())
+            self.return_ = True
+            return return_value
         else:
+            self.return_ = True
             return None
 
 
@@ -329,13 +331,15 @@ class VisitorImpl(SchedulerVisitor):
         arg_types = [determine_type(arg_val) for arg_val in arg_vals]
         return_type, node, args = self.gvm.access_function(name, arg_types)
 
+        # define variables in the new scope
         for (arg_type, arg_name), arg_val in zip(args, arg_vals):
             self.gvm.def_variable(arg_type, arg_name, arg_val)
-        
+
         return_value = self.visit(node)
 
         self.return_ = False
-        
+
+        # delete all variables while leaving the scope 
         for arg_type, arg_name in args:
             self.gvm.del_variable(arg_name)
         

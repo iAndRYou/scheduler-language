@@ -22,6 +22,13 @@ else:
 # This class defines a complete generic visitor for a parse tree produced by SchedulerParser.
 
 class VisitorImpl1(SchedulerVisitor):
+
+    def __init__(self, *args, gvm=None, **kwargs):
+        if gvm is None:
+            self.gvm = GlobalVariableManager()
+        else:
+            self.gvm = gvm
+
     # Visit a parse tree produced by SchedulerParser#prog.
     def visitProg(self, ctx:SchedulerParser.ProgContext):
         self.gvm = GlobalVariableManager()
