@@ -212,7 +212,7 @@ class VisitorImpl(SchedulerVisitor):
                         result.append(elem)
                 return result
             else:
-                return elems
+                return [elem[1] for elem in elems]
 
         for date_, elem in elems:
             if is_variable:
@@ -444,10 +444,9 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#EqualExpr.
     def visitEqualExpr(self, ctx:SchedulerParser.EqualExprContext):
-        if ctx.op.text == '==':
-            return self.visit(ctx.expr(0)) == self.visit(ctx.expr(1))
-        else:
-            return self.visit(ctx.expr(0)) != self.visit(ctx.expr(1))
+        a = self.visit(ctx.expr(0))
+        b = self.visit(ctx.expr(1))
+        return apply_operator(ctx.op.text, [a, b])
 
 
     # Visit a parse tree produced by SchedulerParser#Parenthesis.
@@ -504,7 +503,7 @@ class VisitorImpl(SchedulerVisitor):
     def visitOrExpr(self, ctx:SchedulerParser.OrExprContext):
         a = self.visit(ctx.expr(0))
         b = self.visit(ctx.expr(1))
-        return apply_operator('-', [a, b])
+        return apply_operator('OR', [a, b])
         # return (self.visit(ctx.expr(0)) or self.visit(ctx.expr(1)))
 
 

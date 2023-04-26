@@ -28,5 +28,12 @@ VOID rektorskieGodziny(DATE d, TIME start_time, TIME end_time){
 
 rektorskieGodziny(19/4/2023, 15:00, 17:20);
 
+PRINT "Zajecia zaczynajace sie po 15:00:";
+FOR CLASS c IN GET DISTINCT CLASSES class SATISFYING class.START > 15:00{
+    PRINT c;
+}
+PRINT "";
+PRINT "";
+
 STRING sciezka = "plany/plan1";
 DUMP sciezka;

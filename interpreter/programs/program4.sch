@@ -1,2 +1,4 @@
-PRINT a;
-INT a = 5;
+BOOL a = True;
+BOOL b = False;
+
+PRINT True OR False;
