@@ -1,5 +1,7 @@
 # Generated from ./scheduler-language/Scheduler.g4 by ANTLR 4.12.0
 from antlr4 import *
+import os.path
+import json
 if __name__ is not None and "." in __name__:
     from .SchedulerParser import SchedulerParser
     from .SchedulerVisitor import SchedulerVisitor
@@ -7,8 +9,6 @@ if __name__ is not None and "." in __name__:
     from .modules.utils import *
     from .modules.variable_manager import *
     from .modules.operators.operator import operator_dict, apply_operator
-    import os.path
-    import json
 else:
     from SchedulerParser import SchedulerParser
     from SchedulerVisitor import SchedulerVisitor
@@ -16,8 +16,6 @@ else:
     from utils import *
     from modules.variable_manager import *
     from modules.operators.operator import operator_dict, apply_operator
-    import os.path
-    import json
 
 # This class defines a complete generic visitor for a parse tree produced by SchedulerParser.
 
@@ -108,8 +106,8 @@ class VisitorImpl(SchedulerVisitor):
     # Visit a parse tree produced by SchedulerParser#delete.
     def visitDelete(self, ctx:SchedulerParser.DeleteContext):
         condition = ctx.condition()
-        is_variable = bool(ctx.VARNAME())
-        if is_variable:
+        tmp_variable = bool(ctx.VARNAME())
+        if tmp_variable:
             tmp_name = ctx.VARNAME().getText()
 
         if ctx.CLASSESTOKEN():
@@ -120,29 +118,35 @@ class VisitorImpl(SchedulerVisitor):
 
             classes = []
             day_keys_to_del = []
-            if is_variable:
+
+            if tmp_variable:
                 self.gvm.def_class(tmp_name, dict(), tmp_vm=True)
             self.gvm.def_variable('DATE', 'date', date(2023, 1, 1), tmp_vm=True)
 
             for date_, day in self.canvas.days.items():
                 class_indices_to_del = []
                 for j, elem in enumerate(day.classes):
-                    if is_variable:
+                    if tmp_variable:
                         self.gvm.assign_variable(tmp_name, elem)
                     self.gvm.assign_variable('date', date_)
                     satisfied = self.visit(condition)
                     if satisfied:
                         class_indices_to_del.append(j)
                         classes.append(elem)
+
+                # delete classes in reverse order
                 for ind in class_indices_to_del[::-1]:
                     del self.canvas.days[date_].classes[ind]
+
+                # if day is empty, queue it for deletion
                 if len(self.canvas.days[date_].classes) == 0:
                     day_keys_to_del.append(date_)
             
+            # delete empty days
             for key in day_keys_to_del:
                 del self.canvas.days[key]
             
-            if is_variable:
+            if tmp_variable:
                 self.gvm.del_variable(tmp_name)
             self.gvm.del_variable('date')
             
@@ -157,12 +161,12 @@ class VisitorImpl(SchedulerVisitor):
             
             day_keys_to_del = []
             days = []
-            if is_variable:
+            if tmp_variable:
                 self.gvm.def_day(tmp_name, [], tmp_vm=True)
             self.gvm.def_variable('DATE', 'date', date(2023, 1, 1), tmp_vm=True)
 
             for date_, day in self.canvas.days.items():
-                if is_variable:
+                if tmp_variable:
                     self.gvm.assign_variable(tmp_name, day)
                 self.gvm.assign_variable('date', date_)
                 if self.visit(condition):
@@ -172,7 +176,7 @@ class VisitorImpl(SchedulerVisitor):
             for key in day_keys_to_del:
                 del self.canvas.days[key]
             
-            if is_variable:
+            if tmp_variable:
                 self.gvm.del_variable(tmp_name)
             self.gvm.del_variable('date')
             
@@ -182,19 +186,19 @@ class VisitorImpl(SchedulerVisitor):
     # Visit a parse tree produced by SchedulerParser#get.
     def visitGet(self, ctx:SchedulerParser.GetContext):
         condition = ctx.condition()
-        is_variable = bool(ctx.VARNAME())
-        if is_variable:
-            tmp_name = ctx.VARNAME().getText()
+        tmp_variable = bool(ctx.VARNAME())
+        if tmp_variable:
+            tmp_var_name = ctx.VARNAME().getText()
 
         self.gvm.def_variable('DATE', 'date', date(2023, 1, 1), tmp_vm=True)
         if ctx.CLASSESTOKEN():
-            elems = [(date_, class_) for date_, day in self.canvas.days.items() for class_ in day.classes]
-            if is_variable:
-                self.gvm.def_class(tmp_name, dict(), tmp_vm=True)
+            dates_elems = [(date_, class_) for date_, day in self.canvas.days.items() for class_ in day.classes]
+            if tmp_variable:
+                self.gvm.def_class(tmp_var_name, dict(), tmp_vm=True)
         elif ctx.DAYSTOKEN():
-            elems = self.canvas.days.items()
-            if is_variable:
-                self.gvm.def_day(tmp_name, [], tmp_vm=True)
+            dates_elems = self.canvas.days.items()
+            if tmp_variable:
+                self.gvm.def_day(tmp_var_name, [], tmp_vm=True)
         else:
             raise Exception()
 
@@ -202,33 +206,25 @@ class VisitorImpl(SchedulerVisitor):
 
         if not condition:
             if ctx.DISTINCT():
-                for date_, elem in elems:
-                    satisfied = True
-                    for r in result:
-                        if elem == r:
-                            satisfied = False
-                            break
-                    if satisfied:
+                for date_, elem in dates_elems:
+                    if elem not in result:
                         result.append(elem)
                 return result
             else:
-                return [elem[1] for elem in elems]
+                return [elem[1] for elem in dates_elems]
 
-        for date_, elem in elems:
-            if is_variable:
-                self.gvm.assign_variable(tmp_name, elem)
+        for date_, elem in dates_elems:
+            if tmp_variable:
+                self.gvm.assign_variable(tmp_var_name, elem)
             self.gvm.assign_variable('date', date_)
             satisfied = self.visit(condition)
-            if satisfied and ctx.DISTINCT():
-                for r in result:
-                    if elem == r:
-                        satisfied = False
-                        break
+            if ctx.DISTINCT():
+                satisfied = satisfied and elem not in result
             if satisfied:
                 result.append(elem)
         
-        if is_variable:
-            self.gvm.del_variable(tmp_name)
+        if tmp_variable:
+            self.gvm.del_variable(tmp_var_name)
         self.gvm.del_variable('date')
 
         return result

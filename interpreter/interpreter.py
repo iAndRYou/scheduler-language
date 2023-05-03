@@ -7,6 +7,7 @@ from VisitorImpl import VisitorImpl
 from VisitorImpl1 import VisitorImpl1
 from ListenerImpl import ListenerImpl
 from antlr4.error.ErrorListener import ErrorListener
+import options
 
 class ErrorListenerImpl(ErrorListener):
     def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
@@ -22,7 +23,8 @@ class ErrorListenerImpl(ErrorListener):
         pass
  
 def main(argv):
-    sys.tracebacklimit = 0
+    if not options.TRACEBACK:
+        sys.tracebacklimit = 0
     full_path = argv[1]
     el = ErrorListenerImpl()
     input_stream = FileStream(full_path)
@@ -35,7 +37,8 @@ def main(argv):
 
 
     visitor1 = VisitorImpl1()
-    # visitor1.visit(tree)
+    if options.PRZEBIEG2:
+        visitor1.visit(tree)
 
     visitor = VisitorImpl(debug=False,
                           path=os.path.dirname(full_path),
