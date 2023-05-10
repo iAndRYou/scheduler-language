@@ -14,7 +14,7 @@ else:
     from SchedulerListener import SchedulerListener
     from SchedulerVisitor import SchedulerVisitor
     from modules.types_structures import *
-    from utils import *
+    from modules.utils import *
     from modules.variable_manager import *
     import os.path
     import json

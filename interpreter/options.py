@@ -1,2 +1,3 @@
+DEBUG = False
 TRACEBACK = False
 PRZEBIEG2 = False

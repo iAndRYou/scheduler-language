@@ -40,7 +40,7 @@ def main(argv):
     if options.PRZEBIEG2:
         visitor1.visit(tree)
 
-    visitor = VisitorImpl(debug=False,
+    visitor = VisitorImpl(debug=options.DEBUG,
                           path=os.path.dirname(full_path),
                           gvm=visitor1.gvm
                           )

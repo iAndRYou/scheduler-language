@@ -13,7 +13,7 @@ else:
     from SchedulerParser import SchedulerParser
     from SchedulerVisitor import SchedulerVisitor
     from modules.types_structures import *
-    from utils import *
+    from modules.utils import *
     from modules.variable_manager import *
     from modules.operators.operator import operator_dict, apply_operator
 
