@@ -1,6 +1,6 @@
 function loadjson() {
     // output.json
-    fetch("http://[::]:9090/test.json").then(response =>
+    fetch("http://[::]:9090/output.json").then(response =>
         response.json().then(data => {
             console.log(data);
             for (var key in data) {
@@ -26,8 +26,8 @@ function calculateHeight(start, end) {
     var startParts = start.split(":");
     var endParts = end.split(":");
 
-    var startMinutes = +startParts[0] * 60 + +startParts[1];
-    var endMinutes = +endParts[0] * 60 + +endParts[1];
+    var startMinutes = +startParts[0] * 61.75 + +startParts[1];
+    var endMinutes = +endParts[0] * 61.75 + +endParts[1];
 
     var height = (endMinutes - startMinutes);
     return height;
@@ -37,7 +37,7 @@ function calculateTop(start) {
     var startParts = start.split(":");
     var startMinutes = +startParts[0] * 62 + +startParts[1];
 
-    return startMinutes + 20;
+    return startMinutes + 21;
 }
 
 function styleClassContainer(classContainer, data) {
