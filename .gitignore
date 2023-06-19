@@ -3,3 +3,4 @@ __pycache__
 .antlr
 test.py
 node_modules
+frontend/test.json

@@ -1,1 +1,16 @@
-{"5/4/2023": [{"start": "11:30", "end": "13:00", "subject": "Uczenie maszynowe", "teacher": "dr hab inz Igor Wojnicki"}, {"start": "16:15", "end": "17:45", "subject": "Eksploracja podwodna", "teacher": "dr inz Krzysztof Broda"}]}
+{
+    "5/4/2023": [
+        {
+            "start": "11:30",
+            "end": "13:00",
+            "subject": "Uczenie maszynowe",
+            "teacher": "dr hab inz Igor Wojnicki"
+        },
+        {
+            "start": "16:15",
+            "end": "17:45",
+            "subject": "Eksploracja podwodna",
+            "teacher": "dr inz Krzysztof Broda"
+        }
+    ]
+}

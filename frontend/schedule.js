@@ -1,5 +1,9 @@
 function LoadJson() {
-
+    var request = new XMLHttpRequest();
+    request.open("GET", "test.json", false);
+    request.send(null);
+    var object = JSON.parse(request.responseText);
+    return object;
 }
 
 function createAbbreviation(subject) {
@@ -27,6 +31,12 @@ function createClassContainer(data) {
         <div class="teacher">
             ${data.start}
         </div>
-    `
-    return classContainer;
+    `;
+    document.body.appendChild(classContainer);
+}
+
+var tds = document.getElementsByTagName("td");
+
+tds.onclick = function() {
+    console.log("clicked");
 }

@@ -13,9 +13,8 @@ body {
     -ms-user-select: none;
     user-select: none;
 }
-
 div.header {
-    position: sticky;
+    position: fixed;
     top: 0;
     background-color: #1E1C28;
     z-index: 2;
@@ -23,6 +22,10 @@ div.header {
     width: 100vw;
     display: flex;
     align-items: center;
+}
+div.vspace {
+    height: 20px;
+    width: 100vw;
 }
 
 table {
@@ -58,6 +61,7 @@ td.hheader {
 div.class {
     position: absolute;
     min-width: 50px;
+    width: 100vh;
     height: 50px;
     background-color: blue;
     z-index: 1;
