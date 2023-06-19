@@ -13,6 +13,18 @@ body {
     -ms-user-select: none;
     user-select: none;
 }
+
+div.header {
+    position: sticky;
+    top: 0;
+    background-color: #1E1C28;
+    z-index: 2;
+    height: 20px;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+}
+
 table {
     width: 100vw;
 }
