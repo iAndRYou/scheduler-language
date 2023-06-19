@@ -28,12 +28,12 @@ div.vspace {
     width: 100vw;
 }
 
-table {
+table.header, table.plan {
     width: 100vw;
 }
 tr {
     width: 100vw;
-    height: 50px;
+    height: 60px;
 }
 tr.header {
     height: 20px;
@@ -42,7 +42,7 @@ tr.hour {
     font-size: 12px;
 }
 td {
-    min-width: 50px;
+    min-width: 60px;
     text-align: left;
     vertical-align: top;
     border-top: 1px solid #55535C;
@@ -53,16 +53,39 @@ td.header {
     color: #DDDDDE;
 }
 td.hheader {
-    width: 50px;
+    width: 60px;
     border-top: none;
     font-size: 12px;
 }
 
 div.class {
     position: absolute;
-    min-width: 50px;
-    height: 50px;
-    background-color: blue;
+    top: 20px;
+    left: 50px;
     z-index: 1;
-    opacity: 0.5;
+    min-width: fit-content;
+    width: calc((100vw - 50px )/ 7 - 2px);
+    max-width: calc((100vw - 50px )/ 7 - 2px);
+    height: 60px;
+    border-radius: 5px;
+
+    padding: 2px;
+    margin-top: 2px;
+    background-color: rgba(0, 155, 255, 0.400);
+    color: rgba(0, 155, 255, 1.000);
+}
+div.time {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+div.subject {
+    position: absolute;
+    top: 0;
+    right: 2px;
+    font-size: 20px;
+    font-weight: bold;
+}
+div.teacher {
+    font-size: 12px;
 }
