@@ -1,11 +1,3 @@
-function LoadJson() {
-    var request = new XMLHttpRequest();
-    request.open("GET", "test.json", false);
-    request.send(null);
-    var object = JSON.parse(request.responseText);
-    return object;
-}
-
 function createAbbreviation(subject) {
     var abbreviation = "";
     var words = subject.oUpperCase().split(" ");
@@ -23,20 +15,24 @@ function createClassContainer(data) {
 
     classContainer.innerHTML = `
         <div class="start">
-            ${data.start}
+            <h1>${data.start}</h1>
         </div>
         <div class="subject">
-            ${subject}
+            <h1>${subject}</h1>
         </div>
         <div class="teacher">
-            ${data.start}
+            <h1>${data.start}</h1>
         </div>
     `;
     document.body.appendChild(classContainer);
 }
 
-var tds = document.getElementsByTagName("td");
-
-tds.onclick = function() {
-    console.log("clicked");
+function loadjson() {
+    fetch("localhost:9000/test.json").then(response => {
+        console.log(response);
+    }).catch(error => {
+        console.log(error);
+    });
 }
+
+loadjson();

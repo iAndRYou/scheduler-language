@@ -61,7 +61,6 @@ td.hheader {
 div.class {
     position: absolute;
     min-width: 50px;
-    width: 100vh;
     height: 50px;
     background-color: blue;
     z-index: 1;

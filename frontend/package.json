@@ -8,6 +8,17 @@
     "start": "electron .",
     "build": "electron-packager . --platform=win32 --arch=x64 --version=0.36.0 --overwrite"
   },
+  "files": [
+    "main.js",
+    "schedule.js",
+    "index.html",
+    "package.json",
+    "node_modules",
+    "css",
+    "js",
+    "img"
+  ],
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
