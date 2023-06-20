@@ -1,13 +1,6 @@
 const millisecondsPerDay = 24 * 60 * 60 * 1000;
-const daysInWeek = {
-    "0": "mon",
-    "1": "tue",
-    "2": "wed",
-    "3": "thu",
-    "4": "fri",
-    "5": "sat",
-    "6": "sun"
-};
+const daysInWeek = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+
 function createAbbreviation(subject) {
     var abbreviation = "";
     var words = subject.toUpperCase().split(" ");
@@ -139,6 +132,10 @@ function plotClasses(days) {
     console.log(days);
     for (let i = 0; i < days.length; i++) {
         var day = days[i];
+
+        var header = document.getElementById(daysInWeek[i]);
+        header.innerHTML += ", " + day.date;
+
         if (day.data != null) {
             day.data.forEach(data => {
                 createClassContainer(data, i);
@@ -147,11 +144,18 @@ function plotClasses(days) {
     }
 }
 
-function deleteAllClasses() {
+function resetCanvas() {
     var classes = document.getElementsByClassName("class");
     classes = Array.from(classes);
     classes.forEach(classContainer => {
         document.body.removeChild(classContainer);
+    });
+
+    var headers = document.querySelectorAll("td.header");
+
+    headers.forEach(header => {
+        var day = header.id.charAt(0).toUpperCase() + header.id.slice(1);
+        header.innerHTML = day;
     });
 }
 
@@ -174,7 +178,7 @@ function manageContent() {
                     console.log(currentWeek);
                     
                     // plot classes
-                    deleteAllClasses();
+                    resetCanvas();
                     plotClasses(weeks[currentWeek]);
                 } else if (event.key == "ArrowLeft") {
                     if (currentWeek > 0)
@@ -182,7 +186,7 @@ function manageContent() {
                     console.log(currentWeek);
                     
                     // plot classes
-                    deleteAllClasses();
+                    resetCanvas();
                     plotClasses(weeks[currentWeek]);
                 }
             });
