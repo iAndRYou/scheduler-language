@@ -1,20 +1,19 @@
-async function loadjson() {
-    try {
-        // get the json file from the local server at port 9090
-        const response = await fetch("http://[::]:9090/output.json");
-        const data = await response.json();
-        return data;
-    } catch (err) {
-        console.log(err);
-    }
-}
-
+const millisecondsPerDay = 24 * 60 * 60 * 1000;
+const daysInWeek = {
+    "0": "mon",
+    "1": "tue",
+    "2": "wed",
+    "3": "thu",
+    "4": "fri",
+    "5": "sat",
+    "6": "sun"
+};
 function createAbbreviation(subject) {
     var abbreviation = "";
     var words = subject.toUpperCase().split(" ");
-    for (var i = 0; i < words.length; i++) {
-        abbreviation += words[i].charAt(0);
-    }
+    words.forEach(word => {
+        abbreviation += word.charAt(0);
+    });
     return abbreviation;
 }
 
@@ -36,12 +35,13 @@ function calculateTop(start) {
     return startMinutes + 21;
 }
 
-function styleClassContainer(classContainer, data) {
+function styleClassContainer(classContainer, data, day) {
     classContainer.style.height = calculateHeight(data.start, data.end) + "px";
     classContainer.style.top = calculateTop(data.start) + "px";
+    classContainer.style.left = "calc(" + day + " * ((100vw - 50px )/ 7) + 50px)";
 }
 
-function createClassContainer(data) {
+function createClassContainer(data, day) {
     var classContainer = document.createElement("div");
     classContainer.classList.add("class");
 
@@ -55,55 +55,138 @@ function createClassContainer(data) {
             ${subject}
         </div>
         <div class="teacher">
-            ${data.teacher}
+            ${data.teacher ? data.teacher : ""}
         </div>
     `;
     // style the class container
-    styleClassContainer(classContainer, data);
+    styleClassContainer(classContainer, data, day);
     document.body.appendChild(classContainer);
 }
 
 function parseDate(dateString) {
-    const parts = dateString.split("/");
-    const day = parseInt(parts[0], 10);
-    const month = parseInt(parts[1], 10) - 1;
-    const year = parseInt(parts[2], 10);
+    var parts = dateString.split("/");
+    var day = parseInt(parts[0], 10);
+    var month = parseInt(parts[1], 10) - 1;
+    var year = parseInt(parts[2], 10);
     
     return new Date(year, month, day);
 }
 
 function dateToString(date) {
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
 
     return `${day}/${month}/${year}`;
 }
 
+function dateToPresentableString(date) {
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+
+    return `${day}.${month}`;
+}
+
 function calculateCalendarWeeks(data) {
-    const dates = Object.keys(data);
-    const startDate = parseDate(dates[0]);
-    const endDate = parseDate(dates[dates.length - 1]);
+    var dates = Object.keys(data);
+    var startDate = parseDate(dates[0]);
+    var endDate = parseDate(dates[dates.length - 1]);
   
-    const millisecondsPerDay = 24 * 60 * 60 * 1000;
-    const startDayOfWeek = (startDate.getDay() + 6) % 7; 
-    const endDayOfWeek = (endDate.getDay() + 6) % 7; 
+    var startDayOfWeek = (startDate.getDay() + 6) % 7; 
+    var endDayOfWeek = (endDate.getDay() + 6) % 7; 
   
-    const daysInSpan = Math.ceil((endDate - startDate) / millisecondsPerDay) + 1; 
-    const totalDaysInWeeks = daysInSpan + startDayOfWeek + (6 - endDayOfWeek);
-    const numOfWeeks = Math.floor(totalDaysInWeeks / 7); 
+    var daysInSpan = Math.ceil((endDate - startDate) / millisecondsPerDay) + 1; 
+    var totalDaysInWeeks = daysInSpan + startDayOfWeek + (6 - endDayOfWeek);
+    var numOfWeeks = Math.floor(totalDaysInWeeks / 7); 
   
-    const adjustedStartDate = new Date(startDate.getTime() - startDayOfWeek * millisecondsPerDay);
+    var adjustedStartDate = new Date(startDate.getTime() - startDayOfWeek * millisecondsPerDay);
   
     return { "startDate": adjustedStartDate, "numOfWeeks": numOfWeeks };
 }
 
-function createWeeks(data) {
+function generateWeekList(data) {
     let weeks = calculateCalendarWeeks(data);
     console.log(weeks);
+
+    let startDate = weeks.startDate;
+    let numOfWeeks = weeks.numOfWeeks;
+    const weekList = [];
+    
+    // generate weeks: for each week generate array of days
+    // each day is an object with date to present and data
+    for (let i = 0; i < numOfWeeks; i++) {
+      var weekStart = new Date(startDate.getTime() + i * 7 * millisecondsPerDay);
+      const week = [];
+  
+      for (let j = 0; j < 7; j++) {
+        var dayDate = new Date(weekStart.getTime() + j * millisecondsPerDay);
+        var dayDateString = dateToString(dayDate);
+
+        var dayPresentableString = dateToPresentableString(dayDate);
+        var dayData = data[dayDateString] ? data[dayDateString] : null;
+        
+        var day = { "date": dayPresentableString, "data": dayData };
+        week.push(day);
+      }
+  
+      weekList.push(week);
+    }
+  
+    return weekList;
 }
 
-loadjson().then(data => {
-    console.log(data);
-    createWeeks(data);
-});
+function plotClasses(days) {
+    console.log(days);
+    for (let i = 0; i < days.length; i++) {
+        var day = days[i];
+        if (day.data != null) {
+            day.data.forEach(data => {
+                createClassContainer(data, i);
+            });
+        }
+    }
+}
+
+function deleteAllClasses() {
+    var classes = document.getElementsByClassName("class");
+    classes = Array.from(classes);
+    classes.forEach(classContainer => {
+        document.body.removeChild(classContainer);
+    });
+}
+
+function manageContent() {
+    fetch("http://[::]:9000/output.json").then(response => 
+        response.json()).then(data => {
+            console.log(data);
+            // generate weeks with days
+            var weeks = generateWeekList(data);
+            console.log(weeks);
+
+            // plot classes
+            var currentWeek = 0;
+            plotClasses(weeks[currentWeek]);
+
+            document.body.addEventListener("keydown", event => {
+                if (event.key == "ArrowRight") {
+                    if (currentWeek < weeks.length - 1)
+                        currentWeek++;
+                    console.log(currentWeek);
+                    
+                    // plot classes
+                    deleteAllClasses();
+                    plotClasses(weeks[currentWeek]);
+                } else if (event.key == "ArrowLeft") {
+                    if (currentWeek > 0)
+                        currentWeek--;
+                    console.log(currentWeek);
+                    
+                    // plot classes
+                    deleteAllClasses();
+                    plotClasses(weeks[currentWeek]);
+                }
+            });
+        });
+}
+
+manageContent();
