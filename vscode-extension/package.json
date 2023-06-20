@@ -2,7 +2,7 @@
   "name": "scheduler-language-extension",
   "displayName": "Scheduler Language",
   "description": "A Visual Studio Code extension that enables support for the Scheduler Language",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
     "vscode": "^1.77.0"
   },

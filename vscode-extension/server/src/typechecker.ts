@@ -216,10 +216,7 @@ export class TypecheckingVisitor implements SchedulerVisitor<Type> {
   public visitFunc_call(ctx: Func_callContext): Type {
     const scope = findScope(ctx.VARNAME(), this.rootTable);
     const symbol = scope?.resolveSync(ctx.VARNAME().text);
-    assert(
-      symbol instanceof RoutineSymbol,
-      "expected symbol to be a RuntimeSymbol"
-    );
+    if (symbol == null || !(symbol instanceof RoutineSymbol)) return null;
 
     const params = symbol.getNestedSymbolsOfTypeSync(ParameterSymbol);
     if (params.length !== ctx.expr().length) {

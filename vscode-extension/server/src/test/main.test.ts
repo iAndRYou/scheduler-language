@@ -272,6 +272,20 @@ describe("LSP handler", () => {
       );
     });
 
+    test("undefined function", async () => {
+      await getHandler("function(42);");
+      expect(diagnostics).toSatisfy<typeof diagnostics>((d) =>
+        d.some((x) => x.message.includes("not defined"))
+      );
+    });
+
+    test("undefined variable attribute", async () => {
+      await getHandler("PRINT variable.CLASS;");
+      expect(diagnostics).toSatisfy<typeof diagnostics>((d) =>
+        d.some((x) => x.message.includes("not defined"))
+      );
+    });
+
     test("variable redefinition", async () => {
       await getHandler("INT variable = 42; INT variable = 42;");
       expect(diagnostics).toSatisfy<typeof diagnostics>((d) =>
