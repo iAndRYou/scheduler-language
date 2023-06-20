@@ -295,17 +295,17 @@ class VisitorImpl1(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#type.
     def visitType(self, ctx:SchedulerParser.TypeContext):
-        s = ""
+        types = []
 
         if ctx.COLLECTION_OF():
-            s += ctx.COLLECTION_OF().getText()
+            types.append(ctx.COLLECTION_OF().getText())
 
         if ctx.TYPENAME():
-            s += ctx.TYPENAME().getText()
+            types.append(ctx.TYPENAME().getText())
         else:
-            s += self.visit(ctx.structure())
+            types.append(self.visit(ctx.structure()))
 
-        return s
+        return " ".join(types)
 
 
     # Visit a parse tree produced by SchedulerParser#structure.
