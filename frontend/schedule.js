@@ -160,7 +160,7 @@ function resetCanvas() {
 }
 
 function manageContent() {
-    fetch("http://[::]:9000/output.json").then(response => 
+    fetch("http://localhost:9000/output.json").then(response => 
         response.json()).then(data => {
             console.log(data);
             // generate weeks with days
