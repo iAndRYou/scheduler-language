@@ -1,0 +1,75 @@
+{
+  "name": "scheduler-language-extension",
+  "displayName": "Scheduler Language",
+  "description": "A Visual Studio Code extension that enables support for the Scheduler Language",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.77.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:scheduler-language"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "scheduler-language",
+        "aliases": [
+          "Scheduler Language",
+          "scheduler-language"
+        ],
+        "extensions": [
+          ".sch"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "scheduler-language",
+        "scopeName": "source.scheduler",
+        "path": "./syntaxes/scheduler-language.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "title": "Scheduler Language extension",
+      "properties": {
+        "languageServerExample.trace.server": {
+          "scope": "window",
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the language server."
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^5.60.0",
+    "@typescript-eslint/parser": "^5.60.0",
+    "esbuild": "^0.17.18",
+    "esbuild-register": "^3.4.2",
+    "eslint": "^8.38.0",
+    "typescript": "^5.0.4",
+    "vitest": "^0.32.2",
+    "zod": "^3.21.4"
+  },
+  "main": "./out/extension",
+  "scripts": {
+    "vscode:prepublish": "npm run compile -- --minify",
+    "esbuilds": "esbuild ./client/src/extension.ts --bundle --outfile=client/out/extension.js --external:vscode --format=cjs --platform=node && esbuild ./server/src/server.ts --bundle --outfile=server/out/server.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "esbuild extension=./client/src/extension.ts server=./server/src/server.ts --bundle --outdir=out --external:vscode --format=cjs --platform=node",
+    "compile": "npm run esbuild -- --sourcemap",
+    "watch": "npm run esbuild -- --sourcemap --watch",
+    "lint": "eslint ./client/src ./server/src --ext .ts,.tsx",
+    "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
+    "test": "vitest"
+  }
+}

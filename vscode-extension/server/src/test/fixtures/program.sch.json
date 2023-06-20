@@ -1,0 +1,1039 @@
+[
+  {
+    "name": "rektorskieCalyDzienKolekcja",
+    "kind": 12,
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 5,
+        "character": 1
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 5,
+        "character": 1
+      }
+    },
+    "children": [
+      {
+        "kind": 18,
+        "name": "dates",
+        "range": {
+          "start": {
+            "character": 52,
+            "line": 0
+          },
+          "end": {
+            "character": 57,
+            "line": 0
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 52,
+            "line": 0
+          },
+          "end": {
+            "character": 57,
+            "line": 0
+          }
+        },
+        "detail": "COLLECTION OF DATE"
+      },
+      {
+        "kind": 3,
+        "name": "block",
+        "range": {
+          "start": {
+            "character": 58,
+            "line": 0
+          },
+          "end": {
+            "character": 1,
+            "line": 5
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 58,
+            "line": 0
+          },
+          "end": {
+            "character": 1,
+            "line": 5
+          }
+        },
+        "children": [
+          {
+            "kind": 3,
+            "name": "delete",
+            "range": {
+              "start": {
+                "character": 4,
+                "line": 1
+              },
+              "end": {
+                "character": 43,
+                "line": 1
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 4,
+                "line": 1
+              },
+              "end": {
+                "character": 43,
+                "line": 1
+              }
+            },
+            "children": [
+              {
+                "kind": 13,
+                "name": "date",
+                "range": {
+                  "start": {
+                    "character": 0,
+                    "line": 0
+                  },
+                  "end": {
+                    "character": 0,
+                    "line": 0
+                  }
+                },
+                "selectionRange": {
+                  "start": {
+                    "character": 0,
+                    "line": 0
+                  },
+                  "end": {
+                    "character": 0,
+                    "line": 0
+                  }
+                },
+                "detail": "DATE"
+              }
+            ]
+          },
+          {
+            "kind": 13,
+            "name": "rekt",
+            "range": {
+              "start": {
+                "character": 10,
+                "line": 2
+              },
+              "end": {
+                "character": 14,
+                "line": 2
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 10,
+                "line": 2
+              },
+              "end": {
+                "character": 14,
+                "line": 2
+              }
+            },
+            "detail": "CLASS"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "nachodzi",
+    "kind": 12,
+    "range": {
+      "start": {
+        "line": 7,
+        "character": 0
+      },
+      "end": {
+        "line": 17,
+        "character": 1
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 7,
+        "character": 0
+      },
+      "end": {
+        "line": 17,
+        "character": 1
+      }
+    },
+    "children": [
+      {
+        "kind": 13,
+        "name": "t1",
+        "range": {
+          "start": {
+            "character": 19,
+            "line": 7
+          },
+          "end": {
+            "character": 21,
+            "line": 7
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 19,
+            "line": 7
+          },
+          "end": {
+            "character": 21,
+            "line": 7
+          }
+        },
+        "detail": "TIME"
+      },
+      {
+        "kind": 13,
+        "name": "t2",
+        "range": {
+          "start": {
+            "character": 28,
+            "line": 7
+          },
+          "end": {
+            "character": 30,
+            "line": 7
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 28,
+            "line": 7
+          },
+          "end": {
+            "character": 30,
+            "line": 7
+          }
+        },
+        "detail": "TIME"
+      },
+      {
+        "kind": 13,
+        "name": "t3",
+        "range": {
+          "start": {
+            "character": 37,
+            "line": 7
+          },
+          "end": {
+            "character": 39,
+            "line": 7
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 37,
+            "line": 7
+          },
+          "end": {
+            "character": 39,
+            "line": 7
+          }
+        },
+        "detail": "TIME"
+      },
+      {
+        "kind": 13,
+        "name": "t4",
+        "range": {
+          "start": {
+            "character": 46,
+            "line": 7
+          },
+          "end": {
+            "character": 48,
+            "line": 7
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 46,
+            "line": 7
+          },
+          "end": {
+            "character": 48,
+            "line": 7
+          }
+        },
+        "detail": "TIME"
+      },
+      {
+        "kind": 3,
+        "name": "block",
+        "range": {
+          "start": {
+            "character": 49,
+            "line": 7
+          },
+          "end": {
+            "character": 1,
+            "line": 17
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 49,
+            "line": 7
+          },
+          "end": {
+            "character": 1,
+            "line": 17
+          }
+        },
+        "children": [
+          {
+            "kind": 3,
+            "name": "block",
+            "range": {
+              "start": {
+                "character": 15,
+                "line": 8
+              },
+              "end": {
+                "character": 5,
+                "line": 10
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 15,
+                "line": 8
+              },
+              "end": {
+                "character": 5,
+                "line": 10
+              }
+            },
+            "children": []
+          },
+          {
+            "kind": 3,
+            "name": "block",
+            "range": {
+              "start": {
+                "character": 17,
+                "line": 11
+              },
+              "end": {
+                "character": 5,
+                "line": 13
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 17,
+                "line": 11
+              },
+              "end": {
+                "character": 5,
+                "line": 13
+              }
+            },
+            "children": []
+          },
+          {
+            "kind": 3,
+            "name": "block",
+            "range": {
+              "start": {
+                "character": 8,
+                "line": 14
+              },
+              "end": {
+                "character": 5,
+                "line": 16
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 8,
+                "line": 14
+              },
+              "end": {
+                "character": 5,
+                "line": 16
+              }
+            },
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "rektorskieGodziny",
+    "kind": 12,
+    "range": {
+      "start": {
+        "line": 19,
+        "character": 0
+      },
+      "end": {
+        "line": 24,
+        "character": 1
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 19,
+        "character": 0
+      },
+      "end": {
+        "line": 24,
+        "character": 1
+      }
+    },
+    "children": [
+      {
+        "kind": 13,
+        "name": "d",
+        "range": {
+          "start": {
+            "character": 28,
+            "line": 19
+          },
+          "end": {
+            "character": 29,
+            "line": 19
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 28,
+            "line": 19
+          },
+          "end": {
+            "character": 29,
+            "line": 19
+          }
+        },
+        "detail": "DATE"
+      },
+      {
+        "kind": 13,
+        "name": "start_time",
+        "range": {
+          "start": {
+            "character": 36,
+            "line": 19
+          },
+          "end": {
+            "character": 46,
+            "line": 19
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 36,
+            "line": 19
+          },
+          "end": {
+            "character": 46,
+            "line": 19
+          }
+        },
+        "detail": "TIME"
+      },
+      {
+        "kind": 13,
+        "name": "end_time",
+        "range": {
+          "start": {
+            "character": 53,
+            "line": 19
+          },
+          "end": {
+            "character": 61,
+            "line": 19
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 53,
+            "line": 19
+          },
+          "end": {
+            "character": 61,
+            "line": 19
+          }
+        },
+        "detail": "TIME"
+      },
+      {
+        "kind": 3,
+        "name": "block",
+        "range": {
+          "start": {
+            "character": 62,
+            "line": 19
+          },
+          "end": {
+            "character": 1,
+            "line": 24
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 62,
+            "line": 19
+          },
+          "end": {
+            "character": 1,
+            "line": 24
+          }
+        },
+        "children": [
+          {
+            "kind": 3,
+            "name": "delete",
+            "range": {
+              "start": {
+                "character": 4,
+                "line": 20
+              },
+              "end": {
+                "character": 104,
+                "line": 20
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 4,
+                "line": 20
+              },
+              "end": {
+                "character": 104,
+                "line": 20
+              }
+            },
+            "children": [
+              {
+                "kind": 13,
+                "name": "date",
+                "range": {
+                  "start": {
+                    "character": 0,
+                    "line": 0
+                  },
+                  "end": {
+                    "character": 0,
+                    "line": 0
+                  }
+                },
+                "selectionRange": {
+                  "start": {
+                    "character": 0,
+                    "line": 0
+                  },
+                  "end": {
+                    "character": 0,
+                    "line": 0
+                  }
+                },
+                "detail": "DATE"
+              },
+              {
+                "kind": 13,
+                "name": "class",
+                "range": {
+                  "start": {
+                    "character": 19,
+                    "line": 20
+                  },
+                  "end": {
+                    "character": 24,
+                    "line": 20
+                  }
+                },
+                "selectionRange": {
+                  "start": {
+                    "character": 19,
+                    "line": 20
+                  },
+                  "end": {
+                    "character": 24,
+                    "line": 20
+                  }
+                },
+                "detail": "CLASS"
+              }
+            ]
+          },
+          {
+            "kind": 13,
+            "name": "rekt",
+            "range": {
+              "start": {
+                "character": 10,
+                "line": 21
+              },
+              "end": {
+                "character": 14,
+                "line": 21
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 10,
+                "line": 21
+              },
+              "end": {
+                "character": 14,
+                "line": 21
+              }
+            },
+            "detail": "CLASS"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "daterange",
+    "kind": 12,
+    "range": {
+      "start": {
+        "line": 26,
+        "character": 0
+      },
+      "end": {
+        "line": 35,
+        "character": 1
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 26,
+        "character": 0
+      },
+      "end": {
+        "line": 35,
+        "character": 1
+      }
+    },
+    "children": [
+      {
+        "kind": 13,
+        "name": "a",
+        "range": {
+          "start": {
+            "character": 34,
+            "line": 26
+          },
+          "end": {
+            "character": 35,
+            "line": 26
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 34,
+            "line": 26
+          },
+          "end": {
+            "character": 35,
+            "line": 26
+          }
+        },
+        "detail": "DATE"
+      },
+      {
+        "kind": 13,
+        "name": "b",
+        "range": {
+          "start": {
+            "character": 42,
+            "line": 26
+          },
+          "end": {
+            "character": 43,
+            "line": 26
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 42,
+            "line": 26
+          },
+          "end": {
+            "character": 43,
+            "line": 26
+          }
+        },
+        "detail": "DATE"
+      },
+      {
+        "kind": 13,
+        "name": "step",
+        "range": {
+          "start": {
+            "character": 49,
+            "line": 26
+          },
+          "end": {
+            "character": 53,
+            "line": 26
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 49,
+            "line": 26
+          },
+          "end": {
+            "character": 53,
+            "line": 26
+          }
+        },
+        "detail": "INT"
+      },
+      {
+        "kind": 18,
+        "name": "excludedDates",
+        "range": {
+          "start": {
+            "character": 74,
+            "line": 26
+          },
+          "end": {
+            "character": 87,
+            "line": 26
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 74,
+            "line": 26
+          },
+          "end": {
+            "character": 87,
+            "line": 26
+          }
+        },
+        "detail": "COLLECTION OF DATE"
+      },
+      {
+        "kind": 3,
+        "name": "block",
+        "range": {
+          "start": {
+            "character": 88,
+            "line": 26
+          },
+          "end": {
+            "character": 1,
+            "line": 35
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 88,
+            "line": 26
+          },
+          "end": {
+            "character": 1,
+            "line": 35
+          }
+        },
+        "children": [
+          {
+            "kind": 18,
+            "name": "r",
+            "range": {
+              "start": {
+                "character": 23,
+                "line": 27
+              },
+              "end": {
+                "character": 24,
+                "line": 27
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 23,
+                "line": 27
+              },
+              "end": {
+                "character": 24,
+                "line": 27
+              }
+            },
+            "detail": "COLLECTION OF DATE"
+          },
+          {
+            "kind": 3,
+            "name": "block",
+            "range": {
+              "start": {
+                "character": 15,
+                "line": 28
+              },
+              "end": {
+                "character": 5,
+                "line": 33
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 15,
+                "line": 28
+              },
+              "end": {
+                "character": 5,
+                "line": 33
+              }
+            },
+            "children": [
+              {
+                "kind": 3,
+                "name": "block",
+                "range": {
+                  "start": {
+                    "character": 35,
+                    "line": 29
+                  },
+                  "end": {
+                    "character": 9,
+                    "line": 31
+                  }
+                },
+                "selectionRange": {
+                  "start": {
+                    "character": 35,
+                    "line": 29
+                  },
+                  "end": {
+                    "character": 9,
+                    "line": 31
+                  }
+                },
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "eksploracja",
+    "detail": "CLASS",
+    "kind": 13,
+    "range": {
+      "start": {
+        "line": 38,
+        "character": 6
+      },
+      "end": {
+        "line": 38,
+        "character": 17
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 38,
+        "character": 6
+      },
+      "end": {
+        "line": 38,
+        "character": 17
+      }
+    }
+  },
+  {
+    "name": "uczmasz",
+    "detail": "CLASS",
+    "kind": 13,
+    "range": {
+      "start": {
+        "line": 39,
+        "character": 6
+      },
+      "end": {
+        "line": 39,
+        "character": 13
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 39,
+        "character": 6
+      },
+      "end": {
+        "line": 39,
+        "character": 13
+      }
+    }
+  },
+  {
+    "name": "sroda",
+    "detail": "DAY",
+    "kind": 13,
+    "range": {
+      "start": {
+        "line": 41,
+        "character": 4
+      },
+      "end": {
+        "line": 41,
+        "character": 9
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 41,
+        "character": 4
+      },
+      "end": {
+        "line": 41,
+        "character": 9
+      }
+    }
+  },
+  {
+    "name": "a",
+    "detail": "COLLECTION OF DATE",
+    "kind": 18,
+    "range": {
+      "start": {
+        "line": 43,
+        "character": 19
+      },
+      "end": {
+        "line": 43,
+        "character": 20
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 43,
+        "character": 19
+      },
+      "end": {
+        "line": 43,
+        "character": 20
+      }
+    }
+  },
+  {
+    "name": "zajeciaDrBrody",
+    "detail": "COLLECTION OF CLASS",
+    "kind": 18,
+    "range": {
+      "start": {
+        "line": 49,
+        "character": 20
+      },
+      "end": {
+        "line": 49,
+        "character": 34
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 49,
+        "character": 20
+      },
+      "end": {
+        "line": 49,
+        "character": 34
+      }
+    }
+  },
+  {
+    "name": "get",
+    "kind": 3,
+    "range": {
+      "start": {
+        "line": 49,
+        "character": 37
+      },
+      "end": {
+        "line": 49,
+        "character": 116
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 49,
+        "character": 37
+      },
+      "end": {
+        "line": 49,
+        "character": 116
+      }
+    },
+    "children": [
+      {
+        "kind": 13,
+        "name": "date",
+        "range": {
+          "start": {
+            "character": 0,
+            "line": 0
+          },
+          "end": {
+            "character": 0,
+            "line": 0
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 0,
+            "line": 0
+          },
+          "end": {
+            "character": 0,
+            "line": 0
+          }
+        },
+        "detail": "DATE"
+      },
+      {
+        "kind": 13,
+        "name": "class",
+        "range": {
+          "start": {
+            "character": 58,
+            "line": 49
+          },
+          "end": {
+            "character": 63,
+            "line": 49
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 58,
+            "line": 49
+          },
+          "end": {
+            "character": 63,
+            "line": 49
+          }
+        },
+        "detail": "CLASS"
+      }
+    ]
+  }
+]

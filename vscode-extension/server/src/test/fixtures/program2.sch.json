@@ -1,0 +1,281 @@
+[
+  {
+    "name": "dumpPlanu",
+    "kind": 12,
+    "range": {
+      "start": {
+        "line": 1,
+        "character": 0
+      },
+      "end": {
+        "line": 7,
+        "character": 1
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 1,
+        "character": 0
+      },
+      "end": {
+        "line": 7,
+        "character": 1
+      }
+    },
+    "children": [
+      {
+        "kind": 3,
+        "name": "block",
+        "range": {
+          "start": {
+            "character": 16,
+            "line": 1
+          },
+          "end": {
+            "character": 1,
+            "line": 7
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 16,
+            "line": 1
+          },
+          "end": {
+            "character": 1,
+            "line": 7
+          }
+        },
+        "children": [
+          {
+            "kind": 13,
+            "name": "eksploracja",
+            "range": {
+              "start": {
+                "character": 10,
+                "line": 2
+              },
+              "end": {
+                "character": 21,
+                "line": 2
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 10,
+                "line": 2
+              },
+              "end": {
+                "character": 21,
+                "line": 2
+              }
+            },
+            "detail": "CLASS"
+          },
+          {
+            "kind": 13,
+            "name": "uczmasz",
+            "range": {
+              "start": {
+                "character": 10,
+                "line": 3
+              },
+              "end": {
+                "character": 17,
+                "line": 3
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 10,
+                "line": 3
+              },
+              "end": {
+                "character": 17,
+                "line": 3
+              }
+            },
+            "detail": "CLASS"
+          },
+          {
+            "kind": 13,
+            "name": "sroda",
+            "range": {
+              "start": {
+                "character": 8,
+                "line": 5
+              },
+              "end": {
+                "character": 13,
+                "line": 5
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 8,
+                "line": 5
+              },
+              "end": {
+                "character": 13,
+                "line": 5
+              }
+            },
+            "detail": "DAY"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "wszystkieZajecia",
+    "detail": "COLLECTION OF CLASS",
+    "kind": 18,
+    "range": {
+      "start": {
+        "line": 14,
+        "character": 20
+      },
+      "end": {
+        "line": 14,
+        "character": 36
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 14,
+        "character": 20
+      },
+      "end": {
+        "line": 14,
+        "character": 36
+      }
+    }
+  },
+  {
+    "name": "get",
+    "kind": 3,
+    "range": {
+      "start": {
+        "line": 14,
+        "character": 39
+      },
+      "end": {
+        "line": 14,
+        "character": 118
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 14,
+        "character": 39
+      },
+      "end": {
+        "line": 14,
+        "character": 118
+      }
+    },
+    "children": [
+      {
+        "kind": 13,
+        "name": "date",
+        "range": {
+          "start": {
+            "character": 0,
+            "line": 0
+          },
+          "end": {
+            "character": 0,
+            "line": 0
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 0,
+            "line": 0
+          },
+          "end": {
+            "character": 0,
+            "line": 0
+          }
+        },
+        "detail": "DATE"
+      },
+      {
+        "kind": 13,
+        "name": "class",
+        "range": {
+          "start": {
+            "character": 60,
+            "line": 14
+          },
+          "end": {
+            "character": 65,
+            "line": 14
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 60,
+            "line": 14
+          },
+          "end": {
+            "character": 65,
+            "line": 14
+          }
+        },
+        "detail": "CLASS"
+      }
+    ]
+  },
+  {
+    "name": "delete",
+    "kind": 3,
+    "range": {
+      "start": {
+        "line": 18,
+        "character": 0
+      },
+      "end": {
+        "line": 18,
+        "character": 55
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 18,
+        "character": 0
+      },
+      "end": {
+        "line": 18,
+        "character": 55
+      }
+    },
+    "children": [
+      {
+        "kind": 13,
+        "name": "date",
+        "range": {
+          "start": {
+            "character": 0,
+            "line": 0
+          },
+          "end": {
+            "character": 0,
+            "line": 0
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 0,
+            "line": 0
+          },
+          "end": {
+            "character": 0,
+            "line": 0
+          }
+        },
+        "detail": "DATE"
+      }
+    ]
+  }
+]

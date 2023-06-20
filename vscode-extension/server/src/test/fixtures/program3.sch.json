@@ -1,0 +1,634 @@
+[
+  {
+    "name": "generacjaPlanu",
+    "kind": 12,
+    "range": {
+      "start": {
+        "line": 1,
+        "character": 0
+      },
+      "end": {
+        "line": 13,
+        "character": 1
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 1,
+        "character": 0
+      },
+      "end": {
+        "line": 13,
+        "character": 1
+      }
+    },
+    "children": [
+      {
+        "kind": 3,
+        "name": "block",
+        "range": {
+          "start": {
+            "character": 21,
+            "line": 1
+          },
+          "end": {
+            "character": 1,
+            "line": 13
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 21,
+            "line": 1
+          },
+          "end": {
+            "character": 1,
+            "line": 13
+          }
+        },
+        "children": [
+          {
+            "kind": 13,
+            "name": "eksploracja",
+            "range": {
+              "start": {
+                "character": 10,
+                "line": 2
+              },
+              "end": {
+                "character": 21,
+                "line": 2
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 10,
+                "line": 2
+              },
+              "end": {
+                "character": 21,
+                "line": 2
+              }
+            },
+            "detail": "CLASS"
+          },
+          {
+            "kind": 13,
+            "name": "uczmasz",
+            "range": {
+              "start": {
+                "character": 10,
+                "line": 3
+              },
+              "end": {
+                "character": 17,
+                "line": 3
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 10,
+                "line": 3
+              },
+              "end": {
+                "character": 17,
+                "line": 3
+              }
+            },
+            "detail": "CLASS"
+          },
+          {
+            "kind": 13,
+            "name": "sroda",
+            "range": {
+              "start": {
+                "character": 8,
+                "line": 5
+              },
+              "end": {
+                "character": 13,
+                "line": 5
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 8,
+                "line": 5
+              },
+              "end": {
+                "character": 13,
+                "line": 5
+              }
+            },
+            "detail": "DAY"
+          },
+          {
+            "kind": 13,
+            "name": "d",
+            "range": {
+              "start": {
+                "character": 9,
+                "line": 7
+              },
+              "end": {
+                "character": 10,
+                "line": 7
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 9,
+                "line": 7
+              },
+              "end": {
+                "character": 10,
+                "line": 7
+              }
+            },
+            "detail": "DATE"
+          },
+          {
+            "kind": 3,
+            "name": "block",
+            "range": {
+              "start": {
+                "character": 23,
+                "line": 8
+              },
+              "end": {
+                "character": 5,
+                "line": 11
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 23,
+                "line": 8
+              },
+              "end": {
+                "character": 5,
+                "line": 11
+              }
+            },
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "nachodzi",
+    "kind": 12,
+    "range": {
+      "start": {
+        "line": 16,
+        "character": 0
+      },
+      "end": {
+        "line": 26,
+        "character": 1
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 16,
+        "character": 0
+      },
+      "end": {
+        "line": 26,
+        "character": 1
+      }
+    },
+    "children": [
+      {
+        "kind": 13,
+        "name": "t1",
+        "range": {
+          "start": {
+            "character": 19,
+            "line": 16
+          },
+          "end": {
+            "character": 21,
+            "line": 16
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 19,
+            "line": 16
+          },
+          "end": {
+            "character": 21,
+            "line": 16
+          }
+        },
+        "detail": "TIME"
+      },
+      {
+        "kind": 13,
+        "name": "t2",
+        "range": {
+          "start": {
+            "character": 28,
+            "line": 16
+          },
+          "end": {
+            "character": 30,
+            "line": 16
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 28,
+            "line": 16
+          },
+          "end": {
+            "character": 30,
+            "line": 16
+          }
+        },
+        "detail": "TIME"
+      },
+      {
+        "kind": 13,
+        "name": "t3",
+        "range": {
+          "start": {
+            "character": 37,
+            "line": 16
+          },
+          "end": {
+            "character": 39,
+            "line": 16
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 37,
+            "line": 16
+          },
+          "end": {
+            "character": 39,
+            "line": 16
+          }
+        },
+        "detail": "TIME"
+      },
+      {
+        "kind": 13,
+        "name": "t4",
+        "range": {
+          "start": {
+            "character": 46,
+            "line": 16
+          },
+          "end": {
+            "character": 48,
+            "line": 16
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 46,
+            "line": 16
+          },
+          "end": {
+            "character": 48,
+            "line": 16
+          }
+        },
+        "detail": "TIME"
+      },
+      {
+        "kind": 3,
+        "name": "block",
+        "range": {
+          "start": {
+            "character": 49,
+            "line": 16
+          },
+          "end": {
+            "character": 1,
+            "line": 26
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 49,
+            "line": 16
+          },
+          "end": {
+            "character": 1,
+            "line": 26
+          }
+        },
+        "children": [
+          {
+            "kind": 3,
+            "name": "block",
+            "range": {
+              "start": {
+                "character": 15,
+                "line": 17
+              },
+              "end": {
+                "character": 5,
+                "line": 19
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 15,
+                "line": 17
+              },
+              "end": {
+                "character": 5,
+                "line": 19
+              }
+            },
+            "children": []
+          },
+          {
+            "kind": 3,
+            "name": "block",
+            "range": {
+              "start": {
+                "character": 17,
+                "line": 20
+              },
+              "end": {
+                "character": 5,
+                "line": 22
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 17,
+                "line": 20
+              },
+              "end": {
+                "character": 5,
+                "line": 22
+              }
+            },
+            "children": []
+          },
+          {
+            "kind": 3,
+            "name": "block",
+            "range": {
+              "start": {
+                "character": 8,
+                "line": 23
+              },
+              "end": {
+                "character": 5,
+                "line": 25
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 8,
+                "line": 23
+              },
+              "end": {
+                "character": 5,
+                "line": 25
+              }
+            },
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "rektorskieGodziny",
+    "kind": 12,
+    "range": {
+      "start": {
+        "line": 29,
+        "character": 0
+      },
+      "end": {
+        "line": 34,
+        "character": 1
+      }
+    },
+    "selectionRange": {
+      "start": {
+        "line": 29,
+        "character": 0
+      },
+      "end": {
+        "line": 34,
+        "character": 1
+      }
+    },
+    "children": [
+      {
+        "kind": 13,
+        "name": "d",
+        "range": {
+          "start": {
+            "character": 28,
+            "line": 29
+          },
+          "end": {
+            "character": 29,
+            "line": 29
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 28,
+            "line": 29
+          },
+          "end": {
+            "character": 29,
+            "line": 29
+          }
+        },
+        "detail": "DATE"
+      },
+      {
+        "kind": 13,
+        "name": "start_time",
+        "range": {
+          "start": {
+            "character": 36,
+            "line": 29
+          },
+          "end": {
+            "character": 46,
+            "line": 29
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 36,
+            "line": 29
+          },
+          "end": {
+            "character": 46,
+            "line": 29
+          }
+        },
+        "detail": "TIME"
+      },
+      {
+        "kind": 13,
+        "name": "end_time",
+        "range": {
+          "start": {
+            "character": 53,
+            "line": 29
+          },
+          "end": {
+            "character": 61,
+            "line": 29
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 53,
+            "line": 29
+          },
+          "end": {
+            "character": 61,
+            "line": 29
+          }
+        },
+        "detail": "TIME"
+      },
+      {
+        "kind": 3,
+        "name": "block",
+        "range": {
+          "start": {
+            "character": 62,
+            "line": 29
+          },
+          "end": {
+            "character": 1,
+            "line": 34
+          }
+        },
+        "selectionRange": {
+          "start": {
+            "character": 62,
+            "line": 29
+          },
+          "end": {
+            "character": 1,
+            "line": 34
+          }
+        },
+        "children": [
+          {
+            "kind": 3,
+            "name": "delete",
+            "range": {
+              "start": {
+                "character": 4,
+                "line": 30
+              },
+              "end": {
+                "character": 104,
+                "line": 30
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 4,
+                "line": 30
+              },
+              "end": {
+                "character": 104,
+                "line": 30
+              }
+            },
+            "children": [
+              {
+                "kind": 13,
+                "name": "date",
+                "range": {
+                  "start": {
+                    "character": 0,
+                    "line": 0
+                  },
+                  "end": {
+                    "character": 0,
+                    "line": 0
+                  }
+                },
+                "selectionRange": {
+                  "start": {
+                    "character": 0,
+                    "line": 0
+                  },
+                  "end": {
+                    "character": 0,
+                    "line": 0
+                  }
+                },
+                "detail": "DATE"
+              },
+              {
+                "kind": 13,
+                "name": "class",
+                "range": {
+                  "start": {
+                    "character": 19,
+                    "line": 30
+                  },
+                  "end": {
+                    "character": 24,
+                    "line": 30
+                  }
+                },
+                "selectionRange": {
+                  "start": {
+                    "character": 19,
+                    "line": 30
+                  },
+                  "end": {
+                    "character": 24,
+                    "line": 30
+                  }
+                },
+                "detail": "CLASS"
+              }
+            ]
+          },
+          {
+            "kind": 13,
+            "name": "rekt",
+            "range": {
+              "start": {
+                "character": 10,
+                "line": 31
+              },
+              "end": {
+                "character": 14,
+                "line": 31
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "character": 10,
+                "line": 31
+              },
+              "end": {
+                "character": 14,
+                "line": 31
+              }
+            },
+            "detail": "CLASS"
+          }
+        ]
+      }
+    ]
+  }
+]
