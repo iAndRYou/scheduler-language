@@ -10,6 +10,17 @@ function createAbbreviation(subject) {
     return abbreviation;
 }
 
+function capitalizeWords(string) {
+    var words = string.split(" ");
+    var capitalizedWords = [];
+    
+    words.forEach(word => {
+        capitalizedWords.push(word.charAt(0).toUpperCase() + word.slice(1));
+    });
+
+    return capitalizedWords.join(" ");
+}
+
 function calculateHeight(start, end) {
     var startParts = start.split(":");
     var endParts = end.split(":");
@@ -38,11 +49,15 @@ function createClassContainer(data, day) {
     var classContainer = document.createElement("div");
     classContainer.classList.add("class");
 
-    var subject = createAbbreviation(data.subject);
+    var acronym = createAbbreviation(data.subject);
+    var subject = capitalizeWords(data.subject);
 
     classContainer.innerHTML = `
         <div class="time">
             ${data.start + "-" + data.end}
+        </div>
+        <div class="acronym">
+            ${acronym}
         </div>
         <div class="subject">
             ${subject}
@@ -99,7 +114,6 @@ function calculateCalendarWeeks(data) {
 
 function generateWeekList(data) {
     let weeks = calculateCalendarWeeks(data);
-    console.log(weeks);
 
     let startDate = weeks.startDate;
     let numOfWeeks = weeks.numOfWeeks;
@@ -129,7 +143,6 @@ function generateWeekList(data) {
 }
 
 function plotClasses(days) {
-    console.log(days);
     for (let i = 0; i < days.length; i++) {
         var day = days[i];
 
@@ -154,7 +167,7 @@ function resetCanvas() {
     var headers = document.querySelectorAll("td.header");
 
     headers.forEach(header => {
-        var day = header.id.charAt(0).toUpperCase() + header.id.slice(1);
+        var day = capitalizeWords(header.id);
         header.innerHTML = day;
     });
 }
@@ -162,10 +175,8 @@ function resetCanvas() {
 function manageContent() {
     fetch("http://localhost:9000/output.json").then(response => 
         response.json()).then(data => {
-            console.log(data);
             // generate weeks with days
             var weeks = generateWeekList(data);
-            console.log(weeks);
 
             // plot classes
             var currentWeek = 0;
@@ -175,7 +186,6 @@ function manageContent() {
                 if (event.key == "ArrowRight") {
                     if (currentWeek < weeks.length - 1)
                         currentWeek++;
-                    console.log(currentWeek);
                     
                     // plot classes
                     resetCanvas();
@@ -183,7 +193,6 @@ function manageContent() {
                 } else if (event.key == "ArrowLeft") {
                     if (currentWeek > 0)
                         currentWeek--;
-                    console.log(currentWeek);
                     
                     // plot classes
                     resetCanvas();

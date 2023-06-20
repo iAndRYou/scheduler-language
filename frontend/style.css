@@ -89,14 +89,14 @@ div.time {
     font-size: 12px;
     font-weight: bold;
 }
-div.subject {
+div.acronym {
     position: absolute;
     top: 0;
     right: 2px;
     font-size: 18px;
     font-weight: bold;
 }
-div.teacher {
+div.subject, div.teacher {
     position: relative;
     width: inherit;
     white-space: nowrap; 
