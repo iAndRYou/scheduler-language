@@ -1,0 +1,8 @@
+LOAD "plany/plan1";
+
+CLASS zaj START 15:00 END 16:30 TEACHER "AAA" SUBJECT "BBB";
+ADD CLASS zaj ON DATE 26/04/2023;
+
+// wszystkie unikalne jednostki zajeciowe
+COLLECTION OF CLASS a = GET DISTINCT CLASSES;
+PRINT a;

@@ -60,7 +60,7 @@ def main(argv):
     with open(os.path.join(interpreter_dir, 'output.json'), 'w') as file:
         json.dump(canvas_to_json(visitor.canvas), file)
     
-    subprocess.Popen(['python', '-m', 'http.server', '9000'], cwd=interpreter_dir, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    # subprocess.Popen(['python', '-m', 'http.server', '9000'], cwd=interpreter_dir, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     subprocess.run([os.path.join(interpreter_dir, 'scheduler-win32-x64', 'scheduler.exe')])
 
  

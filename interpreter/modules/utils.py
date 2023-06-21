@@ -20,7 +20,10 @@ def determine_type(value):
     elif type(value) == types_structures.Day:
         val_type = 'DAY'
     elif type(value) == list:
-        val_type = 'COLLECTION OF ' + determine_type(value[0])
+        if len(value) == 0:
+            val_type = 'COLLECTION OF VOID'
+        else:
+            val_type = 'COLLECTION OF ' + determine_type(value[0])
     elif value is None:
         val_type = 'VOID'
     else:
