@@ -1,5 +1,5 @@
 COLLECTION OF DATE daterange(DATE start, DATE end, INT step){
-    COLLECTION OF DATE result = [start]];
+    COLLECTION OF DATE result = [start];
     DATE tmp = start + step;
     WHILE tmp <= end{
         result = result + [tmp];
