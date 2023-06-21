@@ -55,13 +55,13 @@ def main(argv):
 
 
     interpreter_dir = os.path.dirname(os.path.realpath(__file__))
-    frontend_dir = os.path.join(interpreter_dir, '..', 'frontend')
 
     with open(os.path.join(interpreter_dir, 'output.json'), 'w') as file:
         json.dump(canvas_to_json(visitor.canvas), file)
     
-    # subprocess.Popen(['python', '-m', 'http.server', '9000'], cwd=interpreter_dir, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    p = subprocess.Popen(['python', '-m', 'http.server', '9000'], cwd=interpreter_dir, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     subprocess.run([os.path.join(interpreter_dir, 'scheduler-win32-x64', 'scheduler.exe')])
+    p.terminate()
 
  
 if __name__ == '__main__':

@@ -22,9 +22,11 @@ class Operator:
     def __repr__(self):
         return self.name
 
-    def __call__(self, args):
-        arg_types = tuple(utils.determine_type(arg) for arg in args) # turned into tuple to be hashable
-        arg_vals = args
+    def __call__(self, arg_vals, arg_types):
+        if arg_types is None:
+            arg_types = tuple(utils.determine_type(arg) for arg in arg_vals) # turned into tuple to be hashable
+        else:
+            arg_types = tuple(arg_type if arg_type is not None else utils.determine_type(arg) for arg_type, arg in zip(arg_types, arg_vals))
 
         if arg_types not in self.function_map:
             # all arguments are of the same type supported by the default operator
@@ -43,5 +45,5 @@ class Operator:
 
 operator_dict = dict()
 
-def apply_operator(name, args):
-    return operator_dict[name](args)
+def apply_operator(name, arg_vals, arg_types=None):
+    return operator_dict[name](arg_vals, arg_types)

@@ -82,15 +82,15 @@ class VisitorImpl(SchedulerVisitor):
 
         dates = []
         if ctx.DATESTOKEN():
-            for date_ in self.visit(ctx.expr(1)):
+            for date_ in self.visit(ctx.expr(1))[1]:
                 dates.append(self.gvm.cast_value('DATE', date_))
         else:
-            dates.append(self.gvm.cast_value('DATE', self.visit(ctx.expr(1))))
+            dates.append(self.gvm.cast_value('DATE', self.visit(ctx.expr(1))[1]))
 
         add_func = self.canvas.add_class if structure == 'CLASS' else (self.canvas.add_day if structure == 'DAY' else None)
 
         for date_ in dates:
-            add_func(self.visit(ctx.expr(0)), date_)
+            add_func(self.visit(ctx.expr(0))[1], date_)
 
 
     # Visit a parse tree produced by SchedulerParser#structure.
@@ -192,10 +192,12 @@ class VisitorImpl(SchedulerVisitor):
 
         self.gvm.def_variable('DATE', 'date', date(2023, 1, 1), tmp_vm=True)
         if ctx.CLASSESTOKEN():
+            rtype = 'COLLECTION OF CLASS'
             dates_elems = [(date_, class_) for date_, day in self.canvas.days.items() for class_ in day.classes]
             if tmp_variable:
                 self.gvm.def_class(tmp_var_name, dict(), tmp_vm=True)
         elif ctx.DAYSTOKEN():
+            rtype = 'COLLECTION OF DAY'
             dates_elems = self.canvas.days.items()
             if tmp_variable:
                 self.gvm.def_day(tmp_var_name, [], tmp_vm=True)
@@ -227,7 +229,7 @@ class VisitorImpl(SchedulerVisitor):
             self.gvm.del_variable(tmp_var_name)
         self.gvm.del_variable('date')
 
-        return result
+        return [rtype, result]
 
 
     # Visit a parse tree produced by SchedulerParser#start_date.
@@ -245,7 +247,7 @@ class VisitorImpl(SchedulerVisitor):
     # Visit a parse tree produced by SchedulerParser#Return.
     def visitReturn(self, ctx:SchedulerParser.ReturnContext):
         if ctx.expr():
-            return_value = self.visit(ctx.expr())
+            return_value = self.visit(ctx.expr())[1]
             self.return_ = True
             return return_value
         else:
@@ -262,7 +264,8 @@ class VisitorImpl(SchedulerVisitor):
     # Visit a parse tree produced by SchedulerParser#for_loop.
     def visitFor_loop(self, ctx:SchedulerParser.For_loopContext):
         type = self.visit(ctx.type_())
-        for elem in self.visit(ctx.expr()):
+        for elem in self.visit(ctx.expr())[1]:
+            elem = elem[1]
             self.gvm.def_variable(type, ctx.VARNAME().getText(), elem)
             r = self.visit(ctx.block())
             self.gvm.del_variable(ctx.VARNAME().getText())
@@ -298,7 +301,7 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#condition.
     def visitCondition(self, ctx:SchedulerParser.ConditionContext):
-        return self.visit(ctx.expr())
+        return self.visit(ctx.expr())[1]
 
 
     # Visit a parse tree produced by SchedulerParser#function.
@@ -323,8 +326,9 @@ class VisitorImpl(SchedulerVisitor):
     # Visit a parse tree produced by SchedulerParser#func_call.
     def visitFunc_call(self, ctx:SchedulerParser.Func_callContext):
         name = ctx.VARNAME().getText()
-        arg_vals = [self.visit(node) for node in ctx.expr()]
-        arg_types = [determine_type(arg_val) for arg_val in arg_vals]
+        arg_types_vals = [self.visit(node) for node in ctx.expr()]
+        arg_vals = [arg_val for arg_type, arg_val in arg_types_vals]
+        arg_types = [arg_type if arg_type is not None else determine_type(arg_val) for arg_type, arg_val in arg_types_vals] 
         return_type, node, args = self.gvm.access_function(name, arg_types)
 
         # define variables in the new scope
@@ -339,7 +343,7 @@ class VisitorImpl(SchedulerVisitor):
         for arg_type, arg_name in args:
             self.gvm.del_variable(arg_name)
         
-        return self.gvm.cast_value(return_type, return_value)
+        return [return_type, self.gvm.cast_value(return_type, return_value)]
 
 
     # Visit a parse tree produced by SchedulerParser#def.
@@ -349,17 +353,17 @@ class VisitorImpl(SchedulerVisitor):
         else:
             # collection
             if ctx.COLLECTION_OF():
-                self.gvm.def_collection(self.visit(ctx.type_()), ctx.VARNAME().getText(), self.visit(ctx.expr()))
+                self.gvm.def_collection(self.visit(ctx.type_()), ctx.VARNAME().getText(), self.visit(ctx.expr())[1])
             # variable
             else:
-                self.gvm.def_variable(ctx.TYPENAME().getText(), ctx.VARNAME().getText(), self.visit(ctx.expr()))
+                self.gvm.def_variable(ctx.TYPENAME().getText(), ctx.VARNAME().getText(), self.visit(ctx.expr())[1])
             return self.gvm.access_variable(ctx.VARNAME().getText())[1]
 
 
     # Visit a parse tree produced by SchedulerParser#classDef.
     def visitClassDef(self, ctx:SchedulerParser.ClassDefContext):
         attrs = list(map(lambda x: x.getText().lower(), ctx.CLASS_ATTRIBUTE()))
-        attr_values = list(map(lambda x: self.visit(x), ctx.expr()))
+        attr_values = list(map(lambda x: self.visit(x)[1], ctx.expr()))
 
         self.gvm.def_class(ctx.VARNAME().getText(), dict(zip(attrs, attr_values)))
         return self.gvm.access_variable(ctx.VARNAME().getText())[1]
@@ -369,7 +373,7 @@ class VisitorImpl(SchedulerVisitor):
     def visitDayDef(self, ctx:SchedulerParser.DayDefContext):
         name = ctx.VARNAME().getText()
         if ctx.expr():
-            classes = self.gvm.cast_value("COLLECTION OF CLASS", self.visit(ctx.expr()))
+            classes = self.gvm.cast_value("COLLECTION OF CLASS", self.visit(ctx.expr())[1])
         else:
             classes = []
         self.gvm.def_day(name, classes)
@@ -379,9 +383,9 @@ class VisitorImpl(SchedulerVisitor):
     # Visit a parse tree produced by SchedulerParser#assign.
     def visitAssign(self, ctx:SchedulerParser.AssignContext):
         if ctx.attribute():
-            self.gvm.assign_attribute(ctx.VARNAME().getText(), self.visit(ctx.attribute()).lower(), self.visit(ctx.expr()))
+            self.gvm.assign_attribute(ctx.VARNAME().getText(), self.visit(ctx.attribute()).lower(), self.visit(ctx.expr())[1])
         else:
-            self.gvm.assign_variable(ctx.VARNAME().getText(), self.visit(ctx.expr()))
+            self.gvm.assign_variable(ctx.VARNAME().getText(), self.visit(ctx.expr())[1])
 
 
     # Visit a parse tree produced by SchedulerParser#attribute.
@@ -398,7 +402,7 @@ class VisitorImpl(SchedulerVisitor):
         attr_name = self.visit(ctx.attribute()).lower()
 
         var = self.gvm.access_variable(var_name)[1]
-        return var.__getattribute__(attr_name)
+        return [ATTRIBUTES[attr_name], var.__getattribute__(attr_name)]
 
 
     # Visit a parse tree produced by SchedulerParser#collection.
@@ -416,49 +420,51 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#collection_element.
     def visitCollection_element(self, ctx:SchedulerParser.Collection_elementContext):
-        return self.visit(ctx.expr())
+        return self.visit(ctx.expr())[1]
 
 
     # Visit a parse tree produced by SchedulerParser#collection_subscription.
     def visitCollection_subscription(self, ctx:SchedulerParser.Collection_subscriptionContext):
-        return self.gvm.access_variable(ctx.VARNAME().getText())[1][self.visit(ctx.expr())]
+        return self.gvm.access_variable(ctx.VARNAME().getText())[1][self.visit(ctx.expr())[1]]
 
 
     # Visit a parse tree produced by SchedulerParser#AndExpr.
     def visitAndExpr(self, ctx:SchedulerParser.AndExprContext):
-        a = self.visit(ctx.expr(0))
-        b = self.visit(ctx.expr(1))
-        return apply_operator('AND', [a, b])
+        a_type, a = self.visit(ctx.expr(0))
+        b_type, b = self.visit(ctx.expr(1))
+        return [None, apply_operator('AND', [a, b], arg_types=[a_type, b_type])]
         # return (self.visit(ctx.expr(0)) and self.visit(ctx.expr(1)))
 
 
     # Visit a parse tree produced by SchedulerParser#ValueExpr.
     def visitValueExpr(self, ctx:SchedulerParser.ValueExprContext):
         if ctx.collection():
-            return self.visit(ctx.collection())
+            return [None, self.visit(ctx.collection())]
         elif ctx.value():
-            return self.visit(ctx.value())
+            return [None, self.visit(ctx.value())]
         else:
-            return self.gvm.access_variable(ctx.VARNAME().getText())[1] # return the value of the variable
+            var_type, value = self.gvm.access_variable(ctx.VARNAME().getText())
+            return [var_type, value]
 
 
     # Visit a parse tree produced by SchedulerParser#EqualExpr.
     def visitEqualExpr(self, ctx:SchedulerParser.EqualExprContext):
-        a = self.visit(ctx.expr(0))
-        b = self.visit(ctx.expr(1))
-        return apply_operator(ctx.op.text, [a, b])
+        a_type, a = self.visit(ctx.expr(0))
+        b_type, b = self.visit(ctx.expr(1))
+        return [None, apply_operator(ctx.op.text, [a, b], arg_types=[a_type, b_type])]
 
 
     # Visit a parse tree produced by SchedulerParser#Parenthesis.
     def visitParenthesis(self, ctx:SchedulerParser.ParenthesisContext):
-        return self.visit(ctx.expr())
+        t, v = self.visit(ctx.expr())
+        return [t, v]
 
 
     # Visit a parse tree produced by SchedulerParser#AddSub.
     def visitAddSub(self, ctx:SchedulerParser.AddSubContext):
-        a = self.visit(ctx.expr(0))
-        b = self.visit(ctx.expr(1))
-        return apply_operator(ctx.op.text, [a, b])
+        a_type, a = self.visit(ctx.expr(0))
+        b_type, b = self.visit(ctx.expr(1))
+        return [None, apply_operator(ctx.op.text, [a, b], arg_types=[a_type, b_type])]
 
     # Visit a parse tree produced by SchedulerParser#Calls.
     def visitCalls(self, ctx:SchedulerParser.CallsContext):
@@ -467,51 +473,53 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#OverlapExpr.
     def visitOverlapExpr(self, ctx:SchedulerParser.OverlapExprContext):
-        a = self.visit(ctx.expr(0))
-        b = self.visit(ctx.expr(1))
-        return apply_operator('@', [a, b])
+        a_type, a = self.visit(ctx.expr(0))
+        b_type, b = self.visit(ctx.expr(1))
+        return [None, apply_operator('@', [a, b], arg_types=[a_type, b_type])]
         # return (self.visit(ctx.expr(0)) @ self.visit(ctx.expr(1)))
 
 
     # Visit a parse tree produced by SchedulerParser#Compare.
     def visitCompare(self, ctx:SchedulerParser.CompareContext):
-        a = self.visit(ctx.expr(0))
-        b = self.visit(ctx.expr(1))
-        return apply_operator(ctx.op.text, [a, b])
+        a_type, a = self.visit(ctx.expr(0))
+        b_type, b = self.visit(ctx.expr(1))
+        return [None, apply_operator(ctx.op.text, [a, b], arg_types=[a_type, b_type])]
 
 
     # Visit a parse tree produced by SchedulerParser#NotExpr.
     def visitNotExpr(self, ctx:SchedulerParser.NotExprContext):
-        a = self.visit(ctx.expr())
-        return apply_operator('NOT', [a])
+        a_type, a = self.visit(ctx.expr())
+        return [None, apply_operator('NOT', [a], arg_types=[a_type])]
         # return not self.visit(ctx.expr()) 
 
 
     # Visit a parse tree produced by SchedulerParser#InExpr.
     def visitInExpr(self, ctx:SchedulerParser.InExprContext):
-        a = self.visit(ctx.expr(0))
-        b = self.visit(ctx.expr(1))
-        a_type = determine_type(a)
-        b_type = determine_type(b)
+        a_type, a = self.visit(ctx.expr(0))
+        b_type, b = self.visit(ctx.expr(1))
+        if a_type is None:
+            a_type = determine_type(a)
+        if b_type is None:
+            b_type = determine_type(b)
         if 'COLLECTION OF' in b_type:
-            return a in b
+            return [None, a in b]
         else:
             raise Exception('Cannot use IN operator on non-collection type')
 
 
     # Visit a parse tree produced by SchedulerParser#OrExpr.
     def visitOrExpr(self, ctx:SchedulerParser.OrExprContext):
-        a = self.visit(ctx.expr(0))
-        b = self.visit(ctx.expr(1))
-        return apply_operator('OR', [a, b])
+        a_type, a = self.visit(ctx.expr(0))
+        b_type, b = self.visit(ctx.expr(1))
+        return [None, apply_operator('OR', [a, b], arg_types=[a_type, b_type])]
         # return (self.visit(ctx.expr(0)) or self.visit(ctx.expr(1)))
 
 
     # Visit a parse tree produced by SchedulerParser#MultDiv.
     def visitMultDiv(self, ctx:SchedulerParser.MultDivContext):
-        a = self.visit(ctx.expr(0))
-        b = self.visit(ctx.expr(1))
-        return apply_operator(ctx.op.text, [a, b])
+        a_type, a = self.visit(ctx.expr(0))
+        b_type, b = self.visit(ctx.expr(1))
+        return [None, apply_operator(ctx.op.text, [a, b], arg_types=[a_type, b_type])]
 
 
     # Visit a parse tree produced by SchedulerParser#value.
@@ -540,7 +548,7 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#print.
     def visitPrint(self, ctx:SchedulerParser.PrintContext):
-        print(self.visit(ctx.expr()))
+        print(self.visit(ctx.expr())[1])
 
 
     # Visit a parse tree produced by SchedulerParser#load.
@@ -563,7 +571,7 @@ class VisitorImpl(SchedulerVisitor):
 
     # Visit a parse tree produced by SchedulerParser#file_path.
     def visitFile_path(self, ctx:SchedulerParser.File_pathContext):
-        return self.visit(ctx.expr())
+        return self.visit(ctx.expr())[1]
 
 
     # Visit a parse tree produced by SchedulerParser#day_attribute.
