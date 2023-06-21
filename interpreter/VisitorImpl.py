@@ -40,7 +40,7 @@ class VisitorImpl(SchedulerVisitor):
 
         if self.debug:
             print(self.gvm)
-        self.canvas.print()
+            self.canvas.print()
 
 
     # Visit a parse tree produced by SchedulerParser#code.
