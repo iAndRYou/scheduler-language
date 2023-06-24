@@ -16,7 +16,7 @@ instruction_without_semicolon:  if_statement // IfStatement
     ;
 canvas_instruction: add 
     | update // Update content of an object on canvas
-    | delete // Dekete an object from canvas
+    | delete // Delete an object from canvas
     | get // Get specified objects from canvas as a collection
     | start_date
     | end_date

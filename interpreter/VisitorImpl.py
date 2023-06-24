@@ -211,9 +211,9 @@ class VisitorImpl(SchedulerVisitor):
                 for date_, elem in dates_elems:
                     if elem not in result:
                         result.append(elem)
-                return result
+                return [rtype, result]
             else:
-                return [elem[1] for elem in dates_elems]
+                return [rtype, [elem[1] for elem in dates_elems]]
 
         for date_, elem in dates_elems:
             if tmp_variable:
